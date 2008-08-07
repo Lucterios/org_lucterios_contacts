@@ -1,6 +1,24 @@
 <?php
-// setup file write by SDK tool
-// --- Last modification: Date 18 June 2008 23:03:51 By  ---
+// 
+//     This file is part of Lucterios.
+// 
+//     Lucterios is free software; you can redistribute it and/or modify
+//     it under the terms of the GNU General Public License as published by
+//     the Free Software Foundation; either version 2 of the License, or
+//     (at your option) any later version.
+// 
+//     Lucterios is distributed in the hope that it will be useful,
+//     but WITHOUT ANY WARRANTY; without even the implied warranty of
+//     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//     GNU General Public License for more details.
+// 
+//     You should have received a copy of the GNU General Public License
+//     along with Lucterios; if not, write to the Free Software
+//     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+// 
+// 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
+//  // setup file write by SDK tool
+// --- Last modification: Date 06 August 2008 8:22:36 By  ---
 
 $extention_name="org_lucterios_contacts";
 $extention_description="Module de gestion des contacts physiques (hommes ou femmes) ou moraux (entreprise, association, administration,...)";
@@ -12,7 +30,7 @@ $extension_libre=true;
 $version_max=0;
 $version_min=20;
 $version_release=70;
-$version_build=34;
+$version_build=47;
 
 $depencies=array();
 $depencies[0] = new Param_Depencies("CORE", 0, 20, 0, 15, false);
