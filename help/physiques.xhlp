@@ -1,0 +1,26 @@
+Un contact physique est une personne, homme ou femme, que vous voulez mémoriser.
+<h2>Liste de vos contacts physiques</h2>
+Le menu <i>contacts/Personnes Pysiques</i> vous permet de consulter la liste des personnes que vous avez déjà enregistrées.<br>
+Étant donné que la liste peut devenir importante, il est possible de filtrer le personnes par le code postal de leur adresse.<br>
+Par défaut, le code postal de votre structure est appliqué en filtrage.<br><br>
+<center><img src='~org_lucterios_contacts$ListPhysique.jpg' alt='ListPhysique.jpg' /></center><br>
+Depuis cette écran, vous avez aussi la possibilité de d'imprimer la liste des personnes.
+
+<h2>Création du contact physique</h2>
+Depuis la liste précédente, vous avez la possibilité d'ajouter une nouvelle personne.<br><br>
+<center><img src='~org_lucterios_contacts$NewPhysique.jpg' alt='NewPhysique.jpg' /></center><br>
+Remplissez le formulaire et valider le pour l'insérer dans votre base de données.
+
+<JUMP_PAGE/>
+
+<h2>Édition d'un contact physique</h2>
+Depuis la liste des personnes physiques, vous avez la possibilité d'éditer une personne.<br><br>
+<center><img src='~org_lucterios_contacts$EditPhysique.jpg' alt='EditPhysique.jpg' /></center><br>
+Cela vous permettra de consulter la fiche d'une personne précédemment entrée dans votre base.<br>
+Vous pouvez modifier cette fiche ou l'imprimer.
+
+<h2>Recherche d'un contact physique</h2>
+Le menu <i>contacts/Recherche de personne physique</i> vous permet de définir une critère de recherche sur une personne physique.<br><br>
+<center><img src='~org_lucterios_contacts$RecherchePhysique.jpg' alt='RecherchePhysique.jpg' /></center><br>
+Une fois valider, l'outil va rechercher dans la base toutes les personnes correspondants à ces critères.<br>
+Vous pourrez alors imprimer cette liste ou en éditer/modifier une fiche.

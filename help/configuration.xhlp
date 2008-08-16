@@ -1,0 +1,12 @@
+Dans le menu <i>Administration/Extensions (conf)</i> vous avez à votre disposition un ensemble d'outils pour configurer la gestion des contacts.
+
+<h2>Fonctions</h2>
+Dans cette écran vous avez la possibilité de créer ou de modifier une définition d'une fonction pour associer une personne physique à une structure morale.
+
+<h2>Catégorie de personnes morales</h2>
+De la même façon que précédemment, vous pouvez créer ou de modifier une catégorie de structure morale pour vous aider dans la classification de vos contacts.
+
+<h2>Codes postaux/villes</h2>
+Pour vous aider dans votre saisie de contacts, l'outil recherche automatiquement la ville associé au code postal que vous avez saisie.<br>
+Dans cette écran, vous avez la possibilité de rajouter des codes postaux manquant.<br>
+Par défaut, les 39000 codes postaux français sont insérés.
