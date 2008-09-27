@@ -1,6 +1,6 @@
 <?php
 // Method file write by SDK tool
-// --- Last modification: Date 16 June 2008 22:06:08 By  ---
+// --- Last modification: Date 13 September 2008 15:17:25 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
@@ -17,6 +17,7 @@ require_once('extensions/org_lucterios_contacts/personneAbstraite.tbl.php');
 function personneAbstraite_APAS_finder(&$self,$posY,$simple,$xfer_result)
 {
 //@CODE_ACTION@
+$posY=$posY+4;
 $xfer_result->setDBSearch($self,"codePostal",$posY++);
 $xfer_result->setDBSearch($self,"ville",$posY++);
 if($simple == 0) {
