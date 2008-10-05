@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // Method file write by SDK tool
-// --- Last modification: Date 06 August 2008 8:21:53 By  ---
+// --- Last modification: Date 04 October 2008 12:43:35 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
@@ -41,9 +41,12 @@ if($name_upload != '') {
 	if(! is_dir($path))@mkdir($path,0777);
 	$source_pic = $path."/Image_temp.jpg";
 	$destination_pic = $path."/Image_".$self->id.".jpg";
-	if($handle = fopen($source_pic,'w')) {
-		$content = base64_decode($value_upload, true);
-		if( fwrite($handle,$content) !== FALSE) fclose($handle);
+	$content = base64_decode(str_replace(array('\n',' ','\t'),'',$value_upload), true);
+	@unlink($source_pic);
+	if($handle = @fopen($source_pic,'a')) {
+		if( fwrite($handle,$content) == 0)
+			throw new LucteriosException(IMPORTANT,"Image non sauvé!");
+		fclose($handle);
 	}
 	//
 	$max_width = 100;
