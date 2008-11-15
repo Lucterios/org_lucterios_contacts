@@ -18,41 +18,49 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // Action file write by SDK tool
-// --- Last modification: Date 14 November 2008 19:18:30 By  ---
+// --- Last modification: Date 14 November 2008 1:05:16 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
 
 //@TABLES@
-require_once('extensions/org_lucterios_contacts/personneAbstraite.tbl.php');
+require_once('CORE/users.tbl.php');
+require_once('extensions/org_lucterios_contacts/personnePhysique.tbl.php');
 //@TABLES@
-//@XFER:print
-require_once('CORE/xfer_printing.inc.php');
-//@XFER:print@
+//@XFER:custom
+require_once('CORE/xfer_custom.inc.php');
+//@XFER:custom@
 
 
-//@DESC@Imprimer un contact
+//@DESC@Modifier la connexion
 //@PARAM@ 
-//@INDEX:personneAbstraite
+//@INDEX:personnePhysique
 
 
 //@LOCK:0
 
-function personneAbstraite_APAS_PrintFile($Params)
+function personnePhysique_APAS_login($Params)
 {
-$self=new DBObj_org_lucterios_contacts_personneAbstraite();
-$personneAbstraite=getParams($Params,"personneAbstraite",-1);
-if ($personneAbstraite>=0) $self->get($personneAbstraite);
+$self=new DBObj_org_lucterios_contacts_personnePhysique();
+$personnePhysique=getParams($Params,"personnePhysique",-1);
+if ($personnePhysique>=0) $self->get($personnePhysique);
 try {
-$xfer_result=&new Xfer_Container_Print("org_lucterios_contacts","personneAbstraite_APAS_PrintFile",$Params);
-$xfer_result->Caption="Imprimer un contact";
+$xfer_result=&new Xfer_Container_Custom("org_lucterios_contacts","personnePhysique_APAS_login",$Params);
+$xfer_result->Caption="Modifier la connexion";
 //@CODE_ACTION@
-require_once "CORE/PrintAction.inc.php";
-$print_action=new PrintAction("org_lucterios_contacts","personneAbstraite_APAS_PrintFile",$Params);
-$print_action->TabChangePage=false;
-$print_action->Extended=false;
-$print_action->Title="Fiche descriptive";
-$xfer_result->printListing($print_action);
+if($self->user>0) {
+	$DBObjusers=$self->getField('user');
+	$xfer_result->Caption="Modifier la connexion";
+}
+else {
+	$DBObjusers=new DBObj_CORE_users;
+	$DBObjusers->realName=$self->toText();
+	$xfer_result->Caption="Créer une connexion";
+}
+$xfer_result->WithActif=true;
+$xfer_result=$DBObjusers->Formulaire($xfer_result);
+$xfer_result->addAction($self->NewAction("_OK","ok.png","validerLogin"));
+$xfer_result->addAction($self->NewAction("_Annuler","cancel.png"));
 //@CODE_ACTION@
 }catch(Exception $e) {
 	throw $e;

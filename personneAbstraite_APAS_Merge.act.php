@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // Action file write by SDK tool
-// --- Last modification: Date 14 November 2008 19:18:11 By  ---
+// --- Last modification: Date 15 November 2008 1:46:59 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
@@ -31,38 +31,52 @@ require_once('CORE/xfer.inc.php');
 //@XFER:acknowledge@
 
 
-//@DESC@Valider un contact
-//@PARAM@ contact
+//@DESC@Fusionne des contacts
+//@PARAM@ CLASSNAME
+//@PARAM@ PERSONNE
+//@PARAM@ contact=-1
 
 //@TRANSACTION:
 
 //@LOCK:0
 
-function personneAbstraite_APAS_AddModifyAct($Params)
+function personneAbstraite_APAS_Merge($Params)
 {
-if (($ret=checkParams("org_lucterios_contacts", "personneAbstraite_APAS_AddModifyAct",$Params ,"contact"))!=null)
+if (($ret=checkParams("org_lucterios_contacts", "personneAbstraite_APAS_Merge",$Params ,"CLASSNAME","PERSONNE"))!=null)
 	return $ret;
-$contact=getParams($Params,"contact",0);
+$CLASSNAME=getParams($Params,"CLASSNAME",0);
+$PERSONNE=getParams($Params,"PERSONNE",0);
+$contact=getParams($Params,"contact",-1);
 $self=new DBObj_org_lucterios_contacts_personneAbstraite();
 
 global $connect;
 $connect->begin();
 try {
-$xfer_result=&new Xfer_Container_Acknowledge("org_lucterios_contacts","personneAbstraite_APAS_AddModifyAct",$Params);
-$xfer_result->Caption="Valider un contact";
+$xfer_result=&new Xfer_Container_Acknowledge("org_lucterios_contacts","personneAbstraite_APAS_Merge",$Params);
+$xfer_result->Caption="Fusionne des contacts";
 //@CODE_ACTION@
-if($contact>0)
-	$find=$self->get($contact);
-$self->setFrom($Params);
-if ($find)
-	$self->update();
-else
-	$self->insert();
-if (contact<=0)
-{
-  $xfer_result->m_context=array("contact"=>$self->id);
-  $xfer_result->redirectAction($self->NewAction("editer","","Fiche"));
+$file_name=DBObj_Basic::getTableName(substr($CLASSNAME,6));
+require_once($file_name);
+
+$list_id=split(';',$PERSONNE);
+foreach($list_id as $id) {
+	$main=new DBObj_org_lucterios_contacts_personneAbstraite;
+	$main->get($contact);
+
+	$obj=new $CLASSNAME;
+	$obj->get($id);
+	$sub_obj=$obj->getSuperObject('org_lucterios_contacts_personneAbstraite');
+	$sub_obj_id=$sub_obj->id;
+	if ($contact==-1)
+		$contact=$sub_obj_id;
+	if ($contact!=$sub_obj_id) {
+		$other=new DBObj_org_lucterios_contacts_personneAbstraite;
+		$other->get($sub_obj_id);
+		$main->merge($other);
+	}
 }
+$xfer_result->m_context['contact']=$contact;
+$xfer_result->redirectAction($self->NewAction('titre','','Fiche',FORMTYPE_MODAL,CLOSE_NO));
 //@CODE_ACTION@
 	$connect->commit();
 }catch(Exception $e) {

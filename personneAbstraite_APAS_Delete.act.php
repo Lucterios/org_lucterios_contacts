@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // Action file write by SDK tool
-// --- Last modification: Date 14 November 2008 19:18:30 By  ---
+// --- Last modification: Date 14 November 2008 23:18:07 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
@@ -26,35 +26,41 @@ require_once('CORE/rights.inc.php');
 //@TABLES@
 require_once('extensions/org_lucterios_contacts/personneAbstraite.tbl.php');
 //@TABLES@
-//@XFER:print
-require_once('CORE/xfer_printing.inc.php');
-//@XFER:print@
+//@XFER:acknowledge
+require_once('CORE/xfer.inc.php');
+//@XFER:acknowledge@
 
 
-//@DESC@Imprimer un contact
+//@DESC@Suppression en cascade
 //@PARAM@ 
-//@INDEX:personneAbstraite
+//@INDEX:abstractContact
 
+//@TRANSACTION:
 
 //@LOCK:0
 
-function personneAbstraite_APAS_PrintFile($Params)
+function personneAbstraite_APAS_Delete($Params)
 {
 $self=new DBObj_org_lucterios_contacts_personneAbstraite();
-$personneAbstraite=getParams($Params,"personneAbstraite",-1);
-if ($personneAbstraite>=0) $self->get($personneAbstraite);
+$abstractContact=getParams($Params,"abstractContact",-1);
+if ($abstractContact>=0) $self->get($abstractContact);
+
+global $connect;
+$connect->begin();
 try {
-$xfer_result=&new Xfer_Container_Print("org_lucterios_contacts","personneAbstraite_APAS_PrintFile",$Params);
-$xfer_result->Caption="Imprimer un contact";
+$xfer_result=&new Xfer_Container_Acknowledge("org_lucterios_contacts","personneAbstraite_APAS_Delete",$Params);
+$xfer_result->Caption="Suppression en cascade";
 //@CODE_ACTION@
-require_once "CORE/PrintAction.inc.php";
-$print_action=new PrintAction("org_lucterios_contacts","personneAbstraite_APAS_PrintFile",$Params);
-$print_action->TabChangePage=false;
-$print_action->Extended=false;
-$print_action->Title="Fiche descriptive";
-$xfer_result->printListing($print_action);
+if (($res=$self->canBeDelete())!=0) {
+	require_once("CORE/Lucterios_Error.inc.php");
+	throw new LucteriosException(IMPORTANT,"Suppression de '".$self->toText()."' impossible");
+}
+if ($xfer_result->confirme("Voulez vous supprimer '".$self->toText()."'?"))
+	$self->deleteCascade();
 //@CODE_ACTION@
+	$connect->commit();
 }catch(Exception $e) {
+	$connect->rollback();
 	throw $e;
 }
 return $xfer_result;

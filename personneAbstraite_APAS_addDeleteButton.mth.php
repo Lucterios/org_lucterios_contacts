@@ -17,8 +17,8 @@
 //     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
-//  // Action file write by SDK tool
-// --- Last modification: Date 14 November 2008 19:18:30 By  ---
+//  // Method file write by SDK tool
+// --- Last modification: Date 14 November 2008 22:43:19 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
@@ -26,38 +26,32 @@ require_once('CORE/rights.inc.php');
 //@TABLES@
 require_once('extensions/org_lucterios_contacts/personneAbstraite.tbl.php');
 //@TABLES@
-//@XFER:print
-require_once('CORE/xfer_printing.inc.php');
-//@XFER:print@
 
+//@DESC@Ajouter un bouton de suppression en cascade
+//@PARAM@ xfer_result
 
-//@DESC@Imprimer un contact
-//@PARAM@ 
-//@INDEX:personneAbstraite
-
-
-//@LOCK:0
-
-function personneAbstraite_APAS_PrintFile($Params)
+function personneAbstraite_APAS_addDeleteButton(&$self,$xfer_result)
 {
-$self=new DBObj_org_lucterios_contacts_personneAbstraite();
-$personneAbstraite=getParams($Params,"personneAbstraite",-1);
-if ($personneAbstraite>=0) $self->get($personneAbstraite);
-try {
-$xfer_result=&new Xfer_Container_Print("org_lucterios_contacts","personneAbstraite_APAS_PrintFile",$Params);
-$xfer_result->Caption="Imprimer un contact";
 //@CODE_ACTION@
-require_once "CORE/PrintAction.inc.php";
-$print_action=new PrintAction("org_lucterios_contacts","personneAbstraite_APAS_PrintFile",$Params);
-$print_action->TabChangePage=false;
-$print_action->Extended=false;
-$print_action->Title="Fiche descriptive";
-$xfer_result->printListing($print_action);
-//@CODE_ACTION@
-}catch(Exception $e) {
-	throw $e;
+$nb1=count($xfer_result->m_actions);
+$xfer_result->addAction($self->NewAction('_Suppression','suppr.png','Delete',FORMTYPE_MODAL,CLOSE_YES));
+$nb2=count($xfer_result->m_actions);
+
+$can_be_delete=($nb1<$nb2);
+if ($can_be_delete) {
+	$contact=new DBObj_org_lucterios_contacts_personneAbstraite;
+	$contact->get($self->id);
+	$can_be_delete=($contact->canBeDelete()==0);
 }
+
+echo "\n<!-- NB1:$nb1 NB2:$nb2 can_be_delete=$can_be_delete -->\n";
+
+if ($can_be_delete)
+	$xfer_result->m_context['abstractContact']=$self->id;
+else
+	unset($xfer_result->m_actions[$nb2-1]);
 return $xfer_result;
+//@CODE_ACTION@
 }
 
 ?>
