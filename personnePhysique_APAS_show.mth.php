@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // Method file write by SDK tool
-// --- Last modification: Date 15 November 2008 12:43:50 By  ---
+// --- Last modification: Date 15 November 2008 23:17:42 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
@@ -57,6 +57,7 @@ else
 	$bt_login->setAction($self->NewAction("Créer un a_lias","","login",FORMTYPE_MODAL,CLOSE_NO));
 $bt_login->setLocation($posX+2,$posY+6);
 $xfer_result->addComponent($bt_login);
+$xfer_result->m_context['personnePhysique']=$self->id;
 
 return $xfer_result;
 //@CODE_ACTION@

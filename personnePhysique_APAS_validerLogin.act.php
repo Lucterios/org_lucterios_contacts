@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // Action file write by SDK tool
-// --- Last modification: Date 14 November 2008 0:57:52 By  ---
+// --- Last modification: Date 15 November 2008 23:48:57 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
@@ -70,9 +70,9 @@ if ((($self->user>0) || ($newpass1!= "")) && ($newpass1==$newpass2))
 		}
 		else {
 			$DBObjusers->realName=$self->toText();
-			$DBObjusers->insert();
-			$self->user=$DBObjusers->id;
-			$self->update();
+			$uid=$DBObjusers->insert();
+			global $connect;
+			$connect->execute("UPDATE org_lucterios_contacts_personnePhysique SET user=$uid WHERE id=$personnePhysique",true);
 		}
 		if ($newpass1!= "")
 			$DBObjusers->ChangePWD($newpass1);
