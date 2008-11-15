@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // Action file write by SDK tool
-// --- Last modification: Date 15 November 2008 2:09:54 By  ---
+// --- Last modification: Date 15 November 2008 11:37:04 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
@@ -79,8 +79,12 @@ else {
 }
 $grid = $self->getGrid("personneMorale");
 $grid->setLocation(0,2,3);
-if($IsSearch != 0)
-	$grid->addAction($self->NewAction('_Fusionner','','SelectMerge',FORMTYPE_MODAL,CLOSE_NO,SELECT_MULTI));
+if($IsSearch != 0) {
+	$xfer_result->m_context['CLASSNAME']="DBObj_org_lucterios_contacts_personneMorale";
+	$xfer_result->m_context['PARAMNAME']="personneMorale";
+	$DBAbstract=new DBObj_org_lucterios_contacts_personneAbstraite;
+	$grid->addAction($DBAbstract->newAction("_Fusionner","","SelectMerge", FORMTYPE_MODAL, CLOSE_NO,SELECT_MULTI));
+}
 $xfer_result->addComponent($grid);
 $lbl = new Xfer_Comp_LabelForm("nb");
 $lbl->setLocation(0,3,2);

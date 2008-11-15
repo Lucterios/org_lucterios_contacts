@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // Method file write by SDK tool
-// --- Last modification: Date 14 November 2008 19:22:02 By  ---
+// --- Last modification: Date 15 November 2008 12:43:50 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
@@ -49,13 +49,13 @@ $xfer_result->setDBObject($self,"prenom", true,$posY++,$posX+2);
 $xfer_result->setDBObject($self,"sexe", true,$posY,$posX);
 $xfer_result = $self->Super->show($posX,$posY,$xfer_result);
 
-$xfer_result->setDBObject($self,"user",true,$posY+10,$posX);
+$xfer_result->setDBObject($self,"user",true,$posY+6,$posX);
 $bt_login=new Xfer_Comp_Button('buttonLogin');
 if ($self->user>0)
 	$bt_login->setAction($self->NewAction("Modifier l`a_lias","","login",FORMTYPE_MODAL,CLOSE_NO));
 else
 	$bt_login->setAction($self->NewAction("Créer un a_lias","","login",FORMTYPE_MODAL,CLOSE_NO));
-$bt_login->setLocation($posX+2,$posY+10);
+$bt_login->setLocation($posX+2,$posY+6);
 $xfer_result->addComponent($bt_login);
 
 return $xfer_result;

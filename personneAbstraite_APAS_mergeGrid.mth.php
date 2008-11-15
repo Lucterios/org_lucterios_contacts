@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // Method file write by SDK tool
-// --- Last modification: Date 15 November 2008 2:08:04 By  ---
+// --- Last modification: Date 15 November 2008 12:32:55 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
@@ -35,6 +35,9 @@ require_once('extensions/org_lucterios_contacts/personneAbstraite.tbl.php');
 function personneAbstraite_APAS_mergeGrid(&$self,$className,$listId,$contact)
 {
 //@CODE_ACTION@
+$file_name=DBObj_Basic::getTableName(substr($className,6));
+require_once($file_name);
+
 $abstract=array();
 $list_id=split(';',$listid);
 foreach($list_id as $id) {
@@ -47,7 +50,7 @@ foreach($list_id as $id) {
 }
 
 $grid=new Xfer_Comp_Grid('contact');
-$grid->newHeader('select','Référence',3);
+$grid->newHeader('select','Principale',3);
 $grid->newHeader('text','Désignation',4);
 
 $list_id=split(';',$listId);

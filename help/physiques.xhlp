@@ -17,10 +17,13 @@ Remplissez le formulaire et valider le pour l'insérer dans votre base de données
 Depuis la liste des personnes physiques, vous avez la possibilité d'éditer une personne.<br><br>
 <center><img src='~org_lucterios_contacts$EditPhysique.jpg' alt='EditPhysique.jpg' /></center><br>
 Cela vous permettra de consulter la fiche d'une personne précédemment entrée dans votre base.<br>
-Vous pouvez modifier cette fiche ou l'imprimer.
+Vous pouvez modifier cette fiche ou l'imprimer.<br>
+Si cette personne n'est pas référencé dans d'autre enregistrement de l'application, vous avez la possibilité de la supprimer.
 
 <h2>Recherche d'un contact physique</h2>
 Le menu <i>contacts/Recherche de personne physique</i> vous permet de définir une critère de recherche sur une personne physique.<br><br>
 <center><img src='~org_lucterios_contacts$RecherchePhysique.jpg' alt='RecherchePhysique.jpg' /></center><br>
 Une fois valider, l'outil va rechercher dans la base toutes les personnes correspondants à ces critères.<br>
-Vous pourrez alors imprimer cette liste ou en éditer/modifier une fiche.
+Vous pourrez alors imprimer cette liste ou en éditer/modifier une fiche.<br>
+Il vous est possible de fusionner plusieurs fiches en une seul.
+Pour cela vous devez préciser le contact principale, l'outil supprimera les autres après avoir déplacé toutes leurs références sur l'enregistrement restant.

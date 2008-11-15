@@ -17,7 +17,8 @@ Remplissez le formulaire et valider le pour l'insérer dans votre base de données
 Depuis la liste des personnes morales, vous avez la possibilité d'éditer une structure.<br><br>
 <center><img src='~org_lucterios_contacts$EditMoral.jpg' alt='EditMoral.jpg' /></center><br>
 Cela vous permettra de consulter la fiche d'une structure précédemment entrée dans votre base.<br>
-Vous pouvez modifier cette fiche ou l'imprimer.
+Vous pouvez modifier cette fiche ou l'imprimer.<br>
+Si cette personne n'est pas référencé dans d'autre enregistrement de l'application, vous avez la possibilité de la supprimer.
 
 <h2>Responsables d'un contact moral</h2>
 Vous avez la possibilité d'associer une personne physique à votre structure.<br>
@@ -29,4 +30,6 @@ Vous avez aussi la possibilité d'ajouter une fonction à un responsable précédemm
 Le menu <i>contacts/Recherche de personne morale</i> vous permet de définir un critère de recherche sur une structure morale.<br><br>
 <center><img src='~org_lucterios_contacts$RechercheMoral.jpg' alt='RechercheMoral.jpg' /></center><br>
 Une fois valider, l'outil va rechercher dans la base toutes les fiches correspondantes à ces critères.<br>
-Vous pourrez alors imprimer cette liste ou en éditer/modifier une.
+Vous pourrez alors imprimer cette liste ou en éditer/modifier une.<br>
+Il vous est possible de fusionner plusieurs fiches en une seul.
+Pour cela vous devez préciser le contact principale, l'outil supprimera les autres après avoir déplacé toutes leurs références sur l'enregistrement restant.

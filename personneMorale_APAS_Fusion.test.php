@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // Test file write by SDK tool
-// --- Last modification: Date 15 November 2008 2:04:24 By  ---
+// --- Last modification: Date 15 November 2008 12:35:57 By  ---
 
 
 //@TABLES@
@@ -63,8 +63,8 @@ try {
 	$phys=new DBObj_org_lucterios_contacts_personnePhysique;
 	$test->assertEquals(2,$phys->find(),'IN phys nb');
 
-	$rep=$test->CallAction("org_lucterios_contacts","personneMorale_APAS_SelectMerge",array("personneMorale"=>"101;102"),"Xfer_Container_Custom");
-	$test->assertEquals(3,$rep->getComponentCount());
+	$rep=$test->CallAction("org_lucterios_contacts","personneAbstraite_APAS_SelectMerge",array("CLASSNAME"=>"DBObj_org_lucterios_contacts_personneMorale", "PARAMNAME"=>"personneMorale","personneMorale"=>"101;102"),"Xfer_Container_Custom");
+	$test->assertEquals(4,$rep->getComponentCount());
 
 	$comp=$rep->getComponents(0);
 	$test->assertClass("Xfer_Comp_Image",$comp);
@@ -80,7 +80,7 @@ try {
 	$test->assertEquals(2,count($comp->m_headers),"headers");
 	$test->assertEquals(2,count($comp->m_records),"records");
 	$headers=array_keys($comp->m_headers);
-	$test->assertEquals("Référence",$comp->m_headers[$headers[0]]->m_descript);
+	$test->assertEquals("Principale",$comp->m_headers[$headers[0]]->m_descript);
 	$test->assertEquals("Désignation",$comp->m_headers[$headers[1]]->m_descript);
 	$test->assertEquals("Oui",$comp->m_records["101"]["select"]);
 	$test->assertEquals("Non",$comp->m_records["102"]["select"]);

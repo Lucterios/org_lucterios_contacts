@@ -18,12 +18,13 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // Action file write by SDK tool
-// --- Last modification: Date 15 November 2008 2:09:10 By  ---
+// --- Last modification: Date 15 November 2008 11:27:46 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
 
 //@TABLES@
+require_once('extensions/org_lucterios_contacts/personneAbstraite.tbl.php');
 require_once('extensions/org_lucterios_contacts/personneMorale.tbl.php');
 require_once('extensions/org_lucterios_contacts/personnePhysique.tbl.php');
 //@TABLES@
@@ -82,8 +83,12 @@ else {
 }
 $grid = $self->getGrid("personnePhysique");
 $grid->setLocation(0,2,3);
-if($IsSearch != 0)
-	$grid->addAction($self->NewAction('_Fusionner','','SelectMerge',FORMTYPE_MODAL,CLOSE_NO,SELECT_MULTI));
+if($IsSearch != 0) {
+	$xfer_result->m_context['CLASSNAME']="DBObj_org_lucterios_contacts_personnePhysique";
+	$xfer_result->m_context['PARAMNAME']="personnePhysique";
+	$DBAbstract=new DBObj_org_lucterios_contacts_personneAbstraite;
+	$grid->addAction($DBAbstract->newAction("_Fusionner","","SelectMerge", FORMTYPE_MODAL, CLOSE_NO,SELECT_MULTI));
+}
 $xfer_result->addComponent($grid);
 $link = new Xfer_Comp_LinkLabel('email');
 $link->setValue('Ecrire a tous');
