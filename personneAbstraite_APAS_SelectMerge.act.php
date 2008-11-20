@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // Action file write by SDK tool
-// --- Last modification: Date 15 November 2008 12:38:54 By  ---
+// --- Last modification: Date 16 November 2008 23:23:28 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
@@ -60,10 +60,32 @@ $lbl->setLocation(1,0);
 $lbl->setValue("{[bold]}{[center]}{[newline]}Fusion de personnes{[/center]}{[/bold]}");
 $xfer_result->addComponent($lbl);
 
+$grid=new Xfer_Comp_Grid('contact');
+$grid->newHeader('select','Principale',3);
+$grid->newHeader('text','Désignation',4);
+
 $xfer_result->m_context['PERSONNE']=$Params[$PARAMNAME];
-$grid=$self->mergeGrid($CLASSNAME,$Params[$PARAMNAME],$contact);
-$grid->setLocation(0,1,2);
+$list_id=split(';',$Params[$PARAMNAME]);
+$file_name=DBObj_Basic::getTableName(substr($CLASSNAME,6));
+require_once($file_name);
+foreach($list_id as $id) {
+	$obj=new $CLASSNAME;
+	$obj->get($id);
+	$sub_obj=$obj->getSuperObject('org_lucterios_contacts_personneAbstraite');
+	$sub_obj_id=$sub_obj->id;
+	if ($contact==-1)
+		$contact=$sub_obj_id;
+	$grid->setValue($sub_obj_id,'select',$sub_obj_id==$contact?'Oui':'Non');
+	$grid->setValue($sub_obj_id,'text',$obj->toText());
+}
+if (count($grid->m_records)<2) {
+	require_once("CORE/Lucterios_Error.inc.php");
+	throw new LucteriosException(IMPORTANT,"Fusion impossible: vous devez selectionner plusieurs enregistrement");
+}
+$grid->setSize(200,400);
 $grid->addAction($self->NewAction('_Changer','','SelectMerge',FORMTYPE_REFRESH,CLOSE_NO,SELECT_SINGLE));
+$grid->addAction($self->NewAction('_Editer','edit.png','Fiche',FORMTYPE_MODAL,CLOSE_NO,SELECT_SINGLE));
+$grid->setLocation(0,1,2);
 $xfer_result->addComponent($grid);
 
 $lbl = new Xfer_Comp_LabelForm("help");
