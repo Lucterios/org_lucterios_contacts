@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // table file write by SDK tool
-// --- Last modification: Date 14 November 2008 0:35:01 By  ---
+// --- Last modification: Date 21 November 2008 23:16:54 By  ---
 
 require_once('CORE/DBObject.inc.php');
 
@@ -38,7 +38,7 @@ class DBObj_org_lucterios_contacts_personnePhysique extends DBObj_Basic
 	var $prenom;
 	var $sexe;
 	var $user;
-	var $__DBMetaDataField=array('nom'=>array('description'=>'Nom', 'type'=>2, 'notnull'=>false, 'params'=>array('Size'=>30, 'Multi'=>false)), 'prenom'=>array('description'=>'Prénom', 'type'=>2, 'notnull'=>false, 'params'=>array('Size'=>30, 'Multi'=>false)), 'sexe'=>array('description'=>'Sexe', 'type'=>8, 'notnull'=>false, 'params'=>array('Enum'=>array('Homme', 'Femme'))), 'user'=>array('description'=>'Connexion', 'type'=>10, 'notnull'=>false, 'params'=>array('TableName'=>'CORE_users')));
+	var $__DBMetaDataField=array('nom'=>array('description'=>'Nom', 'type'=>2, 'notnull'=>true, 'params'=>array('Size'=>30, 'Multi'=>false)), 'prenom'=>array('description'=>'Prénom', 'type'=>2, 'notnull'=>true, 'params'=>array('Size'=>30, 'Multi'=>false)), 'sexe'=>array('description'=>'Sexe', 'type'=>8, 'notnull'=>false, 'params'=>array('Enum'=>array('Homme', 'Femme'))), 'user'=>array('description'=>'Connexion', 'type'=>10, 'notnull'=>false, 'params'=>array('TableName'=>'CORE_users')));
 
 	var $__toText='$nom $prenom';
 }

@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // Method file write by SDK tool
-// --- Last modification: Date 14 November 2008 22:43:19 By  ---
+// --- Last modification: Date 21 November 2008 23:12:30 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
@@ -43,8 +43,6 @@ if ($can_be_delete) {
 	$contact->get($self->id);
 	$can_be_delete=($contact->canBeDelete()==0);
 }
-
-echo "\n<!-- NB1:$nb1 NB2:$nb2 can_be_delete=$can_be_delete -->\n";
 
 if ($can_be_delete)
 	$xfer_result->m_context['abstractContact']=$self->id;

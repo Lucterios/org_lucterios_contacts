@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // Method file write by SDK tool
-// --- Last modification: Date 15 November 2008 23:17:42 By  ---
+// --- Last modification: Date 21 November 2008 23:27:09 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
@@ -46,7 +46,7 @@ $xfer_result->addComponent($lbl);
 //
 $xfer_result->setDBObject($self,"nom", true,$posY,$posX);
 $xfer_result->setDBObject($self,"prenom", true,$posY++,$posX+2);
-$xfer_result->setDBObject($self,"sexe", true,$posY,$posX);
+$xfer_result->setDBObject($self,"sexe", true,$posY++,$posX);
 $xfer_result = $self->Super->show($posX,$posY,$xfer_result);
 
 $xfer_result->setDBObject($self,"user",true,$posY+6,$posX);
