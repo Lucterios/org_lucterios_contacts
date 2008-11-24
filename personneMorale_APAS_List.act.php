@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // Action file write by SDK tool
-// --- Last modification: Date 15 November 2008 11:37:04 By  ---
+// --- Last modification: Date 23 November 2008 10:58:33 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
@@ -96,6 +96,7 @@ $link->setEmailFromGrid($grid,"mail");
 $link->setLocation(2,3);
 $xfer_result->addComponent($link);
 $xfer_result->addAction($self->newAction("_Imprimer","print.png","PrintList", FORMTYPE_MODAL, CLOSE_NO));
+$xfer_result->addAction($self->newAction("_Etiquettes","print.png","PrintEtiquettes", FORMTYPE_MODAL, CLOSE_NO));
 if($IsSearch != 0)$xfer_result->addAction($self->NewAction("Nouvelle _Recherche","search.png","Search", FORMTYPE_MODAL, CLOSE_YES));
 $xfer_result->addAction( new Xfer_Action("_Fermer","close.png"));
 //@CODE_ACTION@
