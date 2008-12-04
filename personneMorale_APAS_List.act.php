@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // Action file write by SDK tool
-// --- Last modification: Date 23 November 2008 10:58:33 By  ---
+// --- Last modification: Date 29 November 2008 0:04:11 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
@@ -77,7 +77,7 @@ else {
 	$self->type = $Filtretype;
 	$self->find();
 }
-$grid = $self->getGrid("personneMorale");
+$grid = $self->getGrid($Params);
 $grid->setLocation(0,2,3);
 if($IsSearch != 0) {
 	$xfer_result->m_context['CLASSNAME']="DBObj_org_lucterios_contacts_personneMorale";

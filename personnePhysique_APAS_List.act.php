@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // Action file write by SDK tool
-// --- Last modification: Date 23 November 2008 11:02:00 By  ---
+// --- Last modification: Date 29 November 2008 0:04:34 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
@@ -81,7 +81,7 @@ else {
 	$q = "SELECT org_lucterios_contacts_personnePhysique.* FROM org_lucterios_contacts_personnePhysique,org_lucterios_contacts_personneAbstraite WHERE ( org_lucterios_contacts_personnePhysique.superId=org_lucterios_contacts_personneAbstraite.id )  AND ( org_lucterios_contacts_personneAbstraite.codePostal like '".$FiltrecodPostal."%') ";
 	$self->query($q);
 }
-$grid = $self->getGrid("personnePhysique");
+$grid = $self->getGrid($Params);
 $grid->setLocation(0,2,3);
 if($IsSearch != 0) {
 	$xfer_result->m_context['CLASSNAME']="DBObj_org_lucterios_contacts_personnePhysique";
