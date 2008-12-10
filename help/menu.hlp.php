@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // help file write by SDK tool
-// --- Last modification: Date 15 November 2008 12:30:57 By  ---
+// --- Last modification: Date 09 December 2008 23:15:18 By  ---
 
 $HelpTitle='Les contacts';
 $HelpPosition=700;

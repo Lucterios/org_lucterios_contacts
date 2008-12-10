@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // Method file write by SDK tool
-// --- Last modification: Date 21 November 2008 23:27:09 By  ---
+// --- Last modification: Date 09 December 2008 23:22:16 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
@@ -49,7 +49,17 @@ $xfer_result->setDBObject($self,"prenom", true,$posY++,$posX+2);
 $xfer_result->setDBObject($self,"sexe", true,$posY++,$posX);
 $xfer_result = $self->Super->show($posX,$posY,$xfer_result);
 
-$xfer_result->setDBObject($self,"user",true,$posY+6,$posX);
+//$xfer_result->setDBObject($self,"user",true,$posY+6,$posX);
+$user=$self->getField('user');
+$lbl = new Xfer_Comp_LabelForm("labeluser");
+$lbl->setLocation($posX,$posY+6);
+$lbl->setValue("{[bold]}connexion{[/bold]}");
+$xfer_result->addComponent($lbl);
+$lbl = new Xfer_Comp_LabelForm("user");
+$lbl->setLocation($posX+1,$posY+6);
+$lbl->setValue($user->getText());
+$xfer_result->addComponent($lbl);
+
 $bt_login=new Xfer_Comp_Button('buttonLogin');
 if ($self->user>0)
 	$bt_login->setAction($self->NewAction("Modifier l`a_lias","","login",FORMTYPE_MODAL,CLOSE_NO));

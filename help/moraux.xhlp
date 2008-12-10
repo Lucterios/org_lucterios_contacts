@@ -1,7 +1,7 @@
 Un contact moral est une structure ou d'une organisation de personne (entreprise, association, administration, ...), que vous voulez mémoriser.
 
 <h2>Liste de vos contacts moraux</h2>
-Le menu <i>contacts/Personnes morales</i> vous permet de consulter la liste des structures que vous avez déjà enregistrées.<br>
+Le menu <i>Bureautique/contacts/Personnes morales</i> vous permet de consulter la liste des structures que vous avez déjà enregistrées.<br>
 Chaque contact moral est associé à une catégorie. Dans cette liste, vous consultez vos structures filtré par ces catégories.<br><br>
 <center><img src='~org_lucterios_contacts$ListMoral.jpg' alt='ListMoral.jpg' /></center><br>
 Depuis cette écran, vous avez aussi la possibilité de d'imprimer la liste des structures.
@@ -27,7 +27,7 @@ Vous avez aussi la possibilité d'ajouter une fonction à un responsable précédemm
 <center><img src='~org_lucterios_contacts$Responsable.jpg' alt='Responsable.jpg' /></center>
 
 <h2>Recherche d'un contact moraux</h2>
-Le menu <i>contacts/Recherche de personne morale</i> vous permet de définir un critère de recherche sur une structure morale.<br><br>
+Le menu <i>Bureautique/contacts/Recherche de personne morale</i> vous permet de définir un critère de recherche sur une structure morale.<br><br>
 <center><img src='~org_lucterios_contacts$RechercheMoral.jpg' alt='RechercheMoral.jpg' /></center><br>
 Une fois valider, l'outil va rechercher dans la base toutes les fiches correspondantes à ces critères.<br>
 Vous pourrez alors imprimer cette liste ou en éditer/modifier une.<br>
