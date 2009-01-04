@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // setup file write by SDK tool
-// --- Last modification: Date 09 December 2008 23:22:16 By  ---
+// --- Last modification: Date 17 December 2008 21:02:17 By  ---
 
 $extention_name="org_lucterios_contacts";
 $extention_description="Module de gestion des contacts physiques (hommes ou femmes) ou moraux (entreprise, association, administration,...)";
@@ -30,7 +30,7 @@ $extension_libre=true;
 $version_max=0;
 $version_min=20;
 $version_release=90;
-$version_build=51;
+$version_build=68;
 
 $depencies=array();
 $depencies[0] = new Param_Depencies("CORE", 0, 20, 0, 15, false);
@@ -43,14 +43,14 @@ $rights[2] = new Param_Rigth("Gestion des paramètres",75);
 $rights[3] = new Param_Rigth("Suppression/Fusion",85);
 
 $menus=array();
-$menus[0] = new Param_Menu("Adresses et _Contacts", "Bureautiques", "", "contacts.png", "", 50 , 0, "Gestion d'hommes ou de femmes et d'organisations de personnes enregistrés");
+$menus[0] = new Param_Menu("Adresses et _Contacts", "Bureautique", "", "contacts.png", "", 50 , 0, "Gestion d'hommes ou de femmes et d'organisations de personnes enregistrés");
 $menus[1] = new Param_Menu("Personnes _morales", "Adresses et _Contacts", "personneMorale_APAS_List", "contactMoral.png", "ctrl alt M", 10 , 0, "Gestion d'une structure ou d'une organisation de personne (entreprose, association, administration, ...)");
 $menus[2] = new Param_Menu("_Personnes physiques", "Adresses et _Contacts", "personnePhysique_APAS_List", "contactPhyique.png", "", 40 , 0, "Gestion des hommes et des femmes enregistrés");
 $menus[3] = new Param_Menu("_Recherche de personne physique", "Adresses et _Contacts", "personnePhysique_APAS_Search", "contactPhyiqueFind.png", "ctrl alt R", 20 , 1, "Pour trouver une personne physique suivant un ensemble de critères.");
 $menus[4] = new Param_Menu("R_echerche de personne morale", "Adresses et _Contacts", "personneMorale_APAS_Search", "contactMoralFind.png", "", 30 , 1, "Pour trouver une personne morale suivant un ensemble de critères.");
 $menus[5] = new Param_Menu("_Contact", "_Extensions (conf.)", "", "", "", 30 , 0, "");
 $menus[8] = new Param_Menu("Codes postaux / villes", "_Contact", "CodePostal_APAS_list", "contactCodePostal.png", "", 30 , 1, "Gestion des codes postaux associés à leurs communes.");
-$menus[9] = new Param_Menu("Bureautiques", "", "", "bureau.png", "", 60 , 0, "Outils bureautiques");
+$menus[9] = new Param_Menu("Bureautique", "", "", "bureau.png", "", 60 , 0, "Outils bureautiques");
 $menus[10] = new Param_Menu("Configuration des contacts", "_Contact", "configuration", "contactsConfig.png", "", 15 , 1, "Gestion des fonctions des personnes physiques et des catégorie des structures morales.");
 
 $actions=array();

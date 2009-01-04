@@ -1,10 +1,9 @@
-Dans le menu <i>Administration/Extensions (conf)</i> vous avez à votre disposition un ensemble d'outils pour configurer la gestion des contacts.
+Dans le menu <i>Administration/Extensions (conf)</i> vous avez à votre disposition des outils pour configurer la gestion des contacts.
 
-<h2>Fonctions</h2>
-Dans cette écran vous avez la possibilité de créer ou de modifier une définition d'une fonction pour associer une personne physique à une structure morale.
+<h2>Configuration des contacts</h2>
 
-<h2>Catégorie de personnes morales</h2>
-De la même façon que précédemment, vous pouvez créer ou de modifier une catégorie de structure morale pour vous aider dans la classification de vos contacts.
+Dans cette écran vous avez la possibilité de créer ou de modifier une définition d'une fonction ou une résponsabilité pour associer une personne physique à une structure morale.<br>
+De la même façon que précédemment, vous pouvez créer ou de modifier une catégorie de structure morale pour vous aider dans la classification de vos contacts moraux.
 
 <h2>Codes postaux/villes</h2>
 Pour vous aider dans votre saisie de contacts, l'outil recherche automatiquement la ville associé au code postal que vous avez saisie.<br>
