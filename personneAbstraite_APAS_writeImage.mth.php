@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // Method file write by SDK tool
-// --- Last modification: Date 04 October 2008 12:43:35 By  ---
+// --- Last modification: Date 08 January 2009 21:49:19 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
@@ -33,11 +33,14 @@ require_once('extensions/org_lucterios_contacts/personneAbstraite.tbl.php');
 function personneAbstraite_APAS_writeImage(&$self,$Params)
 {
 //@CODE_ACTION@
+global $rootPath;
+if(!isset($rootPath))$rootPath = "";
+
 $uploadlogo = $Params['uploadlogo'];
 list($name_upload,$value_upload) = split(';',$uploadlogo);
 if($name_upload != '') {
 	require_once "CORE/Lucterios_Error.inc.php";
-	$path = "usr/org_lucterios_contacts";
+	$path = $rootPath."usr/org_lucterios_contacts";
 	if(! is_dir($path))@mkdir($path,0777);
 	$source_pic = $path."/Image_temp.jpg";
 	$destination_pic = $path."/Image_".$self->id.".jpg";

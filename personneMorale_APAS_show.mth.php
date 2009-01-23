@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // Method file write by SDK tool
-// --- Last modification: Date 17 December 2008 0:42:38 By  ---
+// --- Last modification: Date 21 January 2009 22:09:53 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
@@ -63,7 +63,7 @@ $lbl = new Xfer_Comp_LabelForm("nbresponsable");
 $lbl->setLocation($posX,$posY);
 $lbl->setValue("Nombre de responsables : ". count($grid->m_records));
 $xfer_result->addComponent($lbl);
-if(!isset($xfer_result->m_context['NOPLAN'])) {
+if(!isset($xfer_result->m_context['PRINT'])) {
 	$link = new Xfer_Comp_LinkLabel('email');
 	$link->setValue('Ecrire a tous');
 	$link->setEmailFromGrid($grid,"mail");

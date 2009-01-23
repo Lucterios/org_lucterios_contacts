@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // Method file write by SDK tool
-// --- Last modification: Date 17 December 2008 21:02:17 By  ---
+// --- Last modification: Date 08 January 2009 21:48:18 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
@@ -34,6 +34,9 @@ require_once('extensions/org_lucterios_contacts/liaison.tbl.php');
 function liaison_APAS_getGrid(&$self,$personneMorale)
 {
 //@CODE_ACTION@
+global $rootPath;
+if(!isset($rootPath))$rootPath = "";
+
 $physique = new DBObj_org_lucterios_contacts_personnePhysique;
 $q = "select DISTINCT org_lucterios_contacts_personnePhysique.* FROM org_lucterios_contacts_personnePhysique,org_lucterios_contacts_liaison WHERE org_lucterios_contacts_personnePhysique.id=org_lucterios_contacts_liaison.physique AND org_lucterios_contacts_liaison.morale=".$personneMorale;
 $physique->query($q);
@@ -54,7 +57,7 @@ foreach($grid->m_records as $key => $value) {
 	$grid->m_records[$key]["Téléphones".SEP_SHOW."TEL"] = $physique->fixe."{[newline]}".$physique->portable;
 	if ($personneMorale==1) {
 		$abstract_id=$physique->Super->id;
-		$grid->m_records[$key]["Photo".SEP_SHOW."PHOTO"] = "usr/org_lucterios_contacts/Image_$abstract_id.jpg";
+		$grid->m_records[$key]["Photo".SEP_SHOW."PHOTO"] = $rootPath."usr/org_lucterios_contacts/Image_$abstract_id.jpg";
 	}
 }
 return $grid;
