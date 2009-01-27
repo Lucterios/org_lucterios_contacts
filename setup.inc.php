@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // setup file write by SDK tool
-// --- Last modification: Date 23 January 2009 19:32:45 By  ---
+// --- Last modification: Date 26 January 2009 19:53:36 By  ---
 
 $extention_name="org_lucterios_contacts";
 $extention_description="Module de gestion des contacts physiques (hommes ou femmes) ou moraux (entreprise, association, administration,...)";
@@ -30,7 +30,7 @@ $extension_libre=true;
 $version_max=0;
 $version_min=90;
 $version_release=1;
-$version_build=3;
+$version_build=6;
 
 $depencies=array();
 $depencies[0] = new Param_Depencies("CORE", 0, 93, 0, 90, false);

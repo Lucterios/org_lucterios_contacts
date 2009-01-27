@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // Action file write by SDK tool
-// --- Last modification: Date 29 November 2008 0:04:11 By  ---
+// --- Last modification: Date 26 January 2009 19:53:36 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
@@ -88,7 +88,7 @@ if($IsSearch != 0) {
 $xfer_result->addComponent($grid);
 $lbl = new Xfer_Comp_LabelForm("nb");
 $lbl->setLocation(0,3,2);
-$lbl->setValue("Nombre affichés : ". count($grid->m_records));
+$lbl->setValue("Nombre total : ".$grid->mNbLines);
 $xfer_result->addComponent($lbl);
 $link = new Xfer_Comp_LinkLabel('email');
 $link->setValue('Ecrire a tous');

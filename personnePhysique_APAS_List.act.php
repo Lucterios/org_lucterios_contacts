@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // Action file write by SDK tool
-// --- Last modification: Date 29 November 2008 0:04:34 By  ---
+// --- Last modification: Date 26 January 2009 19:49:26 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
@@ -97,7 +97,7 @@ $link->setLocation(2,3);
 $xfer_result->addComponent($link);
 $lbl = new Xfer_Comp_LabelForm("nb");
 $lbl->setLocation(0,3,2);
-$lbl->setValue("Nombre affichés : ". count($grid->m_records));
+$lbl->setValue("Nombre total : ".$grid->mNbLines);
 $xfer_result->addComponent($lbl);
 $xfer_result->addAction($self->newAction("_Imprimer","print.png","PrintList", FORMTYPE_MODAL, CLOSE_NO));
 $xfer_result->addAction($self->newAction("_Etiquettes","print.png","PrintEtiquettes", FORMTYPE_MODAL, CLOSE_NO));
