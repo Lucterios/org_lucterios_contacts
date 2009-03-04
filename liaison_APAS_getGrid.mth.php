@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // Method file write by SDK tool
-// --- Last modification: Date 08 January 2009 21:48:18 By  ---
+// --- Last modification: Date 11 February 2009 19:31:30 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
@@ -38,7 +38,9 @@ global $rootPath;
 if(!isset($rootPath))$rootPath = "";
 
 $physique = new DBObj_org_lucterios_contacts_personnePhysique;
-$q = "select DISTINCT org_lucterios_contacts_personnePhysique.* FROM org_lucterios_contacts_personnePhysique,org_lucterios_contacts_liaison WHERE org_lucterios_contacts_personnePhysique.id=org_lucterios_contacts_liaison.physique AND org_lucterios_contacts_liaison.morale=".$personneMorale;
+$q = "select DISTINCT org_lucterios_contacts_personnePhysique.* FROM org_lucterios_contacts_personnePhysique,org_lucterios_contacts_liaison ";
+$q.= "WHERE org_lucterios_contacts_personnePhysique.id=org_lucterios_contacts_liaison.physique AND org_lucterios_contacts_liaison.morale=".$personneMorale;
+$q.= " ORDER BY org_lucterios_contacts_liaison.fonction";
 $physique->query($q);
 // creation de la grille correspondante
 $grid = new Xfer_Comp_Grid("liaison_physique");
@@ -57,7 +59,11 @@ foreach($grid->m_records as $key => $value) {
 	$grid->m_records[$key]["Téléphones".SEP_SHOW."TEL"] = $physique->fixe."{[newline]}".$physique->portable;
 	if ($personneMorale==1) {
 		$abstract_id=$physique->Super->id;
-		$grid->m_records[$key]["Photo".SEP_SHOW."PHOTO"] = $rootPath."usr/org_lucterios_contacts/Image_$abstract_id.jpg";
+		$file_name=$rootPath."usr/org_lucterios_contacts/Image_$abstract_id.jpg";
+		if (is_file($file_name))
+			$grid->m_records[$key]["Photo".SEP_SHOW."PHOTO"] = $file_name;
+		else
+			$grid->m_records[$key]["Photo".SEP_SHOW."PHOTO"] = "";
 	}
 }
 return $grid;

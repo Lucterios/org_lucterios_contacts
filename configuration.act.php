@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // Action file write by SDK tool
-// --- Last modification: Date 09 December 2008 22:20:57 By  ---
+// --- Last modification: Date 11 February 2009 18:54:45 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
@@ -71,7 +71,6 @@ $lbl = new Xfer_Comp_LabelForm("nb");
 $lbl->setLocation(0,2,2);
 $lbl->setValue("Nombre de fonctions affichés : ". count($grid->m_records));
 $xfer_result->addComponent($lbl);
-$xfer_result->addAction( new Xfer_Action("_Fermer","close.png"));
 
 $xfer_result->newTab("Catégories de personnes morales");
 
@@ -96,6 +95,7 @@ $lbl = new Xfer_Comp_LabelForm("nb");
 $lbl->setLocation(0,2,2);
 $lbl->setValue("Nombre de types affichés : ". count($grid->m_records));
 $xfer_result->addComponent($lbl);
+
 $xfer_result->addAction( new Xfer_Action("_Fermer","close.png"));
 //@CODE_ACTION@
 	$connect->commit();

@@ -1,6 +1,24 @@
 <?php
-// Method file write by SDK tool
-// --- Last modification: Date 16 June 2008 21:50:52 By  ---
+// 
+//     This file is part of Lucterios.
+// 
+//     Lucterios is free software; you can redistribute it and/or modify
+//     it under the terms of the GNU General Public License as published by
+//     the Free Software Foundation; either version 2 of the License, or
+//     (at your option) any later version.
+// 
+//     Lucterios is distributed in the hope that it will be useful,
+//     but WITHOUT ANY WARRANTY; without even the implied warranty of
+//     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//     GNU General Public License for more details.
+// 
+//     You should have received a copy of the GNU General Public License
+//     along with Lucterios; if not, write to the Free Software
+//     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+// 
+// 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
+//  // Method file write by SDK tool
+// --- Last modification: Date 04 March 2009 19:10:05 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
@@ -17,6 +35,9 @@ require_once('extensions/org_lucterios_contacts/personneAbstraite.tbl.php');
 function personneAbstraite_APAS_show(&$self,$posX,$posY,$xfer_result)
 {
 //@CODE_ACTION@
+global $rootPath;
+if(!isset($rootPath))
+	$rootPath = "";
 if(!isset($xfer_result->m_context['PRINT'])) {
 	$lbl_plan = new Xfer_Comp_LinkLabel('plan');
 	$lbl_plan->setValue('plan');
@@ -29,8 +50,10 @@ if(!isset($xfer_result->m_context['PRINT'])) {
 }
 $lbl_img = new Xfer_Comp_Image('logo');
 $file_name = "usr/org_lucterios_contacts/Image_".$self->id.".jpg";
-if( is_file($file_name))$lbl_img->setValue($file_name);
-else $lbl_img->setValue('extensions/org_lucterios_contacts/images/NoImage.png');
+if( is_file($rootPath.$file_name))
+	$lbl_img->setValue($file_name);
+else
+	$lbl_img->setValue('extensions/org_lucterios_contacts/images/NoImage.png');
 $lbl_img->setLocation($posX+5,$posY-2,1,4);
 $xfer_result->addComponent($lbl_img);
 //

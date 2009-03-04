@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // Method file write by SDK tool
-// --- Last modification: Date 21 January 2009 22:09:53 By  ---
+// --- Last modification: Date 11 February 2009 19:20:20 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
@@ -41,7 +41,7 @@ $img->setLocation($posX,$posY);
 $img->setValue("contactMoral.png");
 $xfer_result->addComponent($img);
 $lbl = new Xfer_Comp_LabelForm("title_personne");
-$lbl->setLocation($posX+1,$posY++,5);
+$lbl->setLocation($posX+1,$posY++,7);
 $lbl->setValue("{[bold]}{[center]}{[newline]}Personne morale{[/center]}{[/bold]}");
 $xfer_result->addComponent($lbl);
 //
