@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // Action file write by SDK tool
-// --- Last modification: Date 26 January 2009 19:53:36 By  ---
+// --- Last modification: Date 16 March 2009 23:08:47 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
@@ -56,7 +56,7 @@ $lbl = new Xfer_Comp_LabelForm("titre");
 $lbl->setLocation(1,0,2);
 $xfer_result->addComponent($lbl);
 if($IsSearch != 0) {
-	$self->setForSearch($Params);
+	$self->setForSearch($Params,'raisonSociale');
 	$lbl->setValue("{[center]}{[bold]}Résultat de la recherche{[/bold]}{[/center]}");
 }
 else {
@@ -75,6 +75,7 @@ else {
 	$comp->setLocation(2,1);
 	$xfer_result->addComponent($comp);
 	$self->type = $Filtretype;
+	$self->orderBy('raisonSociale');
 	$self->find();
 }
 $grid = $self->getGrid($Params);

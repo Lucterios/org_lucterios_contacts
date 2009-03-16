@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // setup file write by SDK tool
-// --- Last modification: Date 04 March 2009 19:10:05 By  ---
+// --- Last modification: Date 16 March 2009 23:08:47 By  ---
 
 $extention_name="org_lucterios_contacts";
 $extention_description="Module de gestion des contacts physiques (hommes ou femmes) ou moraux (entreprise, association, administration,...)";
@@ -29,8 +29,8 @@ $extension_libre=true;
 
 $version_max=0;
 $version_min=90;
-$version_release=1;
-$version_build=18;
+$version_release=10;
+$version_build=24;
 
 $depencies=array();
 $depencies[0] = new Param_Depencies("CORE", 0, 93, 0, 90, false);
@@ -40,6 +40,8 @@ $rights[0] = new Param_Rigth("Voir/Lister",40);
 $rights[1] = new Param_Rigth("Ajouter/Modifier",60);
 $rights[2] = new Param_Rigth("Gestion des paramètres",75);
 $rights[3] = new Param_Rigth("Suppression/Fusion",70);
+$rights[4] = new Param_Rigth("Voir structure local",0);
+$rights[5] = new Param_Rigth("Voir/modifier fiche personnel",20);
 
 $menus=array();
 $menus[0] = new Param_Menu("Adresses et _Contacts", "Bureautique", "", "contacts.png", "", 50 , 0, "Gestion d'hommes ou de femmes et d'organisations de personnes enregistrés");
@@ -51,54 +53,64 @@ $menus[5] = new Param_Menu("_Contact", "_Extensions (conf.)", "", "", "", 30 , 0
 $menus[8] = new Param_Menu("Codes postaux / villes", "_Contact", "CodePostal_APAS_list", "contactCodePostal.png", "", 30 , 1, "Gestion des codes postaux associés à leurs communes.");
 $menus[9] = new Param_Menu("Bureautique", "", "", "bureau.png", "", 60 , 0, "Outils bureautiques");
 $menus[10] = new Param_Menu("Configuration des contacts", "_Contact", "configuration", "contactsConfig.png", "", 15 , 1, "Gestion des fonctions des personnes physiques et des catégorie des structures morales.");
+$menus[11] = new Param_Menu("Mon compte", "Ad_ministration", "FichePersonnel", "fiche.png", "shift ctrl alt M", 1 , 1, "Visualiser la fiche de mon compte.");
+$menus[12] = new Param_Menu("Nous contacter", "Ad_ministration", "StructureLocal", "nousContact.png", "shift ctrl alt N", 8 , 1, "Fiche complete de notre structure et de ses responsables");
 
 $actions=array();
 $actions[0] = new Param_Action("Validation", "CodePostal_APAS_ajouteract", 0);
 $actions[1] = new Param_Action("Ajouter Code postal/Ville", "CodePostal_APAS_ajout", 0);
 $actions[2] = new Param_Action("Liste des Codes Postaux/Villes", "CodePostal_APAS_list", 0);
-$actions[3] = new Param_Action("Configuration des contacts", "configuration", 2);
-$actions[4] = new Param_Action("Valider l'ajout", "fonctions_APAS_ajouteract", 0);
-$actions[5] = new Param_Action("Ajouter une fonction", "fonctions_APAS_ajout", 0);
-$actions[6] = new Param_Action("Liste des fonctions", "fonctions_APAS_list", 0);
-$actions[7] = new Param_Action("Suppression d`une fonction", "fonctions_APAS_suppr", 0);
-$actions[8] = new Param_Action("Valider un liaison", "liaison_APAS_AddModifyAct", 1);
-$actions[9] = new Param_Action("Ajouter/Modifier une liaison", "liaison_APAS_AddModify", 1);
-$actions[10] = new Param_Action("Ajouter un responsable", "liaison_APAS_AddSearchSelect", 1);
-$actions[11] = new Param_Action("Valider la recherche", "liaison_APAS_AddSearchyAct", 1);
-$actions[12] = new Param_Action("Rechercher une personne pour ajout", "liaison_APAS_AddSearch", 1);
-$actions[13] = new Param_Action("Supprimer un liaison", "liaison_APAS_Del", 1);
-$actions[14] = new Param_Action("Fiche d'un liaison", "liaison_APAS_Fiche", 0);
-$actions[15] = new Param_Action("", "liaison_APAS_addFunctionAct", 1);
-$actions[16] = new Param_Action("", "liaison_APAS_addFunction", 1);
-$actions[17] = new Param_Action("Valider un contact", "personneAbstraite_APAS_AddModifyAct", 1);
-$actions[18] = new Param_Action("Modifier un contact", "personneAbstraite_APAS_AddModify", 1);
-$actions[19] = new Param_Action("Suppression en cascade", "personneAbstraite_APAS_Delete", 3);
-$actions[20] = new Param_Action("Fiche d'un contact", "personneAbstraite_APAS_Fiche", 0);
-$actions[21] = new Param_Action("Fusionne des contacts", "personneAbstraite_APAS_Merge", 3);
-$actions[22] = new Param_Action("Imprimer un contact", "personneAbstraite_APAS_PrintFile", 0);
-$actions[23] = new Param_Action("Selectionner les personnes à fusionner", "personneAbstraite_APAS_SelectMerge", 3);
-$actions[24] = new Param_Action("Valider un personneMorale", "personneMorale_APAS_AddModifyAct", 1);
-$actions[25] = new Param_Action("Ajouter/Modifier un personneMorale", "personneMorale_APAS_AddModify", 1);
-$actions[26] = new Param_Action("Fiche d'une personne morale", "personneMorale_APAS_Fiche", 0);
-$actions[27] = new Param_Action("Liste des personnes morales", "personneMorale_APAS_List", 0);
-$actions[28] = new Param_Action("Imprimer des étiquettes", "personneMorale_APAS_PrintEtiquettes", 0);
-$actions[29] = new Param_Action("Imprimer un personneMorale", "personneMorale_APAS_PrintFile", 0);
-$actions[30] = new Param_Action("Imprimer une liste de personneMorale", "personneMorale_APAS_PrintList", 0);
-$actions[31] = new Param_Action("Rechercher une personne morale", "personneMorale_APAS_Search", 0);
-$actions[32] = new Param_Action("Valider une personne physique", "personnePhysique_APAS_AddModifyAct", 1);
-$actions[33] = new Param_Action("Ajouter/Modifier une personne physique", "personnePhysique_APAS_AddModify", 1);
-$actions[34] = new Param_Action("Fiche d'une personne physique", "personnePhysique_APAS_Fiche", 0);
-$actions[35] = new Param_Action("Liste des personnes physiques", "personnePhysique_APAS_List", 0);
-$actions[36] = new Param_Action("Imprimer les étiquettes", "personnePhysique_APAS_PrintEtiquettes", 0);
-$actions[37] = new Param_Action("Imprimer une personne physique", "personnePhysique_APAS_PrintFile", 0);
-$actions[38] = new Param_Action("Imprimer une liste de personnes physiques", "personnePhysique_APAS_PrintList", 0);
-$actions[39] = new Param_Action("Rechercher une personne physique", "personnePhysique_APAS_Search", 0);
-$actions[40] = new Param_Action("Modifier la connexion", "personnePhysique_APAS_login", 2);
-$actions[41] = new Param_Action("Valider une connexion", "personnePhysique_APAS_validerLogin", 2);
-$actions[42] = new Param_Action("ajouts de catégorie de personne morale", "typesMorales_APAS_ajouteract", 0);
-$actions[43] = new Param_Action("Ajouter une catégorie de personne morale", "typesMorales_APAS_ajout", 0);
-$actions[44] = new Param_Action("Liste des catégories de personnes morales", "typesMorales_APAS_liste", 0);
-$actions[45] = new Param_Action("Suppression de catégorie de personne morale", "typesMorales_APAS_suppr", 0);
+$actions[3] = new Param_Action("Mon compte", "FichePersonnel", 5);
+$actions[4] = new Param_Action("Imprimer nos contacts", "ImpressionLocal", 4);
+$actions[5] = new Param_Action("Nous contacter", "StructureLocal", 4);
+$actions[6] = new Param_Action("Configuration des contacts", "configuration", 2);
+$actions[7] = new Param_Action("Valider l'ajout", "fonctions_APAS_ajouteract", 0);
+$actions[8] = new Param_Action("Ajouter une fonction", "fonctions_APAS_ajout", 0);
+$actions[9] = new Param_Action("Liste des fonctions", "fonctions_APAS_list", 0);
+$actions[10] = new Param_Action("Suppression d`une fonction", "fonctions_APAS_suppr", 0);
+$actions[11] = new Param_Action("Valider un liaison", "liaison_APAS_AddModifyAct", 1);
+$actions[12] = new Param_Action("Ajouter/Modifier une liaison", "liaison_APAS_AddModify", 1);
+$actions[13] = new Param_Action("Ajouter un responsable", "liaison_APAS_AddSearchSelect", 1);
+$actions[14] = new Param_Action("Valider la recherche", "liaison_APAS_AddSearchyAct", 1);
+$actions[15] = new Param_Action("Rechercher une personne pour ajout", "liaison_APAS_AddSearch", 1);
+$actions[16] = new Param_Action("Supprimer un liaison", "liaison_APAS_Del", 1);
+$actions[17] = new Param_Action("Fiche d'un liaison", "liaison_APAS_Fiche", 0);
+$actions[18] = new Param_Action("", "liaison_APAS_addFunctionAct", 1);
+$actions[19] = new Param_Action("", "liaison_APAS_addFunction", 1);
+$actions[20] = new Param_Action("Valider un contact", "personneAbstraite_APAS_AddModifyAct", 1);
+$actions[21] = new Param_Action("Modifier un contact", "personneAbstraite_APAS_AddModify", 1);
+$actions[22] = new Param_Action("Suppression en cascade", "personneAbstraite_APAS_Delete", 3);
+$actions[23] = new Param_Action("Fiche d'un contact", "personneAbstraite_APAS_Fiche", 0);
+$actions[24] = new Param_Action("Fusionne des contacts", "personneAbstraite_APAS_Merge", 3);
+$actions[25] = new Param_Action("Imprimer un contact", "personneAbstraite_APAS_PrintFile", 0);
+$actions[26] = new Param_Action("Selectionner les personnes à fusionner", "personneAbstraite_APAS_SelectMerge", 3);
+$actions[27] = new Param_Action("Valider un personneMorale", "personneMorale_APAS_AddModifyAct", 1);
+$actions[28] = new Param_Action("Ajouter/Modifier un personneMorale", "personneMorale_APAS_AddModify", 1);
+$actions[29] = new Param_Action("Fiche d'une personne morale", "personneMorale_APAS_Fiche", 0);
+$actions[30] = new Param_Action("Liste des personnes morales", "personneMorale_APAS_List", 0);
+$actions[31] = new Param_Action("Ma structure moral", "personneMorale_APAS_MaStructure", 5);
+$actions[32] = new Param_Action("Modifier ma structure morale", "personneMorale_APAS_ModifyMaStructureAct", 5);
+$actions[33] = new Param_Action("Modifier ma structure morale", "personneMorale_APAS_ModifyMaStructure", 5);
+$actions[34] = new Param_Action("Imprimer des étiquettes", "personneMorale_APAS_PrintEtiquettes", 0);
+$actions[35] = new Param_Action("Imprimer un personneMorale", "personneMorale_APAS_PrintFile", 0);
+$actions[36] = new Param_Action("Imprimer une liste de personneMorale", "personneMorale_APAS_PrintList", 0);
+$actions[37] = new Param_Action("Rechercher une personne morale", "personneMorale_APAS_Search", 0);
+$actions[38] = new Param_Action("Valider une personne physique", "personnePhysique_APAS_AddModifyAct", 1);
+$actions[39] = new Param_Action("Ajouter/Modifier une personne physique", "personnePhysique_APAS_AddModify", 1);
+$actions[40] = new Param_Action("Modifier ma fiche personnelle", "personnePhysique_APAS_EditerPerso", 5);
+$actions[41] = new Param_Action("Fiche d'une personne physique", "personnePhysique_APAS_Fiche", 0);
+$actions[42] = new Param_Action("Liste des personnes physiques", "personnePhysique_APAS_List", 0);
+$actions[43] = new Param_Action("Modifier ma fiche personnelle", "personnePhysique_APAS_ModifFichePerso", 5);
+$actions[44] = new Param_Action("Imprimer les étiquettes", "personnePhysique_APAS_PrintEtiquettes", 0);
+$actions[45] = new Param_Action("Imprimer une personne physique", "personnePhysique_APAS_PrintFile", 0);
+$actions[46] = new Param_Action("Imprimer une liste de personnes physiques", "personnePhysique_APAS_PrintList", 0);
+$actions[47] = new Param_Action("Rechercher une personne physique", "personnePhysique_APAS_Search", 0);
+$actions[48] = new Param_Action("Modifier la connexion", "personnePhysique_APAS_login", 2);
+$actions[49] = new Param_Action("Valider une connexion", "personnePhysique_APAS_validerLogin", 2);
+$actions[50] = new Param_Action("ajouts de catégorie de personne morale", "typesMorales_APAS_ajouteract", 0);
+$actions[51] = new Param_Action("Ajouter une catégorie de personne morale", "typesMorales_APAS_ajout", 0);
+$actions[52] = new Param_Action("Liste des catégories de personnes morales", "typesMorales_APAS_liste", 0);
+$actions[53] = new Param_Action("Suppression de catégorie de personne morale", "typesMorales_APAS_suppr", 0);
 
 $params=array();
 

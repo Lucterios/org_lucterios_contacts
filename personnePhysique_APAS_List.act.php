@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // Action file write by SDK tool
-// --- Last modification: Date 26 January 2009 19:49:26 By  ---
+// --- Last modification: Date 16 March 2009 23:05:33 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
@@ -57,7 +57,7 @@ $lbl->setLocation(1,0,2);
 $xfer_result->addComponent($lbl);
 if($IsSearch != 0) {
 	$img->setValue('contactPhyiqueFind.png');
-	$self->setForSearch($Params);
+	$self->setForSearch($Params,"org_lucterios_contacts_personnePhysique.nom,org_lucterios_contacts_personnePhysique.prenom");
 	$lbl->setValue("{[center]}{[bold]}Résultat de la recherche{[/bold]}{[/center]}");
 	$xfer_result->Caption = 'Résultat de recherche';
 }
@@ -78,7 +78,10 @@ else {
 	$comp->setAction( new Xfer_Action('','',$xfer_result->m_extension,$xfer_result->m_action, FORMTYPE_REFRESH, CLOSE_NO));
 	$comp->setLocation(2,1);
 	$xfer_result->addComponent($comp);
-	$q = "SELECT org_lucterios_contacts_personnePhysique.* FROM org_lucterios_contacts_personnePhysique,org_lucterios_contacts_personneAbstraite WHERE ( org_lucterios_contacts_personnePhysique.superId=org_lucterios_contacts_personneAbstraite.id )  AND ( org_lucterios_contacts_personneAbstraite.codePostal like '".$FiltrecodPostal."%') ";
+	$q = "SELECT org_lucterios_contacts_personnePhysique.* ";
+	$q .= "FROM org_lucterios_contacts_personnePhysique,org_lucterios_contacts_personneAbstraite ";
+	$q .= "WHERE ( org_lucterios_contacts_personnePhysique.superId=org_lucterios_contacts_personneAbstraite.id )  AND ( org_lucterios_contacts_personneAbstraite.codePostal like '".$FiltrecodPostal."%') ";
+	$q .= "ORDER BY org_lucterios_contacts_personnePhysique.nom,org_lucterios_contacts_personnePhysique.prenom ";
 	$self->query($q);
 }
 $grid = $self->getGrid($Params);

@@ -17,26 +17,28 @@
 //     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
-//  // library file write by SDK tool
-// --- Last modification: Date 12 March 2009 23:25:06 By  ---
+//  // Method file write by SDK tool
+// --- Last modification: Date 12 March 2009 22:27:40 By  ---
 
-//@BEGIN@
-/*
-function org_lucterios_contacts_config(&$xfer_result) {
-	// Fonction pour ajouter des composants dans la fenêtre de configuration
-	require_once"extensions/org_lucterios_contacts/personneMorale.tbl.php";
-	$xfer_result->m_context['personneMorale'] = 1;
-	$contact = new DBObj_org_lucterios_contacts_personneMorale;
-	$contact->get(1);
-	$xfer_result = $contact->show(0,1,$xfer_result);
-	$title = $xfer_result->getComponents('title_personne');
-	$title->setValue('');
-	$xfer_result->newTab("Coordonnées");
-	$btn = new Xfer_Comp_Button('editer');
-	$btn->setAction($contact->newAction('_Modifier','edit.png','AddModify', FORMTYPE_MODAL, CLOSE_NO));
-	$btn->setLocation(0,60,2);
-	$xfer_result->addComponent($btn);
+require_once('CORE/xfer_exception.inc.php');
+require_once('CORE/rights.inc.php');
+
+//@TABLES@
+require_once('extensions/org_lucterios_contacts/personnePhysique.tbl.php');
+//@TABLES@
+
+//@DESC@Cherche le contact connecté
+//@PARAM@ 
+
+function personnePhysique_APAS_findConnected(&$self)
+{
+//@CODE_ACTION@
+global $LOGIN_ID;
+
+$self->user=$LOGIN_ID;
+$self->find();
+return $self->fetch();
+//@CODE_ACTION@
 }
-*/
-//@END@
+
 ?>
