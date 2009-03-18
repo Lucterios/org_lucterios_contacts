@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // Action file write by SDK tool
-// --- Last modification: Date 16 March 2009 22:21:51 By  ---
+// --- Last modification: Date 17 March 2009 22:35:48 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
@@ -31,7 +31,7 @@ require_once('CORE/xfer_custom.inc.php');
 //@XFER:custom@
 
 
-//@DESC@Nous contacter
+//@DESC@Nos coordonnées
 //@PARAM@ 
 
 
@@ -41,7 +41,7 @@ function StructureLocal($Params)
 {
 try {
 $xfer_result=&new Xfer_Container_Custom("org_lucterios_contacts","StructureLocal",$Params);
-$xfer_result->Caption="Nous contacter";
+$xfer_result->Caption="Nos coordonnées";
 //@CODE_ACTION@
 $xfer_result->m_context['personneMorale'] = 1;
 $contact = new DBObj_org_lucterios_contacts_personneMorale;

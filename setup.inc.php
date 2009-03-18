@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // setup file write by SDK tool
-// --- Last modification: Date 16 March 2009 23:08:47 By  ---
+// --- Last modification: Date 18 March 2009 19:52:31 By  ---
 
 $extention_name="org_lucterios_contacts";
 $extention_description="Module de gestion des contacts physiques (hommes ou femmes) ou moraux (entreprise, association, administration,...)";
@@ -28,12 +28,12 @@ $extention_titre="Gestion des contacts";
 $extension_libre=true;
 
 $version_max=0;
-$version_min=90;
-$version_release=10;
-$version_build=24;
+$version_min=91;
+$version_release=1;
+$version_build=1;
 
 $depencies=array();
-$depencies[0] = new Param_Depencies("CORE", 0, 93, 0, 90, false);
+$depencies[0] = new Param_Depencies("CORE", 0, 93, 0, 91, false);
 
 $rights=array();
 $rights[0] = new Param_Rigth("Voir/Lister",40);
@@ -54,7 +54,7 @@ $menus[8] = new Param_Menu("Codes postaux / villes", "_Contact", "CodePostal_APA
 $menus[9] = new Param_Menu("Bureautique", "", "", "bureau.png", "", 60 , 0, "Outils bureautiques");
 $menus[10] = new Param_Menu("Configuration des contacts", "_Contact", "configuration", "contactsConfig.png", "", 15 , 1, "Gestion des fonctions des personnes physiques et des catégorie des structures morales.");
 $menus[11] = new Param_Menu("Mon compte", "Ad_ministration", "FichePersonnel", "fiche.png", "shift ctrl alt M", 1 , 1, "Visualiser la fiche de mon compte.");
-$menus[12] = new Param_Menu("Nous contacter", "Ad_ministration", "StructureLocal", "nousContact.png", "shift ctrl alt N", 8 , 1, "Fiche complete de notre structure et de ses responsables");
+$menus[12] = new Param_Menu("Nos coordonnées", "Ad_ministration", "StructureLocal", "nousContact.png", "shift ctrl alt N", 8 , 1, "Fiche complete de notre structure et de ses responsables");
 
 $actions=array();
 $actions[0] = new Param_Action("Validation", "CodePostal_APAS_ajouteract", 0);
@@ -62,7 +62,7 @@ $actions[1] = new Param_Action("Ajouter Code postal/Ville", "CodePostal_APAS_ajo
 $actions[2] = new Param_Action("Liste des Codes Postaux/Villes", "CodePostal_APAS_list", 0);
 $actions[3] = new Param_Action("Mon compte", "FichePersonnel", 5);
 $actions[4] = new Param_Action("Imprimer nos contacts", "ImpressionLocal", 4);
-$actions[5] = new Param_Action("Nous contacter", "StructureLocal", 4);
+$actions[5] = new Param_Action("Nos coordonnées", "StructureLocal", 4);
 $actions[6] = new Param_Action("Configuration des contacts", "configuration", 2);
 $actions[7] = new Param_Action("Valider l'ajout", "fonctions_APAS_ajouteract", 0);
 $actions[8] = new Param_Action("Ajouter une fonction", "fonctions_APAS_ajout", 0);
