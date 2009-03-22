@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // Action file write by SDK tool
-// --- Last modification: Date 12 March 2009 23:28:12 By  ---
+// --- Last modification: Date 19 March 2009 8:13:05 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
@@ -48,7 +48,7 @@ $print_action->largeur_page = 297;
 $print_action->hauteur_page = 210;
 $print_action->TabChangePage = false;
 $print_action->Extended = false;
-$print_action->Title = "Nous contacter";
+$print_action->Title = "Nos coordonnées";
 $xfer_result->printListing($print_action);
 //@CODE_ACTION@
 }catch(Exception $e) {
