@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // Method file write by SDK tool
-// --- Last modification: Date 29 November 2008 0:03:38 By  ---
+// --- Last modification: Date 04 May 2009 23:18:15 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
@@ -33,7 +33,11 @@ require_once('extensions/org_lucterios_contacts/personneMorale.tbl.php');
 function personneMorale_APAS_getGrid(&$self,$Params)
 {
 //@CODE_ACTION@
-$grid = new Xfer_Comp_Grid("personneMorale");
+if (isset($Params['GRID_NAME']))
+	$gridName=$Params['GRID_NAME'];
+else
+	$gridName='personneMorale';
+$grid = new Xfer_Comp_Grid($gridName);
 $grid->setDBObject($self,array("raisonSociale","fixe","fax","mail"),'',$Params);
 $grid->addAction($self->newAction("_Editer","edit.png","Fiche", FORMTYPE_MODAL, CLOSE_NO, SELECT_SINGLE));
 $grid->addAction($self->newAction("_Ajouter","add.png","AddModify", FORMTYPE_MODAL, CLOSE_NO, SELECT_NONE));

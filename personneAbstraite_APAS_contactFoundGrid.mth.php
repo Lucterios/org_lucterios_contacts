@@ -1,6 +1,24 @@
 <?php
-// Method file write by SDK tool
-// --- Last modification: Date 17 September 2008 20:59:21 By  ---
+// 
+//     This file is part of Lucterios.
+// 
+//     Lucterios is free software; you can redistribute it and/or modify
+//     it under the terms of the GNU General Public License as published by
+//     the Free Software Foundation; either version 2 of the License, or
+//     (at your option) any later version.
+// 
+//     Lucterios is distributed in the hope that it will be useful,
+//     but WITHOUT ANY WARRANTY; without even the implied warranty of
+//     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//     GNU General Public License for more details.
+// 
+//     You should have received a copy of the GNU General Public License
+//     along with Lucterios; if not, write to the Free Software
+//     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+// 
+// 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
+//  // Method file write by SDK tool
+// --- Last modification: Date 04 May 2009 23:52:32 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
@@ -16,10 +34,10 @@ require_once('extensions/org_lucterios_contacts/personneAbstraite.tbl.php');
 function personneAbstraite_APAS_contactFoundGrid(&$self,$classname,$Params)
 {
 //@CODE_ACTION@
-$contact=$self->contactFound($classname, $Params);
-$grid=$contact->getGrid();
-$grid->m_name = 'contact';
-return $grid;
+list($contact,$query_txt)=$self->contactFound($classname, $Params);
+$Params['GRID_NAME']='contact';
+$grid=$contact->getGrid($Params);
+return array($grid,$query_txt);
 //@CODE_ACTION@
 }
 

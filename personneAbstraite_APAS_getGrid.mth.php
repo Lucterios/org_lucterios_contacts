@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // Method file write by SDK tool
-// --- Last modification: Date 29 November 2008 0:02:53 By  ---
+// --- Last modification: Date 04 May 2009 23:17:23 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
@@ -33,7 +33,11 @@ require_once('extensions/org_lucterios_contacts/personneAbstraite.tbl.php');
 function personneAbstraite_APAS_getGrid(&$self,$Params)
 {
 //@CODE_ACTION@
-$grid = new Xfer_Comp_Grid("personneAbstraite");
+if (isset($Params['GRID_NAME']))
+	$gridName=$Params['GRID_NAME'];
+else
+	$gridName='personneAbstraite';
+$grid = new Xfer_Comp_Grid($gridName);
 $grid->setDBObject($self, 9,'',$Params);
 $grid->setSize(200,750);
 return $grid;
