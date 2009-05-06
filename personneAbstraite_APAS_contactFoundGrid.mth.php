@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // Method file write by SDK tool
-// --- Last modification: Date 04 May 2009 23:52:32 By  ---
+// --- Last modification: Date 06 May 2009 20:39:59 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
@@ -37,6 +37,15 @@ function personneAbstraite_APAS_contactFoundGrid(&$self,$classname,$Params)
 list($contact,$query_txt)=$self->contactFound($classname, $Params);
 $Params['GRID_NAME']='contact';
 $grid=$contact->getGrid($Params);
+$actions=$grid->m_actions;
+$grid->m_actions=array();
+foreach($actions as $action) {
+	if (substr($action->m_action,-5)!='Fiche')
+		$grid->m_actions[]=$action;
+}
+$DBContact=new DBObj_org_lucterios_contacts_personneAbstraite;
+$grid->addAction($DBContact->NewAction('_Editer','edit.png','Fiche',FORMTYPE_MODAL,CLOSE_NO,SELECT_SINGLE),0);
+
 return array($grid,$query_txt);
 //@CODE_ACTION@
 }
