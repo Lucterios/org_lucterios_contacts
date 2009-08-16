@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // table file write by SDK tool
-// --- Last modification: Date 21 November 2008 23:16:54 By  ---
+// --- Last modification: Date 15 August 2009 14:59:39 By  ---
 
 require_once('CORE/DBObject.inc.php');
 
