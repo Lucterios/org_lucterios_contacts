@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // Action file write by SDK tool
-// --- Last modification: Date 15 November 2008 23:48:57 By  ---
+// --- Last modification: Date 16 October 2009 0:41:24 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
@@ -35,6 +35,7 @@ require_once('CORE/xfer.inc.php');
 //@DESC@Valider une connexion
 //@PARAM@ newpass1
 //@PARAM@ newpass2
+//@PARAM@ sendPass='n'
 //@INDEX:personnePhysique
 
 //@TRANSACTION:
@@ -47,6 +48,7 @@ if (($ret=checkParams("org_lucterios_contacts", "personnePhysique_APAS_validerLo
 	return $ret;
 $newpass1=getParams($Params,"newpass1",0);
 $newpass2=getParams($Params,"newpass2",0);
+$sendPass=getParams($Params,"sendPass",'n');
 $self=new DBObj_org_lucterios_contacts_personnePhysique();
 $personnePhysique=getParams($Params,"personnePhysique",-1);
 if ($personnePhysique>=0) $self->get($personnePhysique);
@@ -61,6 +63,13 @@ if($self->user>0)
 	$DBObjusers=$self->getField('user');
 else
 	$DBObjusers=new DBObj_CORE_users;
+
+if ($sendPass=='o') {
+	require_once('extensions/org_lucterios_contacts/mailerFunctions.inc.php');
+	$newpass1=passwordGenerator();
+	$newpass2=$newpass1;
+}
+
 if ((($self->user>0) || ($newpass1!= "")) && ($newpass1==$newpass2))
 {
 	if ($DBObjusers->ModifierUser($Params)) {
@@ -74,8 +83,12 @@ if ((($self->user>0) || ($newpass1!= "")) && ($newpass1==$newpass2))
 			global $connect;
 			$connect->execute("UPDATE org_lucterios_contacts_personnePhysique SET user=$uid WHERE id=$personnePhysique",true);
 		}
-		if ($newpass1!= "")
+		if ($newpass1!= "") {
 			$DBObjusers->ChangePWD($newpass1);
+			if ($sendPass=='o') {
+				sendNewConnection($self->mail,$DBObjusers->login,$newpass1);
+			}
+		}
 	}
 	else
 		$xfer_result->message("Cette connexion exists déjà!",4);

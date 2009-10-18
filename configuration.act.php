@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // Action file write by SDK tool
-// --- Last modification: Date 14 July 2009 17:13:51 By  ---
+// --- Last modification: Date 15 October 2009 23:33:39 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
@@ -96,24 +96,6 @@ $lbl = new Xfer_Comp_LabelForm("nb");
 $lbl->setLocation(0,2,2);
 $lbl->setValue("Nombre de types affichés : ". count($grid->m_records));
 $xfer_result->addComponent($lbl);
-
-$xfer_result->newTab("Options");
-
-$lab = new Xfer_Comp_LabelForm("titleParams");
-$lab->setValue("{[newline]}{[center]}{[underline]}{[bold]}Paramètres{[/bold]}{[/underline]}{[/center]}");
-$lab->setLocation(1,1,5);
-$xfer_result->addComponent($lab);
-
-$DBParam=new DBObj_CORE_extension_params;
-$xfer_result->ReadOnly=1;
-$xfer_result->ParamsDesc=array('MailToConfig'=>array(1,3));
-$xfer_result=$DBParam->fillCustom("org_lucterios_contacts",$xfer_result);
-
-$lab = new Xfer_Comp_Button("Params");
-$lab->setValue("_Modifier");
-$lab->setLocation(1,12,5);
-$lab->setAction(new Xfer_Action('Modifier','edit.png','org_lucterios_contacts','ChangeParams',FORMTYPE_MODAL,CLOSE_NO));
-$xfer_result->addComponent($lab);
 
 $xfer_result->addAction( new Xfer_Action("_Fermer","close.png"));
 //@CODE_ACTION@

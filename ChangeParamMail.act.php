@@ -18,46 +18,49 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // Action file write by SDK tool
-// --- Last modification: Date 14 October 2009 23:56:09 By  ---
+// --- Last modification: Date 15 October 2009 23:44:33 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
 
 //@TABLES@
-require_once('extensions/org_lucterios_contacts/fonctions.tbl.php');
-require_once('extensions/org_lucterios_contacts/liaison.tbl.php');
+require_once('CORE/extension_params.tbl.php');
 //@TABLES@
 //@XFER:custom
 require_once('CORE/xfer_custom.inc.php');
 //@XFER:custom@
 
 
-//@DESC@Ajouter une fonction
-//@PARAM@ personneMorale
-//@PARAM@ liaison_physique
+//@DESC@Changer la configuration courriel
+//@PARAM@ 
 
 
 //@LOCK:0
 
-function liaison_APAS_addFunction($Params)
+function ChangeParamMail($Params)
 {
-if (($ret=checkParams("org_lucterios_contacts", "liaison_APAS_addFunction",$Params ,"personneMorale","liaison_physique"))!=null)
-	return $ret;
-$personneMorale=getParams($Params,"personneMorale",0);
-$liaison_physique=getParams($Params,"liaison_physique",0);
-$self=new DBObj_org_lucterios_contacts_liaison();
 try {
-$xfer_result=&new Xfer_Container_Custom("org_lucterios_contacts","liaison_APAS_addFunction",$Params);
-$xfer_result->Caption="Ajouter une fonction";
+$xfer_result=&new Xfer_Container_Custom("org_lucterios_contacts","ChangeParamMail",$Params);
+$xfer_result->Caption="Changer la configuration courriel";
 //@CODE_ACTION@
-$fct = new DBObj_org_lucterios_contacts_fonctions;
-$fct->find();
-$grid = new Xfer_Comp_Grid('fonctions');
-$grid->setDBObject($fct,array('nom'));
-$grid->addAction($self->NewAction('_Ajouter','add.png','addFunctionAct', FORMTYPE_MODAL, CLOSE_YES, SELECT_MULTI));
-$grid->addAction($self->NewAction('A_nnuler','cancel.png'));
-$grid->setSize(300,300);
-$xfer_result->addComponent($grid);
+$img=new  Xfer_Comp_Image('img');
+$img->setValue('contacts.png');
+$img->setLocation(0,0,1,3);
+$xfer_result->addComponent($img);
+$lab = new Xfer_Comp_LabelForm("title");
+$lab->setValue("{[center]}{[underline]}Configuration courriel{[/underline]}{[/center]}{[newline]}");
+$lab->setLocation(1,0,5);
+$xfer_result->addComponent($lab);
+
+$DBParam=new DBObj_CORE_extension_params();
+$xfer_result->ParamsDesc=array('MailSmtpServer'=>array(1,3,3),'MailSmtpUser'=>array(1,4),
+'MailSmtpPass'=>array(3,4),'MailConnectionMsg'=>array(1,5,3));
+$xfer_result=$DBParam->fillCustom("org_lucterios_contacts",$xfer_result);
+
+$xfer_result->m_context['extensionName']="org_lucterios_contacts";
+$xfer_result->addAction($DBParam->NewAction('_Valider','ok.png','validerModif',FORMTYPE_MODAL,CLOSE_YES));
+
+$xfer_result->addAction(new Xfer_Action("_Annuler","cancel.png"));
 //@CODE_ACTION@
 }catch(Exception $e) {
 	throw $e;

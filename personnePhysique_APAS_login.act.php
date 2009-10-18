@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // Action file write by SDK tool
-// --- Last modification: Date 14 November 2008 1:05:16 By  ---
+// --- Last modification: Date 16 October 2009 0:29:47 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
@@ -59,6 +59,23 @@ else {
 }
 $xfer_result->WithActif=true;
 $xfer_result=$DBObjusers->Formulaire($xfer_result);
+
+require_once('extensions/org_lucterios_contacts/mailerFunctions.inc.php');
+if (willMailSend() && ($self->mail!='')) {
+	$lbl=new Xfer_Comp_LabelForm('lbl_sendPass');
+	$lbl->setLocation(0,10,2);
+	$lbl->setValue("{[italic]}Générer un mot de passe et l'envoyer par courriel{[/italic]}");
+	$xfer_result->addComponent($lbl);
+
+	$check=new Xfer_Comp_Check('sendPass');
+	$check->setLocation(2,10);
+	$check->JavaScript="
+var type=current.getValue();
+parent.get('newpass1').setEnabled(type!='o');
+parent.get('newpass2').setEnabled(type!='o');
+";
+	$xfer_result->addComponent($check);
+}
 $xfer_result->addAction($self->NewAction("_OK","ok.png","validerLogin"));
 $xfer_result->addAction($self->NewAction("_Annuler","cancel.png"));
 //@CODE_ACTION@
