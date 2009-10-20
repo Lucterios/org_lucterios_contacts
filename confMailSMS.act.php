@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // Action file write by SDK tool
-// --- Last modification: Date 17 October 2009 19:28:47 By  ---
+// --- Last modification: Date 19 October 2009 21:52:25 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
@@ -60,12 +60,6 @@ $lab = new Xfer_Comp_Button("btnMail");
 $lab->setValue("_Modifier");
 $lab->setLocation(1,12,5);
 $lab->setAction(new Xfer_Action('Modifier','edit.png','org_lucterios_contacts','ChangeParamMail',FORMTYPE_MODAL,CLOSE_NO));
-$xfer_result->addComponent($lab);
-
-$lab = new Xfer_Comp_Button("btnSMS");
-$lab->setValue("_Modifier");
-$lab->setLocation(1,12,5);
-$lab->setAction(new Xfer_Action('Modifier','edit.png','org_lucterios_contacts','ChangeParamSMS',FORMTYPE_MODAL,CLOSE_NO));
 $xfer_result->addComponent($lab);
 
 $xfer_result->newTab("Options");
