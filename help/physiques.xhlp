@@ -18,6 +18,8 @@ Depuis la liste des personnes physiques, vous avez la possibilité d'éditer une p
 <center><img src='~org_lucterios_contacts$EditPhysique.jpg' height='250' alt='EditPhysique.jpg' /></center><br>
 Cela vous permettra de consulter la fiche d'une personne précédemment entrée dans votre base.<br>
 Vous pouvez modifier cette fiche ou l'imprimer.<br>
+Vous pouvez également lui donner un alias de connexion à l'application associé à un droit d'accès (voir <a href='~CORE$utilisateurs'>Les utilisateurs</a>).
+De plus, si vous avez configurer le serveur SMTP (voir <a href='~org_lucterios_contacts$configuration'>Configuration et paramétrage</a>) vous pouvez créer aléatoirement le mot de passe : le nouvel utilisateur le recevera alors par couriel.<br>
 Si cette personne n'est pas référencée dans d'autre enregistrement de l'application, vous avez la possibilité de la supprimer.
 
 <h2>Recherche d'un contact physique</h2>

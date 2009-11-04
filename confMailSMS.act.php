@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // Action file write by SDK tool
-// --- Last modification: Date 19 October 2009 21:52:25 By  ---
+// --- Last modification: Date 04 November 2009 0:01:21 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
@@ -31,7 +31,7 @@ require_once('CORE/xfer_custom.inc.php');
 //@XFER:custom@
 
 
-//@DESC@Configuration courriel et téléphonie
+//@DESC@Configuration courriel
 //@PARAM@ 
 
 
@@ -41,7 +41,7 @@ function confMailSMS($Params)
 {
 try {
 $xfer_result=&new Xfer_Container_Custom("org_lucterios_contacts","confMailSMS",$Params);
-$xfer_result->Caption="Configuration courriel et téléphonie";
+$xfer_result->Caption="Configuration courriel";
 //@CODE_ACTION@
 $xfer_result->newTab("Courriel");
 

@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // Action file write by SDK tool
-// --- Last modification: Date 16 March 2009 23:08:47 By  ---
+// --- Last modification: Date 03 November 2009 23:43:15 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
@@ -91,11 +91,20 @@ $lbl = new Xfer_Comp_LabelForm("nb");
 $lbl->setLocation(0,3,2);
 $lbl->setValue("Nombre total : ".$grid->mNbLines);
 $xfer_result->addComponent($lbl);
-$link = new Xfer_Comp_LinkLabel('email');
-$link->setValue('Ecrire a tous');
-$link->setEmailFromGrid($grid,"mail");
+
+$DBMoral=new DBObj_org_lucterios_contacts_personneMorale;
+if($IsSearch != 0) {
+	$DBMoral->setForSearch($Params,'raisonSociale');
+}
+else {
+	$DBMoral->type = $Filtretype;
+	$DBMoral->orderBy('raisonSociale');
+	$nb=$DBMoral->find();
+}
+$link = $DBMoral->getEmailLink($DBMoral);
 $link->setLocation(2,3);
 $xfer_result->addComponent($link);
+
 $xfer_result->addAction($self->newAction("_Imprimer","print.png","PrintList", FORMTYPE_MODAL, CLOSE_NO));
 $xfer_result->addAction($self->newAction("_Etiquettes","print.png","PrintEtiquettes", FORMTYPE_MODAL, CLOSE_NO));
 if($IsSearch != 0)$xfer_result->addAction($self->NewAction("Nouvelle _Recherche","search.png","Search", FORMTYPE_MODAL, CLOSE_YES));

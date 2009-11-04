@@ -7,5 +7,13 @@ De la même façon que précédemment, vous pouvez créer ou de modifier une catégori
 
 <h2>Codes postaux/villes</h2>
 Pour vous aider dans votre saisie de contacts, l'outil recherche automatiquement la ville associé au code postal que vous avez saisie.<br>
-Dans cette écran, vous avez la possibilité de rajouter des codes postaux manquant.<br>
+Dans cette écran, vous avez la possibilité de rajouter des codes postaux manquant.<br/>
 Par défaut, les 39000 codes postaux français sont insérés.
+
+<h2>Configuration couriel</h2>
+Vous pouvez configurer ici des réglages pour l'envoie de couriel.<br/>
+<br/>
+Le serveur SMTP permettra au logiciel d'envoyer directement de message à vos contacts comme par exemple l'envoie d'un nouveau mot de passe de connexion.
+N'oubliez pas alors de préciser un petit message d'explication.<br/>
+<br/>
+Vous pouvez aussi préciser comment voulez vous utiliser votre navigateur de couriel pour la fonctionnalité 'écrire à tous': 'Pour', 'Copie à' ou 'Copie caché à'.<br/>

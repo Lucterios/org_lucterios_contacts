@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // Action file write by SDK tool
-// --- Last modification: Date 16 March 2009 23:05:33 By  ---
+// --- Last modification: Date 03 November 2009 23:51:36 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
@@ -84,6 +84,7 @@ else {
 	$q .= "ORDER BY org_lucterios_contacts_personnePhysique.nom,org_lucterios_contacts_personnePhysique.prenom ";
 	$self->query($q);
 }
+$mNbLines=$self->N;
 $grid = $self->getGrid($Params);
 $grid->setLocation(0,2,3);
 if($IsSearch != 0) {
@@ -93,14 +94,24 @@ if($IsSearch != 0) {
 	$grid->addAction($DBAbstract->newAction("_Fusionner","","SelectMerge", FORMTYPE_MODAL, CLOSE_NO,SELECT_MULTI));
 }
 $xfer_result->addComponent($grid);
-$link = new Xfer_Comp_LinkLabel('email');
-$link->setValue('Ecrire a tous');
-$link->setEmailFromGrid($grid,"mail");
+
+$DBPhysique=new DBObj_org_lucterios_contacts_personnePhysique;
+if($IsSearch != 0) {
+	$DBPhysique->setForSearch($Params,"org_lucterios_contacts_personnePhysique.nom,org_lucterios_contacts_personnePhysique.prenom");
+}
+else {
+	$q = "SELECT org_lucterios_contacts_personnePhysique.* ";
+	$q .= "FROM org_lucterios_contacts_personnePhysique,org_lucterios_contacts_personneAbstraite ";
+	$q .= "WHERE ( org_lucterios_contacts_personnePhysique.superId=org_lucterios_contacts_personneAbstraite.id )  AND ( org_lucterios_contacts_personneAbstraite.codePostal like '".$FiltrecodPostal."%') ";
+	$q .= "ORDER BY org_lucterios_contacts_personnePhysique.nom,org_lucterios_contacts_personnePhysique.prenom ";
+	$DBPhysique->query($q);
+}
+$link = $DBPhysique->getEmailLink($DBPhysique);
 $link->setLocation(2,3);
 $xfer_result->addComponent($link);
 $lbl = new Xfer_Comp_LabelForm("nb");
 $lbl->setLocation(0,3,2);
-$lbl->setValue("Nombre total : ".$grid->mNbLines);
+$lbl->setValue("Nombre total : ".$mNbLines);
 $xfer_result->addComponent($lbl);
 $xfer_result->addAction($self->newAction("_Imprimer","print.png","PrintList", FORMTYPE_MODAL, CLOSE_NO));
 $xfer_result->addAction($self->newAction("_Etiquettes","print.png","PrintEtiquettes", FORMTYPE_MODAL, CLOSE_NO));

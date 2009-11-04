@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // setup file write by SDK tool
-// --- Last modification: Date 19 October 2009 21:52:25 By  ---
+// --- Last modification: Date 04 November 2009 0:07:41 By  ---
 
 $extention_name="org_lucterios_contacts";
 $extention_description="Module de gestion des contacts physiques (hommes ou femmes) ou moraux (entreprise, association, administration,...)";
@@ -30,7 +30,7 @@ $extension_libre=true;
 $version_max=1;
 $version_min=0;
 $version_release=4;
-$version_build=150;
+$version_build=177;
 
 $depencies=array();
 $depencies[0] = new Param_Depencies("CORE", 1, 0, 1, 0, false);
@@ -55,7 +55,7 @@ $menus[9] = new Param_Menu("Bureautique", "", "", "bureau.png", "", 60 , 0, "Out
 $menus[10] = new Param_Menu("Configuration des contacts", "_Contact", "configuration", "contactsConfig.png", "", 15 , 1, "Gestion des fonctions des personnes physiques et des catégorie des structures morales.");
 $menus[11] = new Param_Menu("Mon compte", "Ad_ministration", "FichePersonnel", "fiche.png", "shift ctrl alt M", 1 , 1, "Visualiser la fiche de mon compte.");
 $menus[12] = new Param_Menu("Nos coordonnées", "Ad_ministration", "StructureLocal", "nousContact.png", "shift ctrl alt N", 8 , 1, "Fiche complete de notre structure et de ses responsables");
-$menus[13] = new Param_Menu("Courriel et téléphonie", "_Contact", "confMailSMS", "contacts_telmail.png", "", 40 , 1, "Configuration des paramètres pour l'envoir {[newline]}de courriel et de SMS");
+$menus[13] = new Param_Menu("Configuration couriel", "_Contact", "confMailSMS", "contacts_telmail.png", "", 40 , 1, "Configuration des paramètres pour l'envoir de couriel");
 
 $actions=array();
 $actions[0] = new Param_Action("Changer la configuration courriel", "ChangeParamMail", 2);
@@ -66,7 +66,7 @@ $actions[4] = new Param_Action("Liste des Codes Postaux/Villes", "CodePostal_APA
 $actions[5] = new Param_Action("Mon compte", "FichePersonnel", 5);
 $actions[6] = new Param_Action("Imprimer nos contacts", "ImpressionLocal", 4);
 $actions[7] = new Param_Action("Nos coordonnées", "StructureLocal", 4);
-$actions[8] = new Param_Action("Configuration courriel et téléphonie", "confMailSMS", 2);
+$actions[8] = new Param_Action("Configuration courriel", "confMailSMS", 2);
 $actions[9] = new Param_Action("Configuration des contacts", "configuration", 2);
 $actions[10] = new Param_Action("Valider l'ajout", "fonctions_APAS_ajouteract", 0);
 $actions[11] = new Param_Action("Ajouter une fonction", "fonctions_APAS_ajout", 0);
