@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // Test file write by SDK tool
-// --- Last modification: Date 21 November 2008 23:25:50 By  ---
+// --- Last modification: Date 18 November 2009 12:25:56 By  ---
 
 
 //@TABLES@
@@ -31,6 +31,9 @@ require_once('extensions/org_lucterios_contacts/personnePhysique.tbl.php');
 function org_lucterios_contacts_personnePhysique_APAS_AjoutModifier(&$test)
 {
 //@CODE_ACTION@
+$DBPersonne=new DBObj_org_lucterios_contacts_personnePhysique;
+$test->assertEquals(0,$DBPersonne->find(),"INIT NB");
+
 $rep=$test->CallAction("org_lucterios_contacts","personnePhysique_APAS_AddModify",array(),"Xfer_Container_Custom");
 $test->assertEquals(2,count($rep->m_actions),"nb actions");
 $comp=$rep->getComponents('nom');
@@ -84,7 +87,12 @@ $rep=$test->CallAction("org_lucterios_contacts","personnePhysique_APAS_AddModify
 'codePostal'=>'38000','ville'=>'GRENOBLE','pays'=>'FRANCE','fixe'=>'041234567','portable'=>'065432109','fax'=>'041234567',
 'mail'=>'nom.prenom@free.fr','commentaire'=>'aa bb cc','sexe'=>1),"Xfer_Container_Acknowledge");
 
-$rep=$test->CallAction("org_lucterios_contacts","personnePhysique_APAS_Fiche",array('personnePhysique'=>103),"Xfer_Container_Custom");
+$DBpresonne=new DBObj_org_lucterios_contacts_personnePhysique;
+$test->assertEquals(1,$DBPersonne->find(),"ADD NB");
+$DBPersonne->fetch();
+$test->assertEquals('100',$DBPersonne->id,"ID");
+
+$rep=$test->CallAction("org_lucterios_contacts","personnePhysique_APAS_Fiche",array('personnePhysique'=>100),"Xfer_Container_Custom");
 $test->assertEquals(4,count($rep->m_actions),"nb actions");
 $comp=$rep->getComponents('nom');
 $test->assertEquals('Nom',$comp->m_value,'nom value');
@@ -111,11 +119,11 @@ $test->assertEquals('aa bb cc',$comp->m_value,'commentaire value');
 $comp=$rep->getComponents('sexe');
 $test->assertEquals('Femme',$comp->m_value,'sexe value');
 
-$rep=$test->CallAction("org_lucterios_contacts","personnePhysique_APAS_AddModifyAct",array('personnePhysique'=>103,'nom'=>'Nom','prenom'=>'Prenom',
+$rep=$test->CallAction("org_lucterios_contacts","personnePhysique_APAS_AddModifyAct",array('personnePhysique'=>'100','nom'=>'Nom','prenom'=>'Prenom',
 'adresse'=>'adresse2 adresse1','codePostal'=>'38000','ville'=>'GRENOBLE','pays'=>'FRANCE','fixe'=>'041234567','portable'=>'065432109',
 'fax'=>'049876543','mail'=>'nom.prenom@free.fr','commentaire'=>'aa bb cc dd ee','sexe'=>1),"Xfer_Container_Acknowledge");
 
-$rep=$test->CallAction("org_lucterios_contacts","personnePhysique_APAS_Fiche",array('personnePhysique'=>103),"Xfer_Container_Custom");
+$rep=$test->CallAction("org_lucterios_contacts","personnePhysique_APAS_Fiche",array('personnePhysique'=>100),"Xfer_Container_Custom");
 $test->assertEquals(4,count($rep->m_actions),"nb actions");
 $comp=$rep->getComponents('nom');
 $test->assertEquals('Nom',$comp->m_value,'nom value');
@@ -143,11 +151,14 @@ $comp=$rep->getComponents('sexe');
 $test->assertEquals('Femme',$comp->m_value,'sexe value');
 
 $pers=new DBObj_org_lucterios_contacts_personnePhysique;
-$pers->get(103);
+$pers->get(100);
 $contact=$pers->getSuperObject('org_lucterios_contacts_personneAbstraite');
 $test->CallAction("org_lucterios_contacts","personneAbstraite_APAS_Delete",array('abstractContact'=>$contact->id,'CONFIRME'=>'YES'),"Xfer_Container_Acknowledge");
 
-$test->CallAction("org_lucterios_contacts","adherents_APAS_editer",array('membre'=>103),"LucteriosException");
+$DBPersonne=new DBObj_org_lucterios_contacts_personnePhysique;
+$test->assertEquals(0,$DBPersonne->find(),"FINAL NB");
+
+$test->CallAction("org_lucterios_contacts","personnePhysique_APAS_Fiche",array('personnePhysique'=>100),"LucteriosException");
 //@CODE_ACTION@
 }
 

@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // library file write by SDK tool
-// --- Last modification: Date 20 July 2009 20:33:17 By  ---
+// --- Last modification: Date 18 November 2009 11:42:37 By  ---
 
 //@BEGIN@
 include_once("CORE/log.inc.php");
@@ -56,13 +56,14 @@ function install_org_lucterios_contacts($ExensionVersions) {
 	global $rootPath;
 	if(!isset($rootPath))
 		$rootPath = "./";
-	$dir = "extensions/org_lucterios_contacts/"; 
+	$dir = "extensions/org_lucterios_contacts/";
 	logAutre("install_contacts - dir=$dir");
 	global $connect;
-	if (version_compare($ExensionVersions[0], '0.90', '<')) {
+	$testtag_file='conf/testtag.file';
+	if (!is_file($testtag_file) && version_compare($ExensionVersions[0], '0.90', '<')) {
 		$q = "CREATE UNIQUE INDEX IDX_UNIQUE ON org_lucterios_contacts_CodePostal(codePostal,ville,pays)";
 		$id = $connect->execute($q);
-		if($id === false) 
+		if($id === false)
 			logAutre("install_contacts - Error=".$connect->errorMsg);
 		$dh = opendir($rootPath.$dir);
 		$nb = 0;
@@ -72,7 +73,7 @@ function install_org_lucterios_contacts($ExensionVersions) {
 		}
 		if($nb>0)
 			$error_msg .= "Import/controle de ".$nb." CodesPostals/Villes{[newline]}";
-		else 
+		else
 			$error_msg .= "Pas d'import de Code Postal/Ville{[newline]}";
 	}
 	else
