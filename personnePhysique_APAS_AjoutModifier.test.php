@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // Test file write by SDK tool
-// --- Last modification: Date 18 November 2009 12:25:56 By  ---
+// --- Last modification: Date 04 January 2010 0:59:56 By  ---
 
 
 //@TABLES@
@@ -31,6 +31,8 @@ require_once('extensions/org_lucterios_contacts/personnePhysique.tbl.php');
 function org_lucterios_contacts_personnePhysique_APAS_AjoutModifier(&$test)
 {
 //@CODE_ACTION@
+echo "<!-- BEGIN -->";
+
 $DBPersonne=new DBObj_org_lucterios_contacts_personnePhysique;
 $test->assertEquals(0,$DBPersonne->find(),"INIT NB");
 
