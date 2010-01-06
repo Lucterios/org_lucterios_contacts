@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // Test file write by SDK tool
-// --- Last modification: Date 15 November 2008 12:35:57 By  ---
+// --- Last modification: Date 07 January 2010 0:13:12 By  ---
 
 
 //@TABLES@
@@ -43,14 +43,14 @@ $connect->execute("DELETE FROM org_lucterios_contacts_personneAbstraite WHERE id
 $connect->execute("DELETE FROM org_lucterios_contacts_liaison WHERE id=101");
 $connect->execute("DELETE FROM org_lucterios_contacts_liaison WHERE id=102");
 
-$connect->execute("INSERT INTO org_lucterios_contacts_personneMorale (id,raisonSociale,type,superId) VALUES (101,'abc',1,101)",true);
-$connect->execute("INSERT INTO org_lucterios_contacts_personneMorale (id,raisonSociale,type,superId) VALUES (102,'xyz',2,102)",true);
-$connect->execute("INSERT INTO org_lucterios_contacts_personnePhysique (id,nom,prenom,sexe,superId) VALUES (101,'AAA','BBB',1,103)",true);
-$connect->execute("INSERT INTO org_lucterios_contacts_personnePhysique (id,nom,prenom,sexe,superId) VALUES (102,'AAA','BBBB',1,104)",true);
 $connect->execute("INSERT INTO org_lucterios_contacts_personneAbstraite (id,adresse,codePostal,ville) VALUES (101,'rue machine','38000','Grenoble')",true);
 $connect->execute("INSERT INTO org_lucterios_contacts_personneAbstraite (id,adresse,codePostal,ville) VALUES (102,'rue machine','38000','Grenoble')",true);
 $connect->execute("INSERT INTO org_lucterios_contacts_personneAbstraite (id,adresse,codePostal,ville) VALUES (103,'place truc','38600','Fontaine')",true);
 $connect->execute("INSERT INTO org_lucterios_contacts_personneAbstraite (id,adresse,codePostal,ville) VALUES (104,'place truc','38600','Fontaine')",true);
+$connect->execute("INSERT INTO org_lucterios_contacts_personneMorale (id,raisonSociale,type,superId) VALUES (101,'abc',1,101)",true);
+$connect->execute("INSERT INTO org_lucterios_contacts_personneMorale (id,raisonSociale,type,superId) VALUES (102,'xyz',2,102)",true);
+$connect->execute("INSERT INTO org_lucterios_contacts_personnePhysique (id,nom,prenom,sexe,superId) VALUES (101,'AAA','BBB',1,103)",true);
+$connect->execute("INSERT INTO org_lucterios_contacts_personnePhysique (id,nom,prenom,sexe,superId) VALUES (102,'AAA','BBBB',1,104)",true);
 $connect->execute("INSERT INTO org_lucterios_contacts_liaison (id,physique,morale,fonction) VALUES (101,101,101,1)",true);
 $connect->execute("INSERT INTO org_lucterios_contacts_liaison (id,physique,morale,fonction) VALUES (102,102,102,2)",true);
 try {

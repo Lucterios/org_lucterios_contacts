@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // Test file write by SDK tool
-// --- Last modification: Date 14 November 2008 23:21:45 By  ---
+// --- Last modification: Date 07 January 2010 0:13:58 By  ---
 
 
 //@TABLES@
@@ -42,10 +42,10 @@ $connect->execute("DELETE FROM org_lucterios_contacts_personneAbstraite WHERE id
 $connect->execute("DELETE FROM org_lucterios_contacts_personneAbstraite WHERE id=102");
 $connect->execute("DELETE FROM org_lucterios_contacts_liaison WHERE id=101");
 
-$connect->execute("INSERT INTO org_lucterios_contacts_personneMorale (id,raisonSociale,type,superId) VALUES (101,'abc',1,101)",true);
-$connect->execute("INSERT INTO org_lucterios_contacts_personnePhysique (id,nom,prenom,sexe,superId) VALUES (101,'AAA','BBB',1,102)",true);
 $connect->execute("INSERT INTO org_lucterios_contacts_personneAbstraite (id,adresse,codePostal,ville) VALUES (101,'rue machine','38000','Grenoble')",true);
 $connect->execute("INSERT INTO org_lucterios_contacts_personneAbstraite (id,adresse,codePostal,ville) VALUES (102,'place truc','38600','Fontaine')",true);
+$connect->execute("INSERT INTO org_lucterios_contacts_personneMorale (id,raisonSociale,type,superId) VALUES (101,'abc',1,101)",true);
+$connect->execute("INSERT INTO org_lucterios_contacts_personnePhysique (id,nom,prenom,sexe,superId) VALUES (101,'AAA','BBB',1,102)",true);
 $connect->execute("INSERT INTO org_lucterios_contacts_liaison (id,physique,morale,fonction) VALUES (101,101,101,1)",true);
 try {
 	$abstr=new DBObj_org_lucterios_contacts_personneAbstraite;
