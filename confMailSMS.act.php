@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // Action file write by SDK tool
-// --- Last modification: Date 04 November 2009 0:01:21 By  ---
+// --- Last modification: Date 08 January 2010 22:03:07 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
@@ -50,11 +50,9 @@ $lab->setValue("{[newline]}{[center]}{[underline]}{[bold]}Configuration d'envoie
 $lab->setLocation(1,1,5);
 $xfer_result->addComponent($lab);
 
+$ParamsDesc=array('MailSmtpServer'=>array(1,3,3),'MailSmtpUser'=>array(1,4),'MailSmtpPass'=>array(3,4),'MailConnectionMsg'=>array(1,5,3));
 $DBParam=new DBObj_CORE_extension_params;
-$xfer_result->ReadOnly=1;
-$xfer_result->ParamsDesc=array('MailSmtpServer'=>array(1,3,3),'MailSmtpUser'=>array(1,4),
-'MailSmtpPass'=>array(3,4),'MailConnectionMsg'=>array(1,5,3));
-$xfer_result=$DBParam->fillCustom("org_lucterios_contacts",$xfer_result);
+$xfer_result=$DBParam->fillCustom("org_lucterios_contacts",1,$ParamsDesc,$xfer_result);
 
 $lab = new Xfer_Comp_Button("btnMail");
 $lab->setValue("_Modifier");
@@ -70,9 +68,7 @@ $lab->setLocation(1,1,5);
 $xfer_result->addComponent($lab);
 
 $DBParam=new DBObj_CORE_extension_params;
-$xfer_result->ReadOnly=1;
-$xfer_result->ParamsDesc=array('MailToConfig'=>array(1,3));
-$xfer_result=$DBParam->fillCustom("org_lucterios_contacts",$xfer_result);
+$xfer_result=$DBParam->fillCustom("org_lucterios_contacts",1,array('MailToConfig'=>array(1,3)),$xfer_result);
 
 $lab = new Xfer_Comp_Button("btnOptions");
 $lab->setValue("_Modifier");

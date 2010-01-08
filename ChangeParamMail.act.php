@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // Action file write by SDK tool
-// --- Last modification: Date 15 October 2009 23:44:33 By  ---
+// --- Last modification: Date 08 January 2010 22:03:53 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
@@ -52,10 +52,9 @@ $lab->setValue("{[center]}{[underline]}Configuration courriel{[/underline]}{[/ce
 $lab->setLocation(1,0,5);
 $xfer_result->addComponent($lab);
 
+$ParamsDesc=array('MailSmtpServer'=>array(1,3,3),'MailSmtpUser'=>array(1,4),'MailSmtpPass'=>array(3,4),'MailConnectionMsg'=>array(1,5,3));
 $DBParam=new DBObj_CORE_extension_params();
-$xfer_result->ParamsDesc=array('MailSmtpServer'=>array(1,3,3),'MailSmtpUser'=>array(1,4),
-'MailSmtpPass'=>array(3,4),'MailConnectionMsg'=>array(1,5,3));
-$xfer_result=$DBParam->fillCustom("org_lucterios_contacts",$xfer_result);
+$xfer_result=$DBParam->fillCustom("org_lucterios_contacts",0,$ParamsDesc,$xfer_result);
 
 $xfer_result->m_context['extensionName']="org_lucterios_contacts";
 $xfer_result->addAction($DBParam->NewAction('_Valider','ok.png','validerModif',FORMTYPE_MODAL,CLOSE_YES));
