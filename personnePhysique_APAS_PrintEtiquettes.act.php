@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // Action file write by SDK tool
-// --- Last modification: Date 23 November 2008 11:02:11 By  ---
+// --- Last modification: Date 04 February 2010 22:00:10 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
@@ -32,7 +32,7 @@ require_once('CORE/xfer_printing.inc.php');
 
 
 //@DESC@Imprimer les étiquettes
-//@PARAM@ FiltrecodePostal=0
+//@PARAM@ FiltrecodPostal=0
 //@PARAM@ IsSearch=0
 
 
@@ -40,7 +40,7 @@ require_once('CORE/xfer_printing.inc.php');
 
 function personnePhysique_APAS_PrintEtiquettes($Params)
 {
-$FiltrecodePostal=getParams($Params,"FiltrecodePostal",0);
+$FiltrecodPostal=getParams($Params,"FiltrecodPostal",0);
 $IsSearch=getParams($Params,"IsSearch",0);
 $self=new DBObj_org_lucterios_contacts_personnePhysique();
 try {
@@ -48,20 +48,23 @@ $xfer_result=&new Xfer_Container_Print("org_lucterios_contacts","personnePhysiqu
 $xfer_result->Caption="Imprimer les étiquettes";
 //@CODE_ACTION@
 if ($xfer_result->showSelector()) {
-	if ($search!=0)
-		$self->setForSearch($Params);
+	$DBObj=new DBObj_org_lucterios_contacts_personnePhysique;
+	if($IsSearch != 0)
+		$DBObj->setForSearch($Params);
 	else {
-		$q = "SELECT org_lucterios_contacts_personnePhysique.* FROM org_lucterios_contacts_personnePhysique,org_lucterios_contacts_personneAbstraite WHERE ( org_lucterios_contacts_personnePhysique.superId=org_lucterios_contacts_personneAbstraite.id )  AND ( org_lucterios_contacts_personneAbstraite.codePostal like '".$FiltrecodPostal."%') ";
-		$self->query($q);
+		$DBObj->whereAdd("org_lucterios_contacts_personneAbstraite.codePostal like '".$FiltrecodPostal."%'");
+		$DBObj->find();
 	}
 	$etiquette_values=array();
-	while ($self->fetch()) {
-		$etiquette_val=$self->nom." ".$self->prenom."{[newline]}";
-		$etiquette_val.=$self->adresse."{[newline]}".$self->codePostal." ".$self->ville;
-		if ($pers->pays!="France") $etiquette_val.="{[newline]}".$self->pays;
+	while ($DBObj->fetch()) {
+		$etiquette_val=$DBObj->nom." ".$DBObj->prenom."{[newline]}";
+		$etiquette_val.=$DBObj->adresse."{[newline]}".$DBObj->codePostal." ".$DBObj->ville;
+		if ($DBObj->pays!="France")
+			$etiquette_val.="{[newline]}".$DBObj->pays;
 		$etiquette_values[]=$etiquette_val;
 	}
-	while (count($etiquette_values)<1) $etiquette_values[]="";
+	while (count($etiquette_values)<1)
+		$etiquette_values[]="";
 	$xfer_result->printEtiquette($xfer_result->Caption,$etiquette_values);
 }
 //@CODE_ACTION@

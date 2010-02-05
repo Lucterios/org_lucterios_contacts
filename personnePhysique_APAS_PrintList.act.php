@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // Action file write by SDK tool
-// --- Last modification: Date 30 January 2010 23:58:43 By  ---
+// --- Last modification: Date 04 February 2010 21:53:11 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
@@ -50,14 +50,15 @@ $xfer_result->Caption="Imprimer une liste de personnes physiques";
 $xfer_result->withTextExport=1;
 if ($xfer_result->showSelector(0)) {
 	require_once"CORE/PrintListing.inc.php";
-	$listing = new PrintListing("Liste des Personnes Morales");
+	$listing = new PrintListing("Liste des Personnes Physiques");
 	$listing->Header = "Liste des Personnes Morales";
 	$listing->GridHeader[] = array('Nom',25);
 	$listing->GridHeader[] = array('Prénom',40);
 	$listing->GridHeader[] = array('Adresse',60);
 	$listing->GridHeader[] = array('Téléphones',20);
 	$listing->GridHeader[] = array('Courriel',45);
-	if($IsSearch != 0)$self->setForSearch($Params);
+	if($IsSearch != 0)
+		$self->setForSearch($Params);
 	else {
 		$q = "SELECT org_lucterios_contacts_personnePhysique.* FROM org_lucterios_contacts_personnePhysique,org_lucterios_contacts_personneAbstraite WHERE (org_lucterios_contacts_personnePhysique.superId=org_lucterios_contacts_personneAbstraite.id) AND (org_lucterios_contacts_personneAbstraite.codePostal like '".$FiltrecodPostal."%') ";
 		$self->query($q);
