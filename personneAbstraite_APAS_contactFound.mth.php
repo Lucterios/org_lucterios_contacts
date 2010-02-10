@@ -60,7 +60,7 @@ if ($query=='') {
 
 	$search = new DB_Search($contact);
 	if ($class_name=='DBObj_org_lucterios_contacts_personneMorale')
-		$addquery=" id!=1";
+		$addquery="org_lucterios_contacts_personneMorale.id!=1";
 	else
 		$addquery="";
 	$query = $search->Execute(array($FirstOrder.'_select'=>1,$FirstOrder.'_value1'=>'---'),$OrderBy,$addquery);
