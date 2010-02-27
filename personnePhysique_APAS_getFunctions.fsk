@@ -1,0 +1,58 @@
+-- 
+--     This file is part of Lucterios.
+-- 
+--     Lucterios is free software; you can redistribute it and/or modify
+--     it under the terms of the GNU General Public License as published by
+--     the Free Software Foundation; either version 2 of the License, or
+--     (at your option) any later version.
+-- 
+--     Lucterios is distributed in the hope that it will be useful,
+--     but WITHOUT ANY WARRANTY; without even the implied warranty of
+--     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+--     GNU General Public License for more details.
+-- 
+--     You should have received a copy of the GNU General Public License
+--     along with Lucterios; if not, write to the Free Software
+--     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+-- 
+-- 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
+--  -- Stocked file write by SDK tool
+-- Last modification: Date 26 February 2010 22:59:43 By  ---
+
+
+-- @DESC@
+-- @PARAM@ ObjId int(10)
+-- @PARAM@ MoralId int(10)
+
+CREATE FUNCTION org_lucterios_contacts_FCT_personnePhysique_APAS_getFunctions(ObjId int(10),MoralId int(10))
+RETURNS TEXT
+BEGIN
+DECLARE result TEXT DEFAULT '';
+-- @CODE_ACTION@
+DECLARE last_fctName TEXT DEFAULT '';
+DECLARE fctName TEXT DEFAULT '';
+DECLARE done INT DEFAULT 0;
+
+DECLARE cur1 CURSOR FOR SELECT f.nom FROM org_lucterios_contacts_liaison l,org_lucterios_contacts_fonctions f
+WHERE l.fonction=f.id AND l.physique=ObjId AND (((l.morale=MoralId) AND NOT MoralId IS NULL) || ((l.morale=1) AND MoralId IS NULL))
+ORDER BY l.fonction;
+
+DECLARE CONTINUE HANDLER FOR SQLSTATE '02000' SET done = 1;
+
+OPEN cur1;
+REPEAT
+	FETCH cur1 INTO fctName;
+	IF (last_fctName<>fctName) THEN
+		SET result=CONCAT(result,fctName,"{[newline]}");
+	END IF;
+	SET last_fctName=fctName;
+UNTIL done END REPEAT;
+CLOSE cur1;
+
+IF (result<>'') THEN
+	SET result=SUBSTRING(result,1,LENGTH(result)-11);
+END IF;
+-- @CODE_ACTION@
+RETURN result;
+END
+

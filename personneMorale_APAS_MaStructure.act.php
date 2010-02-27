@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // Action file write by SDK tool
-// --- Last modification: Date 13 March 2009 0:28:29 By  ---
+// --- Last modification: Date 26 February 2010 23:36:13 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
@@ -56,7 +56,7 @@ $xfer_result = $self->show(1,0,$xfer_result);
 $title = $xfer_result->getComponents('title_personne');
 $title->setValue('{[center]}{[bold]}Coordonnées de ma structure{[newline]}et de mes responsables{[/bold]}{[/center]}');
 
-$xfer_result->addAction($self->newAction("_Modifier","edit.png","ModifyMaStructure", FORMTYPE_MODAL, CLOSE_YES));
+$xfer_result->addAction($self->newAction("_Modifier","edit.png","AddModify", FORMTYPE_MODAL, CLOSE_YES));
 $xfer_result->addAction(new Xfer_Action("_Fermer","close.png"));
 //@CODE_ACTION@
 	$xfer_result->setCloseAction(new Xfer_Action('unlock','','CORE','UNLOCK',FORMTYPE_MODAL,CLOSE_YES,SELECT_NONE));

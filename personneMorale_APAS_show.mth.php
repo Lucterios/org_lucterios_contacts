@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // Method file write by SDK tool
-// --- Last modification: Date 11 February 2009 19:20:20 By  ---
+// --- Last modification: Date 26 February 2010 23:28:05 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
@@ -54,9 +54,9 @@ if($self->id != 1)$xfer_result->setDBObject($self,"type", true,$posY++,$posX+2);
 else $posY++;
 $xfer_result->setDBObject($self,"siren", true,$posY++,$posX);
 //
-$xfer_result->newTab("Résponsables",2);
+$xfer_result->newTab("Responsables",2);
 $liaison_physiques = new DBObj_org_lucterios_contacts_liaison;
-$grid = $liaison_physiques->getGrid($self->id);
+$grid = $liaison_physiques->getGrid($self->id,$xfer_result->m_context);
 $grid->setLocation($posX,$posY++,7);
 $xfer_result->addComponent($grid);
 $lbl = new Xfer_Comp_LabelForm("nbresponsable");

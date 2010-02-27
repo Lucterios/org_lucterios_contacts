@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // Action file write by SDK tool
-// --- Last modification: Date 16 March 2009 22:20:42 By  ---
+// --- Last modification: Date 27 February 2010 0:30:24 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
@@ -53,15 +53,15 @@ if ($contact->findConnected()) {
 	$title->setValue('{[center]}{[bold]}{[newline]}Mon compte personnel{[/bold]}{[/center]}');
 	$xfer_result->addAction($contact->NewAction('_Modifier','edit.png','EditerPerso',FORMTYPE_MODAL,CLOSE_YES));
 
-	$liaison=new DBObj_org_lucterios_contacts_liaison;
-	$liaison->physique=$contact->id;
-	if ($liaison->find()==1) {
-		$liaison->fetch();
-		if ($liaison->morale>1) {
-			$xfer_result->m_context['personneMorale']=$liaison->morale;
-			$contact_moral=new DBObj_org_lucterios_contacts_personneMorale;
-			$xfer_result->addAction($contact_moral->NewAction('Ma _structure','','MaStructure',FORMTYPE_MODAL,CLOSE_YES));
-		}
+	$Q="SELECT count(*) FROM org_lucterios_contacts_personneMorale M,org_lucterios_contacts_liaison L WHERE M.id<>1 AND L.morale=M.id AND L.physique=".$contact->id;
+	global $connect;
+	$QId=$connect->execute($Q,true);
+	list($nb)=$connect->getRow($QId);
+	$nn=(int)$nb;
+	if ($nb>0) {
+		$contact_moral=new DBObj_org_lucterios_contacts_personneMorale;
+		$title="Structure";
+		$xfer_result->addAction($contact_moral->NewAction($title,'','currentMoral',FORMTYPE_MODAL,CLOSE_YES));
 	}
 }
 else {

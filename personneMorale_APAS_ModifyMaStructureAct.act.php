@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // Action file write by SDK tool
-// --- Last modification: Date 13 March 2009 0:15:47 By  ---
+// --- Last modification: Date 26 February 2010 23:50:13 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
@@ -55,7 +55,6 @@ $xfer_result->m_context['RECORD_ID']=$self->id;
 $self->setFrom($Params);
 $self->update();
 $self->writeImage($Params);
-$xfer_result->redirectAction($self->NewAction("editer","","MaStructure"));
 //@CODE_ACTION@
 	$xfer_result->setCloseAction(new Xfer_Action('unlock','','CORE','UNLOCK',FORMTYPE_MODAL,CLOSE_YES,SELECT_NONE));
 }catch(Exception $e) {

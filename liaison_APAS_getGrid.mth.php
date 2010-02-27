@@ -18,54 +18,42 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // Method file write by SDK tool
-// --- Last modification: Date 11 February 2009 19:31:30 By  ---
+// --- Last modification: Date 26 February 2010 23:29:45 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
 
 //@TABLES@
+require_once('extensions/org_lucterios_contacts/personneAbstraite.tbl.php');
 require_once('extensions/org_lucterios_contacts/personnePhysique.tbl.php');
 require_once('extensions/org_lucterios_contacts/liaison.tbl.php');
 //@TABLES@
 
 //@DESC@getList de liaison
 //@PARAM@ personneMorale
+//@PARAM@ Params
 
-function liaison_APAS_getGrid(&$self,$personneMorale)
+function liaison_APAS_getGrid(&$self,$personneMorale,$Params)
 {
 //@CODE_ACTION@
-global $rootPath;
-if(!isset($rootPath))$rootPath = "";
+$q = "SELECT DISTINCT P.*,org_lucterios_contacts_FCT_personnePhysique_APAS_getFunctions(P.id,$personneMorale) as functions, org_lucterios_contacts_FCT_personneAbstraite_APAS_getAllTel(P.superId) as allTel ";
+$q.= "FROM org_lucterios_contacts_personnePhysique P,org_lucterios_contacts_liaison L ";
+$q.= "WHERE P.id=L.physique AND L.morale=".$personneMorale;
+$q.= " ORDER BY L.fonction";
 
-$physique = new DBObj_org_lucterios_contacts_personnePhysique;
-$q = "select DISTINCT org_lucterios_contacts_personnePhysique.* FROM org_lucterios_contacts_personnePhysique,org_lucterios_contacts_liaison ";
-$q.= "WHERE org_lucterios_contacts_personnePhysique.id=org_lucterios_contacts_liaison.physique AND org_lucterios_contacts_liaison.morale=".$personneMorale;
-$q.= " ORDER BY org_lucterios_contacts_liaison.fonction";
-$physique->query($q);
+$DBPhys = new DBObj_org_lucterios_contacts_personnePhysique;
+$DBPhys->query($q);
+
 // creation de la grille correspondante
 $grid = new Xfer_Comp_Grid("liaison_physique");
 if ($personneMorale==1) {
-	$grid->setDBObject($physique,array("Photo".SEP_SHOW."PHOTO","nom","prenom","fonctions".SEP_SHOW."FCT","Téléphones".SEP_SHOW."TEL","mail"));
-	$grid->m_headers["Photo".SEP_SHOW."PHOTO"]->m_type='icon';
+	$grid->setDBObject($DBPhys,array("Photo".SEP_SHOW."#getPhoto","nom","prenom","allTel","mail"),"",$Params);
+	$grid->m_headers["Photo".SEP_SHOW."#getPhoto"]->m_type='icon';
 }
 else
-	$grid->setDBObject($physique,array("nom","prenom","fonctions".SEP_SHOW."FCT","Téléphones".SEP_SHOW."TEL","mail"));
+	$grid->setDBObject($DBPhys,array("nom","prenom","functions","allTel","mail"),"",$Params);
 $grid->addAction($self->newAction("_Editer","edit.png","Fiche", FORMTYPE_MODAL, CLOSE_NO, SELECT_SINGLE));
 $grid->addAction($self->NewAction('_Rechercher/Ajouter','add.png','AddSearch', FORMTYPE_MODAL, CLOSE_NO, SELECT_NONE));
-foreach($grid->m_records as $key => $value) {
-	$physique = new DBObj_org_lucterios_contacts_personnePhysique;
-	$physique->get($key);
-	$grid->m_records[$key]["fonctions". SEP_SHOW."FCT"] = $physique->getFonctions($personneMorale);
-	$grid->m_records[$key]["Téléphones".SEP_SHOW."TEL"] = $physique->fixe."{[newline]}".$physique->portable;
-	if ($personneMorale==1) {
-		$abstract_id=$physique->Super->id;
-		$file_name=$rootPath."usr/org_lucterios_contacts/Image_$abstract_id.jpg";
-		if (is_file($file_name))
-			$grid->m_records[$key]["Photo".SEP_SHOW."PHOTO"] = $file_name;
-		else
-			$grid->m_records[$key]["Photo".SEP_SHOW."PHOTO"] = "";
-	}
-}
 return $grid;
 //@CODE_ACTION@
 }

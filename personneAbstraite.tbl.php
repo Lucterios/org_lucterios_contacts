@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // table file write by SDK tool
-// --- Last modification: Date 21 November 2008 23:24:45 By  ---
+// --- Last modification: Date 26 February 2010 23:14:56 By  ---
 
 require_once('CORE/DBObject.inc.php');
 
@@ -43,7 +43,8 @@ class DBObj_org_lucterios_contacts_personneAbstraite extends DBObj_Basic
 	var $fax;
 	var $mail;
 	var $commentaire;
-	var $__DBMetaDataField=array('adresse'=>array('description'=>'Adresse', 'type'=>2, 'notnull'=>true, 'params'=>array('Size'=>200, 'Multi'=>true)), 'codePostal'=>array('description'=>'Code Postal', 'type'=>2, 'notnull'=>true, 'params'=>array('Size'=>8, 'Multi'=>false)), 'ville'=>array('description'=>'Ville', 'type'=>2, 'notnull'=>true, 'params'=>array('Size'=>70, 'Multi'=>false)), 'pays'=>array('description'=>'Pays', 'type'=>2, 'notnull'=>false, 'params'=>array('Size'=>50, 'Multi'=>false)), 'fixe'=>array('description'=>'Tel. Fixe', 'type'=>2, 'notnull'=>false, 'params'=>array('Size'=>15, 'Multi'=>false)), 'portable'=>array('description'=>'Tel. Portable', 'type'=>2, 'notnull'=>false, 'params'=>array('Size'=>15, 'Multi'=>false)), 'fax'=>array('description'=>'Fax', 'type'=>2, 'notnull'=>false, 'params'=>array('Size'=>15, 'Multi'=>false)), 'mail'=>array('description'=>'Courriel', 'type'=>2, 'notnull'=>false, 'params'=>array('Size'=>100, 'Multi'=>false)), 'commentaire'=>array('description'=>'Commentaire', 'type'=>7, 'notnull'=>false, 'params'=>array()));
+	var $allTel;
+	var $__DBMetaDataField=array('adresse'=>array('description'=>'Adresse', 'type'=>2, 'notnull'=>true, 'params'=>array('Size'=>200, 'Multi'=>true)), 'codePostal'=>array('description'=>'Code Postal', 'type'=>2, 'notnull'=>true, 'params'=>array('Size'=>8, 'Multi'=>false)), 'ville'=>array('description'=>'Ville', 'type'=>2, 'notnull'=>true, 'params'=>array('Size'=>70, 'Multi'=>false)), 'pays'=>array('description'=>'Pays', 'type'=>2, 'notnull'=>false, 'params'=>array('Size'=>50, 'Multi'=>false)), 'fixe'=>array('description'=>'Tel. Fixe', 'type'=>2, 'notnull'=>false, 'params'=>array('Size'=>15, 'Multi'=>false)), 'portable'=>array('description'=>'Tel. Portable', 'type'=>2, 'notnull'=>false, 'params'=>array('Size'=>15, 'Multi'=>false)), 'fax'=>array('description'=>'Fax', 'type'=>2, 'notnull'=>false, 'params'=>array('Size'=>15, 'Multi'=>false)), 'mail'=>array('description'=>'Courriel', 'type'=>2, 'notnull'=>false, 'params'=>array('Size'=>100, 'Multi'=>false)), 'commentaire'=>array('description'=>'Commentaire', 'type'=>7, 'notnull'=>false, 'params'=>array()), 'allTel'=>array('description'=>'Téléphones', 'type'=>11, 'notnull'=>false, 'params'=>array('Function'=>'org_lucterios_contacts_FCT_personneAbstraite_APAS_getAllTel', 'NbField'=>1)));
 
 }
 
