@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // Action file write by SDK tool
-// --- Last modification: Date 27 February 2010 0:30:24 By  ---
+// --- Last modification: Date 02 March 2010 17:07:50 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
@@ -51,7 +51,12 @@ if ($contact->findConnected()) {
 	$contact->show(0, 1, $xfer_result);
 	$title = $xfer_result->getComponents('title');
 	$title->setValue('{[center]}{[bold]}{[newline]}Mon compte personnel{[/bold]}{[/center]}');
-	$xfer_result->addAction($contact->NewAction('_Modifier','edit.png','EditerPerso',FORMTYPE_MODAL,CLOSE_YES));
+	$buttonLogin=$xfer_result->getComponents('buttonLogin');
+	if (($buttonLogin==null) || ($buttonLogin->m_action==null)) {
+		$xfer_result->removeComponents('user');
+		$xfer_result->removeComponents('labeluser');
+	}
+	$xfer_result->addAction($contact->NewAction('_Modifier compte','edit.png','EditerPerso',FORMTYPE_MODAL,CLOSE_YES));
 
 	$Q="SELECT count(*) FROM org_lucterios_contacts_personneMorale M,org_lucterios_contacts_liaison L WHERE M.id<>1 AND L.morale=M.id AND L.physique=".$contact->id;
 	global $connect;
@@ -59,9 +64,16 @@ if ($contact->findConnected()) {
 	list($nb)=$connect->getRow($QId);
 	$nn=(int)$nb;
 	if ($nb>0) {
+		if ($xfer_result->m_tab==0){
+			$xfer_result->newTab("Mon compte",1);
+			foreach($xfer_result->m_components as $id=>$comp) {
+				if ($comp->y>1)
+					$comp->tab=1;
+			}
+		}
+		$xfer_result->newTab("Organisation");
 		$contact_moral=new DBObj_org_lucterios_contacts_personneMorale;
-		$title="Structure";
-		$xfer_result->addAction($contact_moral->NewAction($title,'','currentMoral',FORMTYPE_MODAL,CLOSE_YES));
+		$xfer_result=$contact_moral->getCurrentMoralShow(0, 100, $xfer_result);
 	}
 }
 else {

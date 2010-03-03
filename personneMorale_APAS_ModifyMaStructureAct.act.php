@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // Action file write by SDK tool
-// --- Last modification: Date 26 February 2010 23:50:13 By  ---
+// --- Last modification: Date 02 March 2010 12:00:45 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
@@ -31,7 +31,7 @@ require_once('CORE/xfer.inc.php');
 //@XFER:acknowledge@
 
 
-//@DESC@Modifier ma structure morale
+//@DESC@Modifier mon organisation
 //@PARAM@ 
 //@INDEX:personneMorale
 
@@ -47,7 +47,7 @@ if ($personneMorale>=0) $self->get($personneMorale);
 $self->lockRecord("personneMorale_APAS_ModifyMaStructureAct");
 try {
 $xfer_result=&new Xfer_Container_Acknowledge("org_lucterios_contacts","personneMorale_APAS_ModifyMaStructureAct",$Params);
-$xfer_result->Caption="Modifier ma structure morale";
+$xfer_result->Caption="Modifier mon organisation";
 $xfer_result->m_context['ORIGINE']="personneMorale_APAS_ModifyMaStructureAct";
 $xfer_result->m_context['TABLE_NAME']=$self->__table;
 $xfer_result->m_context['RECORD_ID']=$self->id;

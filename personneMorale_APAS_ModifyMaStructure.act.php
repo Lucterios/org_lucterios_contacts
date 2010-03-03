@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // Action file write by SDK tool
-// --- Last modification: Date 13 March 2009 0:13:59 By  ---
+// --- Last modification: Date 02 March 2010 12:09:30 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
@@ -31,7 +31,7 @@ require_once('CORE/xfer_custom.inc.php');
 //@XFER:custom@
 
 
-//@DESC@Modifier ma structure morale
+//@DESC@Modifier mon organisation
 //@PARAM@ 
 //@INDEX:personneMorale
 
@@ -47,13 +47,18 @@ if ($personneMorale>=0) $self->get($personneMorale);
 $self->lockRecord("personneMorale_APAS_ModifyMaStructure");
 try {
 $xfer_result=&new Xfer_Container_Custom("org_lucterios_contacts","personneMorale_APAS_ModifyMaStructure",$Params);
-$xfer_result->Caption="Modifier ma structure morale";
+$xfer_result->Caption="Modifier mon organisation";
 $xfer_result->m_context['ORIGINE']="personneMorale_APAS_ModifyMaStructure";
 $xfer_result->m_context['TABLE_NAME']=$self->__table;
 $xfer_result->m_context['RECORD_ID']=$self->id;
 //@CODE_ACTION@
 $self->setFrom($Params);
-$xfer_result = $self->edit(0,0,$xfer_result);
+
+$xfer_result->setDBObject($self,"raisonSociale", false,$posY++,$posX);
+$xfer_result = $self->Super->edit($posX,$posY,$xfer_result);
+$posY = 30;
+$xfer_result->setDBObject($self,"siren", false,$posY++,$posX);
+
 $xfer_result->addAction($self->newAction("_Ok","ok.png","ModifyMaStructureAct", FORMTYPE_MODAL, CLOSE_YES));
 $xfer_result->addAction( new Xfer_Action("_Annuler","cancel.png"));
 //@CODE_ACTION@
