@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // Method file write by SDK tool
-// --- Last modification: Date 26 February 2010 23:29:45 By  ---
+// --- Last modification: Date 04 March 2010 15:30:22 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
@@ -47,7 +47,7 @@ $DBPhys->query($q);
 // creation de la grille correspondante
 $grid = new Xfer_Comp_Grid("liaison_physique");
 if ($personneMorale==1) {
-	$grid->setDBObject($DBPhys,array("Photo".SEP_SHOW."#getPhoto","nom","prenom","allTel","mail"),"",$Params);
+	$grid->setDBObject($DBPhys,array("Photo".SEP_SHOW."#getPhoto","nom","prenom","functions","allTel","mail"),"",$Params);
 	$grid->m_headers["Photo".SEP_SHOW."#getPhoto"]->m_type='icon';
 }
 else

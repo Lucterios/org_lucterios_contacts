@@ -18,56 +18,59 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // Action file write by SDK tool
-// --- Last modification: Date 04 March 2010 19:51:25 By  ---
+// --- Last modification: Date 04 March 2010 23:58:16 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
 
 //@TABLES@
 require_once('extensions/org_lucterios_contacts/personneAbstraite.tbl.php');
-require_once('extensions/org_lucterios_contacts/personneMorale.tbl.php');
+require_once('extensions/org_lucterios_contacts/personnePhysique.tbl.php');
+require_once('CORE/users.tbl.php');
 //@TABLES@
 //@XFER:acknowledge
 require_once('CORE/xfer.inc.php');
 //@XFER:acknowledge@
 
 
-//@DESC@Valider un personneMorale
-//@PARAM@ personneMorale
+//@DESC@Mot de passe perdu
+//@PARAM@ mail
 
-//@TRANSACTION:
 
 //@LOCK:0
 
-function personneMorale_APAS_AddModifyAct($Params)
+function passForgotAct($Params)
 {
-if (($ret=checkParams("org_lucterios_contacts", "personneMorale_APAS_AddModifyAct",$Params ,"personneMorale"))!=null)
+if (($ret=checkParams("org_lucterios_contacts", "passForgotAct",$Params ,"mail"))!=null)
 	return $ret;
-$personneMorale=getParams($Params,"personneMorale",0);
-$self=new DBObj_org_lucterios_contacts_personneMorale();
-
-global $connect;
-$connect->begin();
+$mail=getParams($Params,"mail",0);
 try {
-$xfer_result=&new Xfer_Container_Acknowledge("org_lucterios_contacts","personneMorale_APAS_AddModifyAct",$Params);
-$xfer_result->Caption="Valider un personneMorale";
+$xfer_result=&new Xfer_Container_Acknowledge("org_lucterios_contacts","passForgotAct",$Params);
+$xfer_result->Caption="Mot de passe perdu";
 //@CODE_ACTION@
-if($personneMorale>0)
-	$find = $self->get($personneMorale);
-$self->setFrom($Params);
-if($find)
-	$self->update();
-else 
-	$self->insert();
-$self->writeImage($Params);
-if($self->id != 1) {
-	$xfer_result->m_context = array("personneMorale" => $self->id);
-	$xfer_result->redirectAction($self->NewAction("editer","","Fiche"));
+require_once('extensions/org_lucterios_contacts/mailerFunctions.inc.php');
+$result=false;
+
+$DBPersonne=new DBObj_org_lucterios_contacts_personnePhysique;
+$DBPersonne->whereAdd("org_lucterios_contacts_personneAbstraite.mail='$mail'");
+$DBPersonne->whereAdd('user>0');
+$DBPersonne->find();
+while ($DBPersonne->fetch()) {
+	$DBObjusers=$DBPersonne->getField('user');
+	if ($DBObjusers->actif=='o') {
+		$newpass=passwordGenerator();
+		$DBObjusers->ChangePWD($newpass);
+		sendNewConnection($DBPersonne->mail,$DBObjusers->login,$newpass);
+		$result=true;
+	}
 }
+
+if ($result)
+	$xfer_result->message("Nouveau mot de passe envoyé à '$mail'");
+else
+	$xfer_result->message("Aucun utilisateur enregistré avec ce courriel!",XFER_DBOX_WARNING);
 //@CODE_ACTION@
-	$connect->commit();
 }catch(Exception $e) {
-	$connect->rollback();
 	throw $e;
 }
 return $xfer_result;
