@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // Action file write by SDK tool
-// --- Last modification: Date 05 March 2010 1:04:43 By  ---
+// --- Last modification: Date 05 March 2010 22:02:22 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
@@ -28,7 +28,7 @@ require_once('extensions/org_lucterios_contacts/liaison.tbl.php');
 require_once('extensions/org_lucterios_contacts/personneAbstraite.tbl.php');
 require_once('extensions/org_lucterios_contacts/personneMorale.tbl.php');
 require_once('extensions/org_lucterios_contacts/personnePhysique.tbl.php');
-require_once('CORE/groups.tbl.php');
+require_once('CORE/extension_params.tbl.php');
 require_once('CORE/users.tbl.php');
 //@TABLES@
 //@XFER:acknowledge
@@ -71,29 +71,29 @@ if ($DBUser->find()) {
 		$xfer_result->redirectAction(new Xfer_Action('','','org_lucterios_contacts','newContact',FORMTYPE_MODAL, CLOSE_YES));
 	}
 	else {
+		$DBParam=new DBObj_CORE_extension_params;
+		$params_contacts=$DBParam->getParameters("org_lucterios_contacts");
+
 		require_once('extensions/org_lucterios_contacts/mailerFunctions.inc.php');
 		$newpass=passwordGenerator();
-
-		$DBgroup=new DBObj_CORE_groups;
-		$DBgroup->query("SELECT * FROM CORE_groups WHERE weigth>0 ORDER BY weigth");
-		$DBgroup->fetch();
 
 		$DBUser=new DBObj_CORE_users;
 		$DBUser->login=$login;
 		$DBUser->realName=$DBPhysique->toText();
-		$DBUser->groupId=$DBgroup->id;
+		$DBUser->groupId=$params_contacts['defaultGroup'];
 		$DBUser->pass=md5($newpass);
+		$DBUser->actif='o';
 		$DBUser->insert();
 
 		$DBPhysique->user=$DBUser->id;
 		$DBPhysique->insert();
 		if ($DBMoral->raisonSociale!='') {
-			$DBMoral->type=1;
+			$DBMoral->type=$params_contacts['defaultType'];
 			$DBMoral->insert();
 			$DBlink=new DBObj_org_lucterios_contacts_liaison;
 			$DBlink->physique=$DBPhysique->id;
 			$DBlink->morale=$DBMoral->id;
-			$DBlink->fonction=1;
+			$DBlink->fonction=$params_contacts['defaultFunction'];
 			$DBlink->insert();
 		}
 

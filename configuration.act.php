@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // Action file write by SDK tool
-// --- Last modification: Date 15 October 2009 23:33:39 By  ---
+// --- Last modification: Date 05 March 2010 19:47:29 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
@@ -27,6 +27,7 @@ require_once('CORE/rights.inc.php');
 require_once('extensions/org_lucterios_contacts/fonctions.tbl.php');
 require_once('extensions/org_lucterios_contacts/typesMorales.tbl.php');
 require_once('CORE/extension_params.tbl.php');
+require_once('CORE/groups.tbl.php');
 //@TABLES@
 //@XFER:custom
 require_once('CORE/xfer_custom.inc.php');
@@ -49,6 +50,58 @@ try {
 $xfer_result=&new Xfer_Container_Custom("org_lucterios_contacts","configuration",$Params);
 $xfer_result->Caption="Configuration des contacts";
 //@CODE_ACTION@
+$xfer_result->newTab("Paramètres");
+$DBParam=new DBObj_CORE_extension_params;
+$params=$DBParam->getParameters("org_lucterios_contacts");
+
+$img=new  Xfer_Comp_Image('imgParams');
+$img->setValue('contactsConfig.png');
+$img->setLocation(0,0);
+$xfer_result->addComponent($img);
+$lab = new Xfer_Comp_LabelForm("titleParams");
+$lab->setValue("{[newline]}{[center]}{[bold]}Paramètres des contacts{[/bold]}{[/center]}");
+$lab->setLocation(1,0,2);
+$xfer_result->addComponent($lab);
+
+$lab = new Xfer_Comp_LabelForm("defaultGrouplbl");
+$lab->setValue("{[bold]}Groupe par défaut{[/bold]}");
+$lab->setLocation(1,1);
+$xfer_result->addComponent($lab);
+$Grp=new DBObj_CORE_groups;
+$Grp->get($params['defaultGroup']);
+$lab = new Xfer_Comp_LabelForm("defaultGroup");
+$lab->setValue($Grp->toText());
+$lab->setLocation(2,1);
+$xfer_result->addComponent($lab);
+
+$lab = new Xfer_Comp_LabelForm("defaultTypelbl");
+$lab->setValue("{[bold]}Catégorie par défaut{[/bold]}");
+$lab->setLocation(1,2);
+$xfer_result->addComponent($lab);
+$Type=new DBObj_org_lucterios_contacts_typesMorales;
+$Type->get($params['defaultType']);
+$lab = new Xfer_Comp_LabelForm("defaultType");
+$lab->setValue($Type->toText());
+$lab->setLocation(2,2);
+$xfer_result->addComponent($lab);
+
+$lab = new Xfer_Comp_LabelForm("defaultFunctionlbl");
+$lab->setValue("{[bold]}Fonction par défaut{[/bold]}");
+$lab->setLocation(1,3);
+$xfer_result->addComponent($lab);
+$Fct=new DBObj_org_lucterios_contacts_fonctions;
+$Fct->get($params['defaultFunction']);
+$lab = new Xfer_Comp_LabelForm("defaultFunction");
+$lab->setValue($Fct->toText());
+$lab->setLocation(2,3);
+$xfer_result->addComponent($lab);
+
+$lab = new Xfer_Comp_Button("Params");
+$lab->setValue("_Modifier");
+$lab->setLocation(0,4,3);
+$lab->setAction(new Xfer_Action('Modifier','edit.png','org_lucterios_contacts','ChangeParams',FORMTYPE_MODAL,CLOSE_NO));
+$xfer_result->addComponent($lab);
+
 $xfer_result->newTab("Fonctions et responsabilités");
 
 $DBFunction=new DBObj_org_lucterios_contacts_fonctions;
