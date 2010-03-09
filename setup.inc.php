@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // setup file write by SDK tool
-// --- Last modification: Date 05 March 2010 22:02:22 By  ---
+// --- Last modification: Date 08 March 2010 19:51:56 By  ---
 
 $extention_name="org_lucterios_contacts";
 $extention_description="Module de gestion des contacts physiques (hommes ou femmes){[newline]}ou moraux (entreprise, association, administration,...)";
@@ -30,7 +30,7 @@ $extension_libre=true;
 $version_max=1;
 $version_min=1;
 $version_release=2;
-$version_build=447;
+$version_build=463;
 
 $depencies=array();
 $depencies[0] = new Param_Depencies("CORE", 1, 2, 1, 1, false);
@@ -130,9 +130,9 @@ $params["MailSmtpServer"] = new Param_Parameters("MailSmtpServer", "", "Serveur 
 $params["MailSmtpUser"] = new Param_Parameters("MailSmtpUser", "", "Authentification SMTP", 0, array('Multi'=>false));
 $params["MailSmtpPass"] = new Param_Parameters("MailSmtpPass", "", "Mot de passe SMTP", 0, array('Multi'=>false));
 $params["MailConnectionMsg"] = new Param_Parameters("MailConnectionMsg", "", "Message de confirmation de connexion", 0, array('Multi'=>true));
-$params["defaultFunction"] = new Param_Parameters("defaultFunction", "1", "Fonction par défaut", 1, array('Min'=>1, 'Max'=>1000));
-$params["defaultType"] = new Param_Parameters("defaultType", "1", "Catégorie par défaul", 1, array('Min'=>1, 'Max'=>10000));
-$params["defaultGroup"] = new Param_Parameters("defaultGroup", "1", "Groupe par défaut", 1, array('Min'=>1, 'Max'=>100000));
+$params["defaultFunction"] = new Param_Parameters("defaultFunction", "1", "Fonction par défaut", 1, array('Min'=>1, 'Max'=>100000));
+$params["defaultType"] = new Param_Parameters("defaultType", "1", "Catégorie par défaut", 1, array('Min'=>1, 'Max'=>100000));
+$params["defaultGroup"] = new Param_Parameters("defaultGroup", "99", "Groupe par défaut", 1, array('Min'=>1, 'Max'=>100000));
 
 $extend_tables=array();
 $extend_tables["CodePostal"] = array("Code postal","",array());

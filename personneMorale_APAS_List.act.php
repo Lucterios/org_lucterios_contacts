@@ -18,13 +18,14 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // Action file write by SDK tool
-// --- Last modification: Date 03 November 2009 23:43:15 By  ---
+// --- Last modification: Date 08 March 2010 19:41:22 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
 
 //@TABLES@
 require_once('extensions/org_lucterios_contacts/typesMorales.tbl.php');
+require_once('CORE/extension_params.tbl.php');
 require_once('extensions/org_lucterios_contacts/personneMorale.tbl.php');
 //@TABLES@
 //@XFER:custom
@@ -33,7 +34,7 @@ require_once('CORE/xfer_custom.inc.php');
 
 
 //@DESC@Liste des personnes morales
-//@PARAM@ Filtretype=1
+//@PARAM@ Filtretype=-1
 //@PARAM@ IsSearch=0
 
 
@@ -41,13 +42,19 @@ require_once('CORE/xfer_custom.inc.php');
 
 function personneMorale_APAS_List($Params)
 {
-$Filtretype=getParams($Params,"Filtretype",1);
+$Filtretype=getParams($Params,"Filtretype",-1);
 $IsSearch=getParams($Params,"IsSearch",0);
 $self=new DBObj_org_lucterios_contacts_personneMorale();
 try {
 $xfer_result=&new Xfer_Container_Custom("org_lucterios_contacts","personneMorale_APAS_List",$Params);
 $xfer_result->Caption="Liste des personnes morales";
 //@CODE_ACTION@
+if ($Filtretype==-1) {
+	$DBParam=new DBObj_CORE_extension_params();
+	$param_contacts=$DBParam->getParameters('org_lucterios_contacts');
+	$Filtretype=$param_contacts['defaultType'];
+}
+
 $img = new Xfer_Comp_Image("img");
 $img->setLocation(0,0,1,2);
 $img->setValue("contactMoral.png");

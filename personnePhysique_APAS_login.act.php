@@ -18,12 +18,13 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // Action file write by SDK tool
-// --- Last modification: Date 16 October 2009 0:29:47 By  ---
+// --- Last modification: Date 08 March 2010 19:38:53 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
 
 //@TABLES@
+require_once('CORE/extension_params.tbl.php');
 require_once('CORE/users.tbl.php');
 require_once('extensions/org_lucterios_contacts/personnePhysique.tbl.php');
 //@TABLES@
@@ -53,8 +54,12 @@ if($self->user>0) {
 	$xfer_result->Caption="Modifier la connexion";
 }
 else {
+	$DBParam=new DBObj_CORE_extension_params();
+	$param_contacts=$DBParam->getParameters('org_lucterios_contacts');
+
 	$DBObjusers=new DBObj_CORE_users;
 	$DBObjusers->realName=$self->toText();
+	$DBObjusers->groupId=$param_contacts['defaultGroup'];
 	$xfer_result->Caption="Créer une connexion";
 }
 $xfer_result->WithActif=true;
