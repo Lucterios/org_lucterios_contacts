@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // library file write by SDK tool
-// --- Last modification: Date 18 November 2009 11:42:37 By  ---
+// --- Last modification: Date 10 March 2010 23:05:04 By  ---
 
 //@BEGIN@
 include_once("CORE/log.inc.php");
@@ -26,7 +26,8 @@ require_once("conf/cnf.inc.php");
 require_once"CORE/dbcnx.inc.php";
 
 function readCodePostalFile($codePostalFile) {
-	global $connect; logAutre("install_contacts - Openfile=$codePostalFile");
+	global $connect;
+	logAutre("install_contacts - Openfile=$codePostalFile");
 	$q = "";
 	$nb = 0;
 	$lines = file($codePostalFile);
@@ -40,14 +41,12 @@ function readCodePostalFile($codePostalFile) {
 		$q .= ",('$codePostal','$ville','$pays')";
 		$nb++;
 	}
-	$r = $connect->dbh->query($q);
-	if(! DB:: isError($r)) {
-		if( get_class($r) == 'DB_result')$r->free();
-		$q = "";
-	}
-	else { logAutre("install_contacts - Erreur=".$r->getMessage()."\nQuery=". substr($q,0,300));
+	$id = $connect->execute($q);
+	if($id === false) {
+		logAutre("install_contacts - Erreur=".$connect->errorMsg."\nQuery=". substr($q,0,300));
 		$nb = 0;
-	} logAutre("install_contacts - read$nb=$codePostalFile");
+	}
+        logAutre("install_contacts - read $nb=$codePostalFile");
 	return $nb;
 }
 
@@ -59,8 +58,11 @@ function install_org_lucterios_contacts($ExensionVersions) {
 	$dir = "extensions/org_lucterios_contacts/";
 	logAutre("install_contacts - dir=$dir");
 	global $connect;
+	$id = $connect->execute("SELECT count(*) FROM org_lucterios_contacts_CodePostal",true);
+	list($nb)=$connect->getRow($id);
+	$nb=(int)$nb;
 	$testtag_file='conf/testtag.file';
-	if (!is_file($testtag_file) && version_compare($ExensionVersions[0], '0.90', '<')) {
+	if (($nb==0) ||(!is_file($testtag_file) && version_compare($ExensionVersions[0], '0.90', '<'))) {
 		$q = "CREATE UNIQUE INDEX IDX_UNIQUE ON org_lucterios_contacts_CodePostal(codePostal,ville,pays)";
 		$id = $connect->execute($q);
 		if($id === false)
