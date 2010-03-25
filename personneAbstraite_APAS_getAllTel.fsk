@@ -17,7 +17,7 @@
 -- 
 -- 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 --  -- Stocked file write by SDK tool
--- Last modification: Date 26 February 2010 23:13:52 By  ---
+-- Last modification: Date 24 March 2010 21:55:24 By  ---
 
 
 -- @DESC@
@@ -25,6 +25,7 @@
 
 CREATE FUNCTION org_lucterios_contacts_FCT_personneAbstraite_APAS_getAllTel(ObjId int(10))
 RETURNS TEXT
+READS SQL DATA
 BEGIN
 DECLARE result TEXT DEFAULT '';
 -- @CODE_ACTION@

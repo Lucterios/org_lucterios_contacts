@@ -17,7 +17,7 @@
 -- 
 -- 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 --  -- Stocked file write by SDK tool
--- Last modification: Date 26 February 2010 22:59:43 By  ---
+-- Last modification: Date 24 March 2010 21:55:33 By  ---
 
 
 -- @DESC@
@@ -26,6 +26,7 @@
 
 CREATE FUNCTION org_lucterios_contacts_FCT_personnePhysique_APAS_getFunctions(ObjId int(10),MoralId int(10))
 RETURNS TEXT
+READS SQL DATA
 BEGIN
 DECLARE result TEXT DEFAULT '';
 -- @CODE_ACTION@
