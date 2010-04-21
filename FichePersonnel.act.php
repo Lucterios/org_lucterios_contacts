@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // Action file write by SDK tool
-// --- Last modification: Date 02 March 2010 17:07:50 By  ---
+// --- Last modification: Date 20 April 2010 16:51:36 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
@@ -56,7 +56,7 @@ if ($contact->findConnected()) {
 		$xfer_result->removeComponents('user');
 		$xfer_result->removeComponents('labeluser');
 	}
-	$xfer_result->addAction($contact->NewAction('_Modifier compte','edit.png','EditerPerso',FORMTYPE_MODAL,CLOSE_YES));
+	$xfer_result->addAction($contact->NewAction('_Modifier compte','editPhysique.png','EditerPerso',FORMTYPE_MODAL,CLOSE_YES));
 
 	$Q="SELECT count(*) FROM org_lucterios_contacts_personneMorale M,org_lucterios_contacts_liaison L WHERE M.id<>1 AND L.morale=M.id AND L.physique=".$contact->id;
 	global $connect;

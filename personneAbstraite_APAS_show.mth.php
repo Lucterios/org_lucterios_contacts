@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // Method file write by SDK tool
-// --- Last modification: Date 04 March 2009 19:10:05 By  ---
+// --- Last modification: Date 20 April 2010 16:20:02 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
@@ -76,7 +76,7 @@ $xfer_result->addComponent($lbl_mail);
 $xfer_result->setDBObject($self,"fixe", true,$posY,$posX);
 $xfer_result->setDBObject($self,"portable", true,$posY,$posX+2);
 $xfer_result->setDBObject($self,"fax", true,$posY,$posX+4);
-$posY = 50;
+$posY+=50;
 $xfer_result->setDBObject($self,"commentaire", true,$posY++,$posX,5);
 return $xfer_result;
 //@CODE_ACTION@

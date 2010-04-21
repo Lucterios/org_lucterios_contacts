@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // Method file write by SDK tool
-// --- Last modification: Date 02 March 2010 12:03:33 By  ---
+// --- Last modification: Date 20 April 2010 16:52:20 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
@@ -55,12 +55,12 @@ if ($contact->findConnected()) {
 		$xfer_result->setDBObject($DBMoral,"raisonSociale", true,$posY++,$posX, 3);
 		$xfer_result = $DBMoral->Super->show($posX, $posY,$xfer_result);
 		$xfer_result->setDBObject($DBMoral,"siren", true,$posY+30,$posX);
-		$xfer_result->addAction($DBMoral->newAction("_Modifier organisation","edit.png","ModifyMaStructure", FORMTYPE_MODAL, CLOSE_NO));
+		$xfer_result->addAction($DBMoral->newAction("_Modifier organisation","editMoral.png","ModifyMaStructure", FORMTYPE_MODAL, CLOSE_NO));
 	}
 	else {
 		$grid->setSize(300,500);
 		$grid->setLocation($posX, $posY);
-		$grid->addAction($DBMoral->newAction("_Editer","edit.png","currentMoral", FORMTYPE_MODAL, CLOSE_NO, SELECT_SINGLE));
+		$grid->addAction($DBMoral->newAction("_Editer","editMoral.png","currentMoral", FORMTYPE_MODAL, CLOSE_NO, SELECT_SINGLE));
 		$xfer_result->addComponent($grid);
 	}
 } else {
