@@ -18,33 +18,36 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // Method file write by SDK tool
-// --- Last modification: Date 11 May 2010 11:53:38 By  ---
+// --- Last modification: Date 11 May 2010 13:53:58 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
 
 //@TABLES@
-require_once('extensions/org_lucterios_contacts/personnePhysique.tbl.php');
+require_once('extensions/org_lucterios_contacts/personneMorale.tbl.php');
 //@TABLES@
 
-//@DESC@Editer un personne physique
-//@PARAM@ posX
-//@PARAM@ posY
-//@PARAM@ xfer_result
+//@DESC@Retourne les informations légales formatées
+//@PARAM@ 
 
-function personnePhysique_APAS_edit(&$self,$posX,$posY,$xfer_result)
+function personneMorale_APAS_getInfoLegal(&$self)
 {
 //@CODE_ACTION@
-$img = new Xfer_Comp_Image("img");
-$img->setLocation($posX++,$posY,1,3);
-$img->setValue("contactPhyique.png");
-$xfer_result->addComponent($img);
-//
-$xfer_result->setDBObject($self,"sexe", false,$posY++,$posX);
-$xfer_result->setDBObject($self,"nom", false,$posY,$posX);
-$xfer_result->setDBObject($self,"prenom", false,$posY++,$posX+2);
-$xfer_result = $self->Super->edit($posX,$posY,$xfer_result);
-return $xfer_result;
+$info_legal=array();
+$info_legal_list=explode('{[newline]}',$self->siren);
+$info_legal_line="";
+foreach($info_legal_list as $info_legal_item) {
+	if ($info_legal_line!='')
+		$info_legal_line.=" - ";
+	$info_legal_line.=trim($info_legal_item);
+	if (strlen($info_legal_line)>100) {
+		$info_legal[]=$info_legal_line;
+		$info_legal_line='';
+	}
+}
+if ($info_legal_line!='')
+	$info_legal[]=$info_legal_line;
+return implode('{[newline]}',$info_legal);
 //@CODE_ACTION@
 }
 

@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // setup file write by SDK tool
-// --- Last modification: Date 20 April 2010 16:52:20 By  ---
+// --- Last modification: Date 11 May 2010 13:53:58 By  ---
 
 $extention_name="org_lucterios_contacts";
 $extention_description="Module de gestion des contacts physiques (hommes ou femmes){[newline]}ou moraux (entreprise, association, administration,...)";
@@ -30,7 +30,7 @@ $extension_libre=true;
 $version_max=1;
 $version_min=1;
 $version_release=3;
-$version_build=470;
+$version_build=492;
 
 $depencies=array();
 $depencies[0] = new Param_Depencies("CORE", 1, 2, 1, 1, false);
@@ -133,6 +133,7 @@ $params["MailConnectionMsg"] = new Param_Parameters("MailConnectionMsg", "", "Me
 $params["defaultFunction"] = new Param_Parameters("defaultFunction", "1", "Fonction par défaut", 1, array('Min'=>1, 'Max'=>100000));
 $params["defaultType"] = new Param_Parameters("defaultType", "1", "Catégorie par défaut", 1, array('Min'=>1, 'Max'=>100000));
 $params["defaultGroup"] = new Param_Parameters("defaultGroup", "99", "Groupe par défaut", 1, array('Min'=>1, 'Max'=>100000));
+$params["withInterneCode"] = new Param_Parameters("withInterneCode", "n", "Utilisation de code interne", 3, array());
 
 $extend_tables=array();
 $extend_tables["CodePostal"] = array("Code postal","",array());

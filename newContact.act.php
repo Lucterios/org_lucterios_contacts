@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // Action file write by SDK tool
-// --- Last modification: Date 05 March 2010 1:08:23 By  ---
+// --- Last modification: Date 11 May 2010 13:15:42 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
@@ -78,9 +78,9 @@ $lab->needed=true;
 $lab->m_description='Alias';
 $xfer_result->addComponent($lab);
 
+$xfer_result->setDBObject($DBPhysique,"sexe", false,$posY++,$posX);
 $xfer_result->setDBObject($DBPhysique,"nom", false,$posY,$posX);
 $xfer_result->setDBObject($DBPhysique,"prenom", false,$posY++,$posX+2);
-$xfer_result->setDBObject($DBPhysique,"sexe", false,$posY++,$posX);
 $xfer_result->setDBObject($DBMoral,"raisonSociale", false,$posY++,$posX,3);
 $raisonSociale=$xfer_result->getComponents("raisonSociale");
 $raisonSociale->needed=false;

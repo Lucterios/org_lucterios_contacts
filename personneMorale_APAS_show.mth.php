@@ -18,13 +18,14 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // Method file write by SDK tool
-// --- Last modification: Date 26 February 2010 23:28:05 By  ---
+// --- Last modification: Date 11 May 2010 12:12:12 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
 
 //@TABLES@
 require_once('extensions/org_lucterios_contacts/liaison.tbl.php');
+require_once('CORE/extension_params.tbl.php');
 require_once('extensions/org_lucterios_contacts/personneMorale.tbl.php');
 //@TABLES@
 
@@ -36,6 +37,9 @@ require_once('extensions/org_lucterios_contacts/personneMorale.tbl.php');
 function personneMorale_APAS_show(&$self,$posX,$posY,$xfer_result)
 {
 //@CODE_ACTION@
+$DBParam=new DBObj_CORE_extension_params;
+$contPara=$DBParam->getParameters('org_lucterios_contacts');
+
 $img = new Xfer_Comp_Image("img");
 $img->setLocation($posX,$posY);
 $img->setValue("contactMoral.png");
@@ -49,10 +53,15 @@ $xfer_result->newTab("Coordonnées",1);
 $xfer_result->setDBObject($self,"raisonSociale", true,$posY++,$posX,3);
 $xfer_result = $self->Super->show($posX,$posY,$xfer_result);
 $posY = 30;
-$xfer_result->setDBObject($self,"identifiant", true,$posY,$posX);
-if($self->id != 1)$xfer_result->setDBObject($self,"type", true,$posY++,$posX+2);
-else $posY++;
-$xfer_result->setDBObject($self,"siren", true,$posY++,$posX);
+$dec_pos=0;
+if($self->id != 1) {
+	$xfer_result->setDBObject($self,"type", true,$posY,$posX);
+	$dec_pos=2;
+}
+if ($contPara['withInterneCode']=='o')
+	$xfer_result->setDBObject($self,"identifiant", true,$posY,$posX+$dec_pos);
+$posY++;
+$xfer_result->setDBObject($self,"siren", true,$posY++,$posX,3);
 //
 $xfer_result->newTab("Responsables",2);
 $liaison_physiques = new DBObj_org_lucterios_contacts_liaison;
