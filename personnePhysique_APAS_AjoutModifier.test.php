@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // Test file write by SDK tool
-// --- Last modification: Date 04 January 2010 0:59:56 By  ---
+// --- Last modification: Date 12 May 2010 18:29:00 By  ---
 
 
 //@TABLES@
@@ -119,7 +119,7 @@ $test->assertEquals('nom.prenom@free.fr',$comp->m_value,'mail value');
 $comp=$rep->getComponents('commentaire');
 $test->assertEquals('aa bb cc',$comp->m_value,'commentaire value');
 $comp=$rep->getComponents('sexe');
-$test->assertEquals('Femme',$comp->m_value,'sexe value');
+$test->assertEquals('Madame/Mademoiselle',$comp->m_value,'sexe value');
 
 $rep=$test->CallAction("org_lucterios_contacts","personnePhysique_APAS_AddModifyAct",array('personnePhysique'=>'100','nom'=>'Nom','prenom'=>'Prenom',
 'adresse'=>'adresse2 adresse1','codePostal'=>'38000','ville'=>'GRENOBLE','pays'=>'FRANCE','fixe'=>'041234567','portable'=>'065432109',
@@ -150,7 +150,7 @@ $test->assertEquals('nom.prenom@free.fr',$comp->m_value,'mail value');
 $comp=$rep->getComponents('commentaire');
 $test->assertEquals('aa bb cc dd ee',$comp->m_value,'commentaire value');
 $comp=$rep->getComponents('sexe');
-$test->assertEquals('Femme',$comp->m_value,'sexe value');
+$test->assertEquals('Madame/Mademoiselle',$comp->m_value,'sexe value');
 
 $pers=new DBObj_org_lucterios_contacts_personnePhysique;
 $pers->get(100);
