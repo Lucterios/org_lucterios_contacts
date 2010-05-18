@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // library file write by SDK tool
-// --- Last modification: Date 16 October 2009 0:50:28 By  ---
+// --- Last modification: Date 17 May 2010 22:17:05 By  ---
 
 //@BEGIN@
 function willMailSend() {
@@ -36,19 +36,29 @@ function sendEMail($from,$recipients,$Subject,$body) {
 	$DBParam=new DBObj_CORE_extension_params;
 	$params=$DBParam->getParameters("org_lucterios_contacts");
 
-	$params["host"] = $params['MailSmtpServer'];
-	$params["port"] = "25";
+	$smtp_params["host"] = $params['MailSmtpServer'];
+	$smtp_params["port"] = 25;
 	if ($params['MailSmtpUser']!='') {
-		$params["auth"] = true;
-		$params["username"] = $params['MailSmtpUser'];
-		$params["password"] = $params['MailSmtpPass'];
+		$smtp_params["auth"] = true;
+		$smtp_params["username"] = $params['MailSmtpUser'];
+		$smtp_params["password"] = $params['MailSmtpPass'];
 	}
+	else  {
+		$smtp_params["auth"] = false;
+		$smtp_params["username"] = "";
+		$smtp_params["password"] = "";
+	}
+	$smtp_params["persist"] = false;
+	$smtp_params["localhost"] = "localhost";
+	$smtp_params["timeout"] = null;
+	$smtp_params["verp"] = false;
+	$smtp_params["debug"] = false;
 
 	$headers["From"] = $from;
 	$headers["To"] = $recipients;
 	$headers["Subject"] = $Subject;
 
-	$mail_object =& Mail::factory("smtp", $params);
+	$mail_object =& Mail::factory("smtp", $smtp_params);
 	$send=$mail_object->send($recipients, $headers, $body);
 	if (PEAR::isError($send)) {
 		require_once "CORE/Lucterios_Error.inc.php";
