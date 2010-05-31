@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // library file write by SDK tool
-// --- Last modification: Date 17 May 2010 22:17:05 By  ---
+// --- Last modification: Date 30 May 2010 18:41:55 By  ---
 
 //@BEGIN@
 function willMailSend() {
@@ -51,7 +51,6 @@ function sendEMail($from,$recipients,$Subject,$body) {
 	$smtp_params["persist"] = false;
 	$smtp_params["localhost"] = "localhost";
 	$smtp_params["timeout"] = null;
-	$smtp_params["verp"] = false;
 	$smtp_params["debug"] = false;
 
 	$headers["From"] = $from;
