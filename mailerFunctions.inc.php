@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // library file write by SDK tool
-// --- Last modification: Date 30 May 2010 18:41:55 By  ---
+// --- Last modification: Date 31 May 2010 13:53:10 By  ---
 
 //@BEGIN@
 function willMailSend() {
@@ -56,6 +56,7 @@ function sendEMail($from,$recipients,$Subject,$body) {
 	$headers["From"] = $from;
 	$headers["To"] = $recipients;
 	$headers["Subject"] = $Subject;
+	$headers["Content-Type"]="text/plain;charset=iso-8859-1";
 
 	$mail_object =& Mail::factory("smtp", $smtp_params);
 	$send=$mail_object->send($recipients, $headers, $body);
