@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // Action file write by SDK tool
-// --- Last modification: Date 04 February 2010 21:53:11 By  ---
+// --- Last modification: Date 25 June 2010 18:11:03 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
@@ -51,7 +51,7 @@ $xfer_result->withTextExport=1;
 if ($xfer_result->showSelector(0)) {
 	require_once"CORE/PrintListing.inc.php";
 	$listing = new PrintListing("Liste des Personnes Physiques");
-	$listing->Header = "Liste des Personnes Morales";
+	$listing->Header = "Liste des Personnes Physiques";
 	$listing->GridHeader[] = array('Nom',25);
 	$listing->GridHeader[] = array('Prénom',40);
 	$listing->GridHeader[] = array('Adresse',60);
