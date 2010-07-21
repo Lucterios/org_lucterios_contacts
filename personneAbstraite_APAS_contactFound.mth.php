@@ -18,7 +18,7 @@
 // 
 // 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //  // Method file write by SDK tool
-// --- Last modification: Date 06 May 2009 20:56:39 By  ---
+// --- Last modification: Date 21 July 2010 8:57:00 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
@@ -43,12 +43,14 @@ $contact=new $class_name;
 
 $FirstOrder="";
 $OrderBy="";
-$key=array_keys($contact->getDBMetaDataField());
-for($idx=0;$idx<$contact->NbFieldsCheck;$idx++) {
-	if ($OrderBy!='') $OrderBy.=",";
-	$OrderBy.=$key[$idx];
-	if ($FirstOrder=="")
-		$FirstOrder=$key[$idx];
+foreach($contact->getDBMetaDataField() as $field_names => $field_item) {
+	if ($field_item['type']!=8) {
+		if ($OrderBy!='')
+			$OrderBy.=",";
+		$OrderBy.=$field_names;
+		if ($FirstOrder=="")
+			$FirstOrder=$field_names;
+	}
 }
 
 $query=$contact->setForSearch($Params,$OrderBy);
@@ -63,7 +65,11 @@ if ($query=='') {
 		$addquery="org_lucterios_contacts_personneMorale.id!=1";
 	else
 		$addquery="";
-	$query = $search->Execute(array($FirstOrder.'_select'=>1,$FirstOrder.'_value1'=>'---'),$OrderBy,$addquery);
+	if ($FirstOrder!='')
+		$criterion=array($FirstOrder.'_select'=>1,$FirstOrder.'_value1'=>'---');
+	else
+		$criterion=array();
+	$query = $search->Execute($criterion,$OrderBy,$addquery);
 	$query = str_replace(array("like '%---%' "),array("like '%%' "),$query);
 	$contact->query($query);
 }
