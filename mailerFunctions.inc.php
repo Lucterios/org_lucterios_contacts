@@ -22,47 +22,50 @@
 
 //@BEGIN@
 function willMailSend() {
-	include_once("Mail.php");
+	include_once("extensions/org_lucterios_contacts/smtp.inc.php");
 	require_once('CORE/extension_params.tbl.php');
 	$DBParam=new DBObj_CORE_extension_params;
 	$params=$DBParam->getParameters("org_lucterios_contacts");
-	return class_exists('Mail') && ($params['MailSmtpServer']!='');
+	return class_exists('smtp_class') && ($params['MailSmtpServer']!='');
 }
 
 function sendEMail($from,$recipients,$Subject,$body) {
-	include_once("Mail.php");
+	include_once("extensions/org_lucterios_contacts/smtp.inc.php");
 
 	require_once('CORE/extension_params.tbl.php');
 	$DBParam=new DBObj_CORE_extension_params;
 	$params=$DBParam->getParameters("org_lucterios_contacts");
 
+	$smtp=new smtp_class;
+	$smtp->host_name=$params['MailSmtpServer'];
+	$smtp->host_port=25;
+	
 	$smtp_params["host"] = $params['MailSmtpServer'];
 	$smtp_params["port"] = 25;
 	if ($params['MailSmtpUser']!='') {
-		$smtp_params["auth"] = true;
-		$smtp_params["username"] = $params['MailSmtpUser'];
-		$smtp_params["password"] = $params['MailSmtpPass'];
+		$smtp->user=$params['MailSmtpUser'];
+		$smtp->realm=$params['MailSmtpPass'];
 	}
 	else  {
-		$smtp_params["auth"] = false;
-		$smtp_params["username"] = "";
-		$smtp_params["password"] = "";
+		$smtp->user="";                     
+		$smtp->realm="";                    
 	}
-	$smtp_params["persist"] = false;
-	$smtp_params["localhost"] = "localhost";
-	$smtp_params["timeout"] = null;
-	$smtp_params["debug"] = false;
+	$smtp->localhost="localhost";       
+	$smtp->debug=0;                     
+	$smtp->timeout=10;                  
+	$smtp->data_timeout=0;              
 
-	$headers["From"] = $from;
-	$headers["To"] = $recipients;
-	$headers["Subject"] = $Subject;
-	$headers["Content-Type"]="text/plain;charset=iso-8859-1";
+	$ret=$smtp->SendMessage($from,explode(',',$recipients),array(
+	      "From: $from",
+	      "To: $recipients",
+	      "Subject: $Subject",
+	      "Date: ".strftime("%a, %d %b %Y %H:%M:%S %Z"),
+	      "Content-Type: text/plain;charset=iso-8859-1"),
+	      $body);
 
-	$mail_object =& Mail::factory("smtp", $smtp_params);
-	$send=$mail_object->send($recipients, $headers, $body);
-	if (PEAR::isError($send)) {
+	if (!$ret) {
 		require_once "CORE/Lucterios_Error.inc.php";
-		throw new LucteriosException(IMPORTANT,$send->getMessage());
+		throw new LucteriosException(IMPORTANT,$smtp->error);
 	}
 }
 
