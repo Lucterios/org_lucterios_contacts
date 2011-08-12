@@ -1,29 +1,30 @@
 <?php
+// 	This file is part of Diacamma, a software developped by "Le Sanglier du Libre" (http://www.sd-libre.fr)
+// 	Thanks to have payed a retribution for using this module.
 // 
-//     This file is part of Lucterios.
+// 	Diacamma is free software; you can redistribute it and/or modify
+// 	it under the terms of the GNU General Public License as published by
+// 	the Free Software Foundation; either version 2 of the License, or
+// 	(at your option) any later version.
 // 
-//     Lucterios is free software; you can redistribute it and/or modify
-//     it under the terms of the GNU General Public License as published by
-//     the Free Software Foundation; either version 2 of the License, or
-//     (at your option) any later version.
+// 	Diacamma is distributed in the hope that it will be useful,
+// 	but WITHOUT ANY WARRANTY; without even the implied warranty of
+// 	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// 	GNU General Public License for more details.
 // 
-//     Lucterios is distributed in the hope that it will be useful,
-//     but WITHOUT ANY WARRANTY; without even the implied warranty of
-//     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-//     GNU General Public License for more details.
+// 	You should have received a copy of the GNU General Public License
+// 	along with Lucterios; if not, write to the Free Software
+// 	Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 // 
-//     You should have received a copy of the GNU General Public License
-//     along with Lucterios; if not, write to the Free Software
-//     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
-// 
-// 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
-//  // Method file write by SDK tool
-// --- Last modification: Date 11 May 2010 11:53:51 By  ---
+// 		Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
+// Method file write by SDK tool
+// --- Last modification: Date 11 August 2011 14:45:40 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
 
 //@TABLES@
+require_once('extensions/org_lucterios_contacts/liaison.tbl.php');
 require_once('extensions/org_lucterios_contacts/personnePhysique.tbl.php');
 //@TABLES@
 
@@ -68,6 +69,29 @@ else
 $bt_login->setLocation($posX+2,$posY+6);
 $xfer_result->addComponent($bt_login);
 $xfer_result->m_context['personnePhysique']=$self->id;
+
+if (($xfer_result->m_action!='liaison_APAS_AddModify') || ($xfer_result->m_extension!='org_lucterios_contacts')) {
+	if ($self->functions!='') {
+		$lbl = new Xfer_Comp_LabelForm("labelresponsable");
+		$lbl->setLocation($posX,$posY+7);
+		$lbl->setValue("{[bold]}Responsabilité{[/bold]}");
+		$xfer_result->addComponent($lbl);
+		$lbl = new Xfer_Comp_LabelForm("responsable");
+		$lbl->setLocation($posX+1,$posY+7,2);
+		$lbl->setValue($self->functions);
+		$xfer_result->addComponent($lbl);
+	}
+	$DBLiaison=new DBObj_org_lucterios_contacts_liaison;
+	$grid=$DBLiaison->getGridPhysique($self->id, $Params);
+	if ($grid->mNbLines>0) {
+		$lbl = new Xfer_Comp_LabelForm("labelstructures");
+		$lbl->setLocation($posX,$posY+8);
+		$lbl->setValue("{[bold]}Structure(s){[/bold]}");
+		$xfer_result->addComponent($lbl);
+		$grid->setLocation($posX,$posY+9,6);
+		$xfer_result->addComponent($grid);
+	}
+}
 
 return $xfer_result;
 //@CODE_ACTION@
