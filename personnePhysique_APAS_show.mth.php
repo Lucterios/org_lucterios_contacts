@@ -18,7 +18,7 @@
 // 
 // 		Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 // Method file write by SDK tool
-// --- Last modification: Date 11 August 2011 14:45:40 By  ---
+// --- Last modification: Date 12 August 2011 11:12:33 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
@@ -70,7 +70,7 @@ $bt_login->setLocation($posX+2,$posY+6);
 $xfer_result->addComponent($bt_login);
 $xfer_result->m_context['personnePhysique']=$self->id;
 
-if (($xfer_result->m_action!='liaison_APAS_AddModify') || ($xfer_result->m_extension!='org_lucterios_contacts')) {
+if (($xfer_result->m_action!='liaison_APAS_Fiche') || ($xfer_result->m_extension!='org_lucterios_contacts')) {
 	if ($self->functions!='') {
 		$lbl = new Xfer_Comp_LabelForm("labelresponsable");
 		$lbl->setLocation($posX,$posY+7);

@@ -18,7 +18,7 @@
 // 
 // 		Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 // Method file write by SDK tool
-// --- Last modification: Date 11 August 2011 13:52:45 By  ---
+// --- Last modification: Date 12 August 2011 11:14:25 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
@@ -38,7 +38,8 @@ function personnePhysique_APAS_finder(&$self,$posY,$simple,$xfer_result)
 $xfer_result->setDBSearch($self,"sexe",$posY++);
 $xfer_result->setDBSearch($self,"nom",$posY++);
 $xfer_result->setDBSearch($self,"prenom",$posY++);
-$xfer_result->setDBSearch($self,"user[login]",$posY++);
+if(!$simple)
+	$xfer_result->setDBSearch($self,"user[login]",$posY++);
 $xfer_result = $self->Super->finder($posY,$simple,$xfer_result);
 return $xfer_result;
 //@CODE_ACTION@

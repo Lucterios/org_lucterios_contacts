@@ -1,24 +1,24 @@
 <?php
+// 	This file is part of Diacamma, a software developped by "Le Sanglier du Libre" (http://www.sd-libre.fr)
+// 	Thanks to have payed a retribution for using this module.
 // 
-//     This file is part of Lucterios.
+// 	Diacamma is free software; you can redistribute it and/or modify
+// 	it under the terms of the GNU General Public License as published by
+// 	the Free Software Foundation; either version 2 of the License, or
+// 	(at your option) any later version.
 // 
-//     Lucterios is free software; you can redistribute it and/or modify
-//     it under the terms of the GNU General Public License as published by
-//     the Free Software Foundation; either version 2 of the License, or
-//     (at your option) any later version.
+// 	Diacamma is distributed in the hope that it will be useful,
+// 	but WITHOUT ANY WARRANTY; without even the implied warranty of
+// 	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// 	GNU General Public License for more details.
 // 
-//     Lucterios is distributed in the hope that it will be useful,
-//     but WITHOUT ANY WARRANTY; without even the implied warranty of
-//     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-//     GNU General Public License for more details.
+// 	You should have received a copy of the GNU General Public License
+// 	along with Lucterios; if not, write to the Free Software
+// 	Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 // 
-//     You should have received a copy of the GNU General Public License
-//     along with Lucterios; if not, write to the Free Software
-//     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
-// 
-// 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
-//  // Test file write by SDK tool
-// --- Last modification: Date 18 November 2009 15:41:10 By  ---
+// 		Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
+// Test file write by SDK tool
+// --- Last modification: Date 12 August 2011 11:16:40 By  ---
 
 
 //@TABLES@
@@ -44,12 +44,14 @@ $comp=$rep->getComponents('personnePhysique');
 $test->assertEquals(2,count($comp->m_records),"Initial");
 
 $rep=$test->CallAction("org_lucterios_contacts","personnePhysique_APAS_Search",array(),"Xfer_Container_Custom");
-$test->assertEquals(32,$rep->getComponentCount(),"nb");
+$test->assertEquals(35,$rep->getComponentCount(),"nb");
 $test->assertEquals(2,count($rep->m_actions),"m_actions nb");
 $comp=$rep->getComponents('nom_value1');
 $test->assertClass("Xfer_Comp_Edit",$comp,'nom_value1');
 $comp=$rep->getComponents('prenom_value1');
 $test->assertClass("Xfer_Comp_Edit",$comp,'prenom_value1');
+$comp=$rep->getComponents('user%login_value1');
+$test->assertClass("Xfer_Comp_Edit",$comp,'user%login_value1');
 $comp=$rep->getComponents('sexe_value1');
 $test->assertClass("Xfer_Comp_CheckList",$comp,'sexe_value1');
 $comp=$rep->getComponents('codePostal_value1');
