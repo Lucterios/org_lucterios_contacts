@@ -24,7 +24,7 @@ Si cette personne n'est pas référencée dans d'autre enregistrement de l'applicat
 
 <h2>Recherche d'un contact physique</h2>
 Le menu <i>Bureautique/Contacts/Recherche de personne physique</i> vous permet de définir une critère de recherche sur une personne physique.<br><br>
-<center><img src='~org_lucterios_contacts$RecherchePhysique.jpg' height='250' alt='RecherchePhysique.jpg' /></center><br>
+<center><img src='~org_lucterios_contacts$RecherchePhysique.jpg' height='400' alt='RecherchePhysique.jpg' /></center><br>
 Une fois validé, l'outil va rechercher dans la base toutes les personnes correspondantes à ces critères.<br>
 Vous pourrez alors imprimer cette liste ou en éditer/modifier une fiche.<br>
 Il vous est possible de fusionner plusieurs fiches en une seul.
