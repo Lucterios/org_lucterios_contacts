@@ -34,7 +34,7 @@ require_once('extensions/org_lucterios_contacts/personneAbstraite.tbl.php');
 function personneAbstraite_APAS_contactFound(&$self,$classname,$Params)
 {
 //@CODE_ACTION@
-list($ext_name,$table_name) = split('/',$classname);
+list($ext_name,$table_name) = explode('/',$classname);
 $table_name = trim($table_name);
 $file="extensions/$ext_name/$table_name.tbl.php";
 $class_name="DBObj_".$ext_name."_".$table_name;
@@ -44,7 +44,7 @@ $contact=new $class_name;
 $FirstOrder="";
 $OrderBy="";
 foreach($contact->getDBMetaDataField() as $field_names => $field_item) {
-	if ($field_item['type']!=8) {
+	if ($field_item['type']<8) {
 		if ($OrderBy!='')
 			$OrderBy.=",";
 		$OrderBy.=$field_names;
@@ -53,29 +53,9 @@ foreach($contact->getDBMetaDataField() as $field_names => $field_item) {
 	}
 }
 
-$query=$contact->setForSearch($Params,$OrderBy);
-if ($query=='') {
-	$query_txt="complète";
-
-	require_once("CORE/DBSearch.inc.php");
-	$contact=new $class_name;
-
-	$search = new DB_Search($contact);
-	if ($class_name=='DBObj_org_lucterios_contacts_personneMorale')
-		$addquery="org_lucterios_contacts_personneMorale.id!=1";
-	else
-		$addquery="";
-	if ($FirstOrder!='')
-		$criterion=array($FirstOrder.'_select'=>1,$FirstOrder.'_value1'=>'---');
-	else
-		$criterion=array();
-	$query = $search->Execute($criterion,$OrderBy,$addquery);
-	$query = str_replace(array("like '%---%' "),array("like '%%' "),$query);
-	$contact->query($query);
-}
-else {
-	$query_txt="filtré";
-}
+$contact->setForSearch($Params,$OrderBy);
+include_once("CORE/DBFind.inc.php");
+$query_txt=DBFind::getCriteriaText($contact,$Params);
 return array($contact,$query_txt);
 //@CODE_ACTION@
 }

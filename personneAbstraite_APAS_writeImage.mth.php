@@ -37,7 +37,7 @@ global $rootPath;
 if(!isset($rootPath))$rootPath = "";
 
 $uploadlogo = $Params['uploadlogo'];
-list($name_upload,$value_upload) = split(';',$uploadlogo);
+list($name_upload,$value_upload) = explode(';',$uploadlogo);
 if($name_upload != '') {
 	require_once "CORE/Lucterios_Error.inc.php";
 	$path = $rootPath."usr/org_lucterios_contacts";

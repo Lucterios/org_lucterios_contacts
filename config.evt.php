@@ -22,7 +22,7 @@
 
 //@BEGIN@
 /*
-function org_lucterios_contacts_config(&$xfer_result) {
+function org_lucterios_contacts_APAS_config(&$xfer_result) {
 	// Fonction pour ajouter des composants dans la fenêtre de configuration
 	require_once"extensions/org_lucterios_contacts/personneMorale.tbl.php";
 	$xfer_result->m_context['personneMorale'] = 1;

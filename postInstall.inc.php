@@ -33,7 +33,7 @@ function readCodePostalFile($codePostalFile) {
 	$lines = file($codePostalFile);
 	$q = "INSERT IGNORE INTO org_lucterios_contacts_CodePostal (codePostal,ville,pays) VALUES ('75001','PARIS','FRANCE')";
 	foreach($lines as $line) {
-		list($codePostal,$ville,$pays) = split(';',$line);
+		list($codePostal,$ville,$pays) = explode(';',$line);
 		if($pays == '')$pays = 'FRANCE';
 		else $pays = strtoupper( trim($pays));
 		$ville = strtoupper( trim($ville));
@@ -80,7 +80,7 @@ function install_org_lucterios_contacts($ExensionVersions) {
 	}
 	else
 		$error_msg .= "Pas de mise à jour de Code Postal/Ville{[newline]}";
-	// Fonction appelée en fin d'installation.
+	// Fonction appelèe en fin d'installation.
 	return $error_msg;
 }
 //@END@

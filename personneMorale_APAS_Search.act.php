@@ -51,10 +51,11 @@ $img->setLocation(0,0);
 $xfer_result->addComponent($img);
 $img = new Xfer_Comp_LabelForm("title");
 $img->setValue("{[center]}{[underline]}{[bold]}Séléctionnez vos critères de recherche{[/bold]}{[/underline]}{[/center]}");
-$img->setLocation(1,0,2);
+$img->setLocation(1,0,5);
 $xfer_result->addComponent($img);
 $xfer_result->m_context["IsSearch"] = 1;
-$xfer_result = $self->finder(1,0,$xfer_result);
+$fields = $self->findFields();
+$xfer_result->setSearchGUI($self,$fields,1);
 $xfer_result->addAction($self->NewAction("_Rechercher","search.png","List", FORMTYPE_NOMODAL, CLOSE_YES));
 $xfer_result->addAction($self->NewAction("_Annuler","cancel.png"));
 //@CODE_ACTION@

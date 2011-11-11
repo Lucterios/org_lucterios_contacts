@@ -55,7 +55,7 @@ try {
 $xfer_result=&new Xfer_Container_Acknowledge("org_lucterios_contacts","liaison_APAS_addFunctionAct",$Params);
 $xfer_result->Caption="Ajouter une fonction";
 //@CODE_ACTION@
-$fonction_list = split(';',$fonctions);
+$fonction_list = explode(';',$fonctions);
 foreach($fonction_list as $item) {
 	$liaison = new DBObj_org_lucterios_contacts_liaison;
 	$liaison->physique = $liaison_physique;

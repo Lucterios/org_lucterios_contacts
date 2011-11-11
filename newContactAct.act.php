@@ -65,8 +65,8 @@ if ($DBUser->find()) {
 	$DBPhysique->setFrom($Params);
 	$DBMoral=new DBObj_org_lucterios_contacts_personneMorale;
 	$DBMoral->setFrom($Params);
-	$pattern = '^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$';
-	if (!eregi($pattern, $DBPhysique->mail)){
+	$pattern = '/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/i';
+	if (!preg_match($pattern, $DBPhysique->mail)){
 		$xfer_result->m_context['error']='Courriel invalide!';
 		$xfer_result->redirectAction(new Xfer_Action('','','org_lucterios_contacts','newContact',FORMTYPE_MODAL, CLOSE_YES));
 	}

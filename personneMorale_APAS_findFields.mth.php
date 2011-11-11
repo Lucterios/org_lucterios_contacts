@@ -18,15 +18,37 @@
 //
 //	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 //
-// library file write by SDK tool
-// --- Last modification: Date 23 May 2008 23:04:06 By  ---
+// Method file write by SDK tool
+// --- Last modification: Date 16 June 2008 22:06:57 By  ---
 
-//@BEGIN@
+require_once('CORE/xfer_exception.inc.php');
+require_once('CORE/rights.inc.php');
 
-function org_lucterios_contacts_status(&$result)
+//@TABLES@
+require_once('extensions/org_lucterios_contacts/personneMorale.tbl.php');
+require_once('CORE/extension_params.tbl.php');
+//@TABLES@
+
+//@DESC@Recherche un personneMorale
+//@PARAM@ posY
+//@PARAM@ simple
+//@PARAM@ xfer_result
+
+function personneMorale_APAS_findFields(&$self)
 {
-// Fonction pour ajouter une information dans la fenêtre de résumé
+//@CODE_ACTION@
+$Fields=array();
+$Fields[]="raisonSociale";
+$Fields[]="type";
+foreach($self->Super->findFields() as $name)
+	$Fields[]=$name;
+$Fields[]="siren";
+$DBParam=new DBObj_CORE_extension_params();
+$params=$DBParam->getParameters('org_lucterios_contacts');
+if ($params['withInterneCode']=='o')
+	$Fields[]="identifiant";
+return $Fields;
+//@CODE_ACTION@
 }
 
-//@END@
 ?>

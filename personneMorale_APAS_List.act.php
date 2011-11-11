@@ -64,7 +64,8 @@ $lbl->setLocation(1,0,2);
 $xfer_result->addComponent($lbl);
 if($IsSearch != 0) {
 	$self->setForSearch($Params,'raisonSociale');
-	$lbl->setValue("{[center]}{[bold]}Résultat de la recherche{[/bold]}{[/center]}");
+	include_once("CORE/DBFind.inc.php");
+	$lbl->setValue("{[center]}{[bold]}Résultat de la recherche{[/bold]}{[newline]}{[newline]}".DBFind::getCriteriaText($self,$Params)."{[/center]}");
 }
 else {
 	$lbl->setValue("{[center]}{[bold]}Liste des personnes morales{[/bold]}{[/center]}");

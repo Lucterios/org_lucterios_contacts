@@ -58,7 +58,7 @@ $xfer_result->Caption="Fusionne des contacts";
 $file_name=DBObj_Basic::getTableName(substr($CLASSNAME,6));
 require_once($file_name);
 
-$list_id=split(';',$PERSONNE);
+$list_id=explode(';',$PERSONNE);
 foreach($list_id as $id) {
 	$main=new DBObj_org_lucterios_contacts_personneAbstraite;
 	$main->get($contact);

@@ -31,7 +31,7 @@ require_once('CORE/xfer_custom.inc.php');
 //@XFER:custom@
 
 
-//@DESC@Selectionner les personnes à fusionner
+//@DESC@Selectionner les personnes ? fusionner
 //@PARAM@ CLASSNAME
 //@PARAM@ PARAMNAME
 //@PARAM@ contact=-1
@@ -65,7 +65,7 @@ $grid->newHeader('select','Principale',3);
 $grid->newHeader('text','Désignation',4);
 
 $xfer_result->m_context['PERSONNE']=$Params[$PARAMNAME];
-$list_id=split(';',$Params[$PARAMNAME]);
+$list_id=explode(';',$Params[$PARAMNAME]);
 $file_name=DBObj_Basic::getTableName(substr($CLASSNAME,6));
 require_once($file_name);
 foreach($list_id as $id) {
@@ -90,7 +90,7 @@ $xfer_result->addComponent($grid);
 
 $lbl = new Xfer_Comp_LabelForm("help");
 $lbl->setLocation(0,2,2);
-$lbl->setValue("{[italic]}Précisez le contact principale.{[newline]}L'outil supprimera les autres après avoir déplacé toutes leurs références sur l'enregistrement restant.{[/italic]}");
+$lbl->setValue("{[italic]}Précisez le contact principale.{[newline]}L'outil supprimera les autres aprés avoir déplacé toutes leurs références sur l'enregistrement restant.{[/italic]}");
 $xfer_result->addComponent($lbl);
 
 $xfer_result->addAction($self->newAction("_Fusionner","","Merge", FORMTYPE_MODAL, CLOSE_YES));

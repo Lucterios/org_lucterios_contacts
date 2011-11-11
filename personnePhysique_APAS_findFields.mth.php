@@ -32,16 +32,17 @@ require_once('extensions/org_lucterios_contacts/personnePhysique.tbl.php');
 //@PARAM@ simple
 //@PARAM@ xfer_result
 
-function personnePhysique_APAS_finder(&$self,$posY,$simple,$xfer_result)
+function personnePhysique_APAS_findFields(&$self)
 {
 //@CODE_ACTION@
-$xfer_result->setDBSearch($self,"sexe",$posY++);
-$xfer_result->setDBSearch($self,"nom",$posY++);
-$xfer_result->setDBSearch($self,"prenom",$posY++);
-if(!$simple)
-	$xfer_result->setDBSearch($self,"user[login]",$posY++);
-$xfer_result = $self->Super->finder($posY,$simple,$xfer_result);
-return $xfer_result;
+$Fields=array();
+$Fields[]="nom";
+$Fields[]="prenom";
+$Fields[]="sexe";
+$Fields[]="user[login]";
+foreach($self->Super->findFields() as $name)
+	$Fields[]=$name;
+return $Fields;
 //@CODE_ACTION@
 }
 

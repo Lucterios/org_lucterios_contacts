@@ -1,24 +1,23 @@
 <?php
+// 	This file is part of Lucterios/Diacamma, a software developped by "Le Sanglier du Libre" (http://www.sd-libre.fr)
+// 	Thanks to have payed a retribution for using this module.
 // 
-//     This file is part of Lucterios.
+// 	Lucterios/Diacamma is free software; you can redistribute it and/or modify
+// 	it under the terms of the GNU General Public License as published by
+// 	the Free Software Foundation; either version 2 of the License, or
+// 	(at your option) any later version.
 // 
-//     Lucterios is free software; you can redistribute it and/or modify
-//     it under the terms of the GNU General Public License as published by
-//     the Free Software Foundation; either version 2 of the License, or
-//     (at your option) any later version.
+// 	Lucterios/Diacamma is distributed in the hope that it will be useful,
+// 	but WITHOUT ANY WARRANTY; without even the implied warranty of
+// 	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// 	GNU General Public License for more details.
 // 
-//     Lucterios is distributed in the hope that it will be useful,
-//     but WITHOUT ANY WARRANTY; without even the implied warranty of
-//     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-//     GNU General Public License for more details.
+// 	You should have received a copy of the GNU General Public License
+// 	along with Lucterios; if not, write to the Free Software
+// 	Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 // 
-//     You should have received a copy of the GNU General Public License
-//     along with Lucterios; if not, write to the Free Software
-//     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
-// 
-// 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
-//  // Action file write by SDK tool
-// --- Last modification: Date 05 March 2010 19:47:29 By  ---
+// 		Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY// Action file write by SDK tool
+// --- Last modification: Date 08 November 2011 4:14:03 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
@@ -105,11 +104,11 @@ $xfer_result->addComponent($lab);
 $xfer_result->newTab("Fonctions et responsabilités");
 
 $DBFunction=new DBObj_org_lucterios_contacts_fonctions;
-$img = new Xfer_Comp_Image('img');
+$img = new Xfer_Comp_Image('imgFonction');
 $img->setValue('contactFonction.png');
 $img->setLocation(0,0);
 $xfer_result->addComponent($img);
-$img = new Xfer_Comp_LabelForm('title');
+$img = new Xfer_Comp_LabelForm('titleFonction');
 $img->setValue('{[newline]}{[center]}{[undeline]}{[bold]}Liste des fonctions{[/bold]}{[/undeline]}{[/center]}');
 $img->setLocation(1,0);
 $xfer_result->addComponent($img);
@@ -121,7 +120,7 @@ $grid->addAction($DBFunction->newAction("_Supprimer","suppr.png","suppr", FORMTY
 $grid->setLocation(0,1,2);
 $grid->setSize(200,500);
 $xfer_result->addComponent($grid);
-$lbl = new Xfer_Comp_LabelForm("nb");
+$lbl = new Xfer_Comp_LabelForm("nbFonction");
 $lbl->setLocation(0,2,2);
 $lbl->setValue("Nombre de fonctions affichés : ". count($grid->m_records));
 $xfer_result->addComponent($lbl);
@@ -129,11 +128,11 @@ $xfer_result->addComponent($lbl);
 $xfer_result->newTab("Catégories de personnes morales");
 
 $DBCategorie=new DBObj_org_lucterios_contacts_typesMorales;
-$img = new Xfer_Comp_Image('img');
+$img = new Xfer_Comp_Image('imgType');
 $img->setValue('contactCategorie.png');
 $img->setLocation(0,0);
 $xfer_result->addComponent($img);
-$img = new Xfer_Comp_LabelForm('title');
+$img = new Xfer_Comp_LabelForm('titleType');
 $img->setValue('{[newline]}{[center]}{[underline]}{[bold]}Liste des catégories{[/bold]}{[/underline]}{[/center]}');
 $img->setLocation(1,0);
 $xfer_result->addComponent($img);
@@ -145,7 +144,7 @@ $grid->addAction($DBCategorie->newAction("_Supprimer","suppr.png","suppr", FORMT
 $grid->setLocation(0,1,2);
 $grid->setSize(200,500);
 $xfer_result->addComponent($grid);
-$lbl = new Xfer_Comp_LabelForm("nb");
+$lbl = new Xfer_Comp_LabelForm("nbType");
 $lbl->setLocation(0,2,2);
 $lbl->setValue("Nombre de types affichés : ". count($grid->m_records));
 $xfer_result->addComponent($lbl);

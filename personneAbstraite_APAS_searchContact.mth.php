@@ -31,7 +31,7 @@ require_once('extensions/org_lucterios_contacts/personneAbstraite.tbl.php');
 //@PARAM@ posY
 //@PARAM@ xfer_result
 
-function personneAbstraite_APAS_searchContact(&$self,$posY,$xfer_result)
+function personneAbstraite_APAS_searchContact(&$self,$posY,$xfer_result,$ExtractFields=array())
 {
 //@CODE_ACTION@
 if (isset($xfer_result->m_context['classname']))
@@ -50,16 +50,23 @@ if (!isset($xfer_result->classRoot))
 $includeParent=($xfer_result->classRoot!='org_lucterios_contacts/personneAbstraite');
 $select->fillByDaughterList($xfer_result->classRoot,$classname,$includeParent);
 $select->setLocation(1,$posY,2);
-$select->setAction(new Xfer_Action('refresh','',$xfer_result->m_extension,$xfer_result->m_action,FORMTYPE_REFRESH,CLOSE_NO,SELECT_NONE));
+$select->setAction($xfer_result->getRefreshAction('refresh'));
 $xfer_result->addComponent($select);
 
-list($ext_name,$table_name) = split('/',$classname);
-$table_name = trim($table_name);
-$file="extensions/$ext_name/$table_name.tbl.php";
-$class_name="DBObj_".$ext_name."_".$table_name;
+list($file,$class_name)=DBObj_Abstract::getTableAndClass($classname);
 include_once $file;
 $contact=new $class_name;
-$xfer_result=$contact->finder($posY+1, true, $xfer_result);
+$Fields=$contact->findFields();
+foreach($Fields as $ExtractName)
+	$ExtractFields[]=$ExtractName;
+
+include_once("CORE/DBFind.inc.php");
+$newFind= new DBFind($self);
+$CriteriaList=$newFind->extractCriteria($xfer_result->m_context);
+$NewCriteriaList=$newFind->checkInCriteriaFieldExisting($CriteriaList,$ExtractFields);
+$newFind->reinjectCriteria($xfer_result->m_context,$NewCriteriaList);
+
+$xfer_result->setSearchGUI($contact,$ExtractFields,$posY+1);
 return $xfer_result;
 //@CODE_ACTION@
 }

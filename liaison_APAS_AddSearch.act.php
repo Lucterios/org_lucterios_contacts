@@ -53,12 +53,14 @@ $DBParam=new DBObj_CORE_extension_params();
 $param_contacts=$DBParam->getParameters('org_lucterios_contacts');
 $self->fonction=$param_contacts['defaultFunction'];
 $self->morale = $personneMorale;
-$xfer_result->setDBObject($self,'morale', true,0,0,2);
-$xfer_result->setDBObject($self,'fonction', false,1,0,2);
+$xfer_result->setDBObject($self,'morale', true,0,0,3);
+$xfer_result->setDBObject($self,'fonction', false,1,0,3);
 $physique = $self->getField('physique');
 $physique->setFrom($Params);
-$xfer_result = $physique->finder(2,1,$xfer_result);
+$fields=$physique->findFields();
+$xfer_result->setSearchGUI($physique,$fields,2);
 $xfer_result->addAction($self->newAction("_Ok","ok.png","AddSearchyAct", FORMTYPE_MODAL, CLOSE_YES));
+$xfer_result->addAction($self->newAction("_Créer","add.png","AddModify", FORMTYPE_MODAL, CLOSE_YES));
 $xfer_result->addAction( new Xfer_Action("_Annuler","cancel.png"));
 //@CODE_ACTION@
 }catch(Exception $e) {

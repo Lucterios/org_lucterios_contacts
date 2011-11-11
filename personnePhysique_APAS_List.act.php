@@ -58,7 +58,8 @@ $xfer_result->addComponent($lbl);
 if($IsSearch != 0) {
 	$img->setValue('contactPhyiqueFind.png');
 	$self->setForSearch($Params,"org_lucterios_contacts_personnePhysique.nom,org_lucterios_contacts_personnePhysique.prenom");
-	$lbl->setValue("{[center]}{[bold]}Résultat de la recherche{[/bold]}{[/center]}");
+	include_once("CORE/DBFind.inc.php");
+	$lbl->setValue("{[center]}{[bold]}Résultat de la recherche{[/bold]}{[newline]}{[newline]}".DBFind::getCriteriaText($self,$Params)."{[/center]}");
 	$xfer_result->Caption = 'Résultat de recherche';
 }
 else {

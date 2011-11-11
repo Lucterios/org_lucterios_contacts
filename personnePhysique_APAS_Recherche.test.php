@@ -44,44 +44,50 @@ $comp=$rep->getComponents('personnePhysique');
 $test->assertEquals(2,count($comp->m_records),"Initial");
 
 $rep=$test->CallAction("org_lucterios_contacts","personnePhysique_APAS_Search",array(),"Xfer_Container_Custom");
-$test->assertEquals(35,$rep->getComponentCount(),"nb");
+$test->assertEquals(14,$rep->getComponentCount(),"nb");
 $test->assertEquals(2,count($rep->m_actions),"m_actions nb");
-$comp=$rep->getComponents('nom_value1');
-$test->assertClass("Xfer_Comp_Edit",$comp,'nom_value1');
-$comp=$rep->getComponents('prenom_value1');
-$test->assertClass("Xfer_Comp_Edit",$comp,'prenom_value1');
-$comp=$rep->getComponents('user%login_value1');
-$test->assertClass("Xfer_Comp_Edit",$comp,'user%login_value1');
-$comp=$rep->getComponents('sexe_value1');
-$test->assertClass("Xfer_Comp_CheckList",$comp,'sexe_value1');
-$comp=$rep->getComponents('codePostal_value1');
-$test->assertClass("Xfer_Comp_Edit",$comp,'codePostal_value1');
-$comp=$rep->getComponents('ville_value1');
-$test->assertClass("Xfer_Comp_Edit",$comp,'ville_value1');
-$comp=$rep->getComponents('commentaire_value1');
-$test->assertClass("Xfer_Comp_Memo",$comp,'commentaire_value1');
+$comp=$rep->getComponents('searchSelector');
+$test->assertClass("Xfer_Comp_Select",$comp,'searchSelector');
+$test->assertEquals(11,count($comp->m_select),'searchSelector nb');
+$comp=$rep->getComponents('searchOperator');
+$test->assertClass("Xfer_Comp_Select",$comp,'searchOperator');
+
+$comp=$rep->getComponents('searchValueFloat');
+$test->assertClass("Xfer_Comp_Float",$comp,'searchValueFloat');
+$comp=$rep->getComponents('searchValueStr');
+$test->assertClass("Xfer_Comp_Edit",$comp,'searchValueStr');
+$comp=$rep->getComponents('searchValueBool');
+$test->assertClass("Xfer_Comp_Check",$comp,'searchValueBool');
+$comp=$rep->getComponents('searchValueDate');
+$test->assertClass("Xfer_Comp_Date",$comp,'searchValueDate');
+$comp=$rep->getComponents('searchValueTime');
+$test->assertClass("Xfer_Comp_Time",$comp,'searchValueTime');
+$comp=$rep->getComponents('searchValueList');
+$test->assertClass("Xfer_Comp_CheckList",$comp,'searchValueList');
+$comp=$rep->getComponents('searchButtonAdd');
+$test->assertClass("Xfer_Comp_Button",$comp,'searchButtonAdd');
 
 $rep=$test->CallAction("org_lucterios_contacts","personnePhysique_APAS_List",array('IsSearch'=>1),"Xfer_Container_Custom");
 $comp=$rep->getComponents('personnePhysique');
 $test->assertEquals(0,count($comp->m_records),"result A");
 
-$rep=$test->CallAction("org_lucterios_contacts","personnePhysique_APAS_List",array('IsSearch'=>1,'nom_select'=>1,'nom_value1'=>'Nom1'),"Xfer_Container_Custom");
+$rep=$test->CallAction("org_lucterios_contacts","personnePhysique_APAS_List",array('IsSearch'=>1,'CRITERIA'=>'nom||5||Nom1||array%28%27fieldname%27%3D%3E%27nom%27%2C+%27description%27%3D%3E%27Nom%27%2C+%27list%27%3D%3E%27%27%2C+%27type%27%3D%3E%27str%27%2C+%27table.name%27%3D%3E%27org_lucterios_contacts_personnePhysique.nom%27%2C+%27tables%27%3D%3Earray%28%27org_lucterios_contacts_personnePhysique%27%29%2C+%27wheres%27%3D%3Earray%28%29%29'),"Xfer_Container_Custom");
 $comp=$rep->getComponents('personnePhysique');
 $test->assertEquals(1,count($comp->m_records),"result B");
 
-$rep=$test->CallAction("org_lucterios_contacts","personnePhysique_APAS_List",array('IsSearch'=>1,'prenom_select'=>1,'prenom_value1'=>'Prenom2'),"Xfer_Container_Custom");
+$rep=$test->CallAction("org_lucterios_contacts","personnePhysique_APAS_List",array('IsSearch'=>1,'CRITERIA'=>'prenom||6||Prenom2||array%28%27fieldname%27%3D%3E%27prenom%27%2C+%27description%27%3D%3E%27Pr%E9nom%27%2C+%27list%27%3D%3E%27%27%2C+%27type%27%3D%3E%27str%27%2C+%27table.name%27%3D%3E%27org_lucterios_contacts_personnePhysique.prenom%27%2C+%27tables%27%3D%3Earray%28%27org_lucterios_contacts_personnePhysique%27%29%2C+%27wheres%27%3D%3Earray%28%29%29'),"Xfer_Container_Custom");
 $comp=$rep->getComponents('personnePhysique');
 $test->assertEquals(1,count($comp->m_records),"result C");
 
-$rep=$test->CallAction("org_lucterios_contacts","personnePhysique_APAS_List",array('IsSearch'=>1,'sexe_select'=>1,'sexe_value1'=>'1'),"Xfer_Container_Custom");
+$rep=$test->CallAction("org_lucterios_contacts","personnePhysique_APAS_List",array('IsSearch'=>1,'CRITERIA'=>'sexe||8||1||array%28%27fieldname%27%3D%3E%27sexe%27%2C+%27description%27%3D%3E%27Civilit%E9%27%2C+%27list%27%3D%3E%270%7C%7CMonsieur%3B1%7C%7CMadame%2FMademoiselle%3B%27%2C+%27type%27%3D%3E%27list%27%2C+%27table.name%27%3D%3E%27org_lucterios_contacts_personnePhysique.sexe%27%2C+%27tables%27%3D%3Earray%28%27org_lucterios_contacts_personnePhysique%27%29%2C+%27wheres%27%3D%3Earray%28%29%29'),"Xfer_Container_Custom");
 $comp=$rep->getComponents('personnePhysique');
 $test->assertEquals(1,count($comp->m_records),"result D");
 
-$rep=$test->CallAction("org_lucterios_contacts","personnePhysique_APAS_List",array('IsSearch'=>1,'codePostal_select'=>1,'codePostal_value1'=>'38000'),"Xfer_Container_Custom");
+$rep=$test->CallAction("org_lucterios_contacts","personnePhysique_APAS_List",array('IsSearch'=>1,'CRITERIA'=>'codePostal||6||380||array%28%27fieldname%27%3D%3E%27codePostal%27%2C+%27description%27%3D%3E%27Code+Postal%27%2C+%27list%27%3D%3E%27%27%2C+%27type%27%3D%3E%27str%27%2C+%27table.name%27%3D%3E%27org_lucterios_contacts_personneAbstraite.codePostal%27%2C+%27tables%27%3D%3Earray%28%27org_lucterios_contacts_personneAbstraite%27%2C+%27org_lucterios_contacts_personnePhysique%27%29%2C+%27wheres%27%3D%3Earray%28%27org_lucterios_contacts_personnePhysique.superId%3Dorg_lucterios_contacts_personneAbstraite.id%27%29%29'),"Xfer_Container_Custom");
 $comp=$rep->getComponents('personnePhysique');
 $test->assertEquals(1,count($comp->m_records),"result E");
 
-$rep=$test->CallAction("org_lucterios_contacts","personnePhysique_APAS_List",array('IsSearch'=>1,'ville_select'=>1,'ville_value1'=>'grenoble'),"Xfer_Container_Custom");
+$rep=$test->CallAction("org_lucterios_contacts","personnePhysique_APAS_List",array('IsSearch'=>1,'CRITERIA'=>'ville||1||grenoble||array%28%27fieldname%27%3D%3E%27ville%27%2C+%27description%27%3D%3E%27Ville%27%2C+%27list%27%3D%3E%27%27%2C+%27type%27%3D%3E%27str%27%2C+%27table.name%27%3D%3E%27org_lucterios_contacts_personneAbstraite.ville%27%2C+%27tables%27%3D%3Earray%28%27org_lucterios_contacts_personneAbstraite%27%2C+%27org_lucterios_contacts_personnePhysique%27%29%2C+%27wheres%27%3D%3Earray%28%27org_lucterios_contacts_personnePhysique.superId%3Dorg_lucterios_contacts_personneAbstraite.id%27%29%29'),"Xfer_Container_Custom");
 $comp=$rep->getComponents('personnePhysique');
 $test->assertEquals(1,count($comp->m_records),"result F");
 //@CODE_ACTION@

@@ -50,7 +50,7 @@ $xfer_result=&new Xfer_Container_Custom("org_lucterios_contacts","personneAbstra
 $xfer_result->Caption="Fiche d'un contact";
 //@CODE_ACTION@
 if ($classname!='') {
-	list($ext_name,$table_name) = split('/',$classname);
+	list($ext_name,$table_name) = explode('/',$classname);
 	$table_name = trim($table_name);
 	$file="extensions/$ext_name/$table_name.tbl.php";
 	$class_name="DBObj_".$ext_name."_".$table_name;

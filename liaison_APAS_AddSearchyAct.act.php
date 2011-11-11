@@ -52,11 +52,18 @@ $self->setFrom($Params);
 $self->morale = $personneMorale;
 $xfer_result->setDBObject($self,'morale', true,0,1);
 $xfer_result->setDBObject($self,'fonction', true,1,1);
+
 $physique = new DBObj_org_lucterios_contacts_personnePhysique;
 $physique->setForSearch($Params);
+$lbl = new Xfer_Comp_LabelForm("titreFind");
+$lbl->setLocation(1,2,2);
+include_once("CORE/DBFind.inc.php");
+$lbl->setValue(DBFind::getCriteriaText($physique,$Params));
+$xfer_result->addComponent($lbl);
+
 $grid = new Xfer_Comp_Grid('personnePhysique');
 $grid->setDBObject($physique,5,'',$Params);
-$grid->setLocation(1,2,2);
+$grid->setLocation(1,3,2);
 $grid->setSize(300,600);
 $grid->addAction($physique->NewAction('_Fiche','edit.png','Fiche', FORMTYPE_MODAL, CLOSE_NO, SELECT_SINGLE));
 $grid->addAction($self->NewAction('_Selectionner','ok.png','AddSearchSelect', FORMTYPE_MODAL, CLOSE_YES, SELECT_SINGLE));
