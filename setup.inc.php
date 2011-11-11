@@ -18,7 +18,7 @@
 // 
 // 		Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 // setup file write by SDK tool
-// --- Last modification: Date 10 November 2011 20:13:30 By  ---
+// --- Last modification: Date 11 November 2011 10:50:35 By  ---
 
 $extention_name="org_lucterios_contacts";
 $extention_description="Module de gestion des contacts physiques (hommes ou femmes){[newline]}ou moraux (entreprise, association, administration,...)";
@@ -30,7 +30,7 @@ $extension_libre=true;
 $version_max=1;
 $version_min=3;
 $version_release=1;
-$version_build=579;
+$version_build=580;
 
 $depencies=array();
 $depencies[0] = new Param_Depencies("CORE", 1, 3, 1, 3, false);
@@ -136,12 +136,13 @@ $params["defaultGroup"] = new Param_Parameters("defaultGroup", "99", "Groupe par
 $params["withInterneCode"] = new Param_Parameters("withInterneCode", "n", "Utilisation de code interne", 3, array());
 
 $extend_tables=array();
-$extend_tables["CodePostal"] = array("org_lucterios_contacts.CodePostal","",array());
-$extend_tables["fonctions"] = array("org_lucterios_contacts.fonctions","",array());
-$extend_tables["liaison"] = array("org_lucterios_contacts.liaison","",array());
-$extend_tables["personneAbstraite"] = array("org_lucterios_contacts.personneAbstraite","",array());
-$extend_tables["personneMorale"] = array("org_lucterios_contacts.personneMorale","",array());
-$extend_tables["personnePhysique"] = array("org_lucterios_contacts.personnePhysique","",array());
-$extend_tables["typesMorales"] = array("org_lucterios_contacts.typesMorales","",array());
+$extend_tables["CodePostal"] = array("Code postal","",array());
+$extend_tables["fonctions"] = array("Fonctions","",array());
+$extend_tables["liaison"] = array("Résponsabilité","",array("org_lucterios_contacts_personnePhysique"=>"physique","org_lucterios_contacts_personneMorale"=>"morale","org_lucterios_contacts_fonctions"=>"fonction",));
+$extend_tables["personneAbstraite"] = array("Personnes","",array());
+$extend_tables["personneMorale"] = array("Personnes morales","org_lucterios_contacts/personneAbstraite",array("org_lucterios_contacts_typesMorales"=>"type",));
+$extend_tables["personnePhysique"] = array("Personnes physiques","org_lucterios_contacts/personneAbstraite",array("CORE_users"=>"user",));
+$extend_tables["typesMorales"] = array("Type de structures","",array());
+$signals=array();
 
 ?>
