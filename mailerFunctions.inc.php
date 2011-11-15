@@ -1,24 +1,24 @@
 <?php
+// 	This file is part of Diacamma, a software developped by "Le Sanglier du Libre" (http://www.sd-libre.fr)
+// 	Thanks to have payed a retribution for using this module.
 // 
-//     This file is part of Lucterios.
+// 	Diacamma is free software; you can redistribute it and/or modify
+// 	it under the terms of the GNU General Public License as published by
+// 	the Free Software Foundation; either version 2 of the License, or
+// 	(at your option) any later version.
 // 
-//     Lucterios is free software; you can redistribute it and/or modify
-//     it under the terms of the GNU General Public License as published by
-//     the Free Software Foundation; either version 2 of the License, or
-//     (at your option) any later version.
+// 	Diacamma is distributed in the hope that it will be useful,
+// 	but WITHOUT ANY WARRANTY; without even the implied warranty of
+// 	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// 	GNU General Public License for more details.
 // 
-//     Lucterios is distributed in the hope that it will be useful,
-//     but WITHOUT ANY WARRANTY; without even the implied warranty of
-//     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-//     GNU General Public License for more details.
+// 	You should have received a copy of the GNU General Public License
+// 	along with Lucterios; if not, write to the Free Software
+// 	Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 // 
-//     You should have received a copy of the GNU General Public License
-//     along with Lucterios; if not, write to the Free Software
-//     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
-// 
-// 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
-//  // library file write by SDK tool
-// --- Last modification: Date 31 May 2010 13:53:10 By  ---
+// 		Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
+// library file write by SDK tool
+// --- Last modification: Date 15 November 2011 0:21:42 By  ---
 
 //@BEGIN@
 function willMailSend() {
@@ -29,7 +29,7 @@ function willMailSend() {
 	return class_exists('smtp_class') && ($params['MailSmtpServer']!='');
 }
 
-function sendEMail($from,$recipients,$Subject,$body) {
+function sendEMail($from,$recipients,$Subject,$body,$contentFile='',$fileName='') {
 	include_once("extensions/org_lucterios_contacts/smtp.inc.php");
 
 	require_once('CORE/extension_params.tbl.php');
@@ -39,7 +39,7 @@ function sendEMail($from,$recipients,$Subject,$body) {
 	$smtp=new smtp_class;
 	$smtp->host_name=$params['MailSmtpServer'];
 	$smtp->host_port=25;
-	
+
 	$smtp_params["host"] = $params['MailSmtpServer'];
 	$smtp_params["port"] = 25;
 	if ($params['MailSmtpUser']!='') {
@@ -47,21 +47,41 @@ function sendEMail($from,$recipients,$Subject,$body) {
 		$smtp->realm=$params['MailSmtpPass'];
 	}
 	else  {
-		$smtp->user="";                     
-		$smtp->realm="";                    
+		$smtp->user="";
+		$smtp->realm="";
 	}
-	$smtp->localhost="localhost";       
-	$smtp->debug=0;                     
-	$smtp->timeout=10;                  
-	$smtp->data_timeout=0;              
+	$smtp->localhost="localhost";
+	$smtp->debug=0;
+	$smtp->timeout=10;
+	$smtp->data_timeout=0;
 
+	$random_hash = md5(date('r', time()));
+	$extendbody ='';
+	if ($contentFile!='') {
+		if ($fileName=='') $fileName='FichierJoint';
+		$extendbody.='--'.$random_hash."\n";
+		$Conttype='Content-Type: multipart/mixed; boundary="'.$random_hash.'"';
+		$extendbody.="Content-Type: text/plain;charset=iso-8859-1\r\n\n";
+		$extendbody.=$body."\n\n";
+		$extendbody.='--'.$random_hash."\n";
+		$finfo = new finfo(FILEINFO_MIME_TYPE);
+		$extendbody.='Content-Type: '.$finfo->buffer($contentFile).'; name="'.$fileName.'"'."\r\n";
+		$extendbody.="Content-Transfer-Encoding: base64\r\n";
+		$extendbody.='Content-Disposition: attachment; filename="'.$fileName.'"'."\r\n\n";
+		$extendbody.=chunk_split(base64_encode($contentFile));
+		$extendbody.='--'.$random_hash.'--'."\n";
+	}
+	else {
+		$Conttype="Content-Type: text/plain;charset=iso-8859-1";
+		$extendbody.=$body."\n";
+	}
 	$ret=$smtp->SendMessage($from,explode(',',$recipients),array(
-	      "From: $from",
-	      "To: $recipients",
-	      "Subject: $Subject",
-	      "Date: ".strftime("%a, %d %b %Y %H:%M:%S %Z"),
-	      "Content-Type: text/plain;charset=iso-8859-1"),
-	      $body);
+		"From: $from",
+		"To: $recipients",
+		"Subject: $Subject",
+		"Date: ".strftime("%a, %d %b %Y %H:%M:%S %Z"),
+		$Conttype),
+		$extendbody);
 
 	if (!$ret) {
 		require_once "CORE/Lucterios_Error.inc.php";
