@@ -18,7 +18,7 @@
 // 
 // 		Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 // Method file write by SDK tool
-// --- Last modification: Date 15 November 2011 0:18:02 By  ---
+// --- Last modification: Date 15 November 2011 7:47:17 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
@@ -49,7 +49,7 @@ $body.=$DBMoral->codePostal." ".$DBMoral->ville.'{[newline]}';
 $body.=$DBMoral->mail.'{[newline]}';
 
 $img=new Xfer_Comp_Image('sendMail');
-$img->setValue('sendmail.png');
+$img->setValue('extensions/org_lucterios_contacts/images/sendmail.png');
 $img->setLocation(0,0,1,4);
 $xfer_result->addComponent($img);
 
