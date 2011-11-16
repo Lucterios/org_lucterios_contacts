@@ -1,13 +1,13 @@
 <?php
-// 	This file is part of Lucterios/Diacamma, a software developped by "Le Sanglier du Libre" (http://www.sd-libre.fr)
+// 	This file is part of Diacamma, a software developped by "Le Sanglier du Libre" (http://www.sd-libre.fr)
 // 	Thanks to have payed a retribution for using this module.
 // 
-// 	Lucterios/Diacamma is free software; you can redistribute it and/or modify
+// 	Diacamma is free software; you can redistribute it and/or modify
 // 	it under the terms of the GNU General Public License as published by
 // 	the Free Software Foundation; either version 2 of the License, or
 // 	(at your option) any later version.
 // 
-// 	Lucterios/Diacamma is distributed in the hope that it will be useful,
+// 	Diacamma is distributed in the hope that it will be useful,
 // 	but WITHOUT ANY WARRANTY; without even the implied warranty of
 // 	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // 	GNU General Public License for more details.
@@ -16,8 +16,9 @@
 // 	along with Lucterios; if not, write to the Free Software
 // 	Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 // 
-// 		Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY// Test file write by SDK tool
-// --- Last modification: Date 08 November 2011 4:40:43 By  ---
+// 		Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
+// Test file write by SDK tool
+// --- Last modification: Date 15 November 2011 21:41:30 By  ---
 
 
 //@TABLES@
@@ -620,10 +621,10 @@ $test->assertEquals("extensions/org_lucterios_contacts/images/contactMoral.png",
 //LABELFORM - titre
 $comp=$rep->getComponents('titre');
 $test->assertClass("Xfer_Comp_LabelForm",$comp,"Classe de titre");
-$test->assertEquals("{[center]}{[bold]}Résultat de la recherche{[/bold]}{[newline]}{[newline]}{[underline]}Vos critères de recherche:{[/underline]} {[bold]}Catégorie{[/bold]} correspond à {[italic]}\"Entreprise\"{[italic]} et {[bold]}Raison Sociale{[/bold]} contient {[italic]}\"sans\"{[italic]}{[/center]}","".$comp->m_value,"Valeur de titre");
+$test->assertEquals('{[center]}{[bold]}Résultat de la recherche{[/bold]}{[newline]}{[newline]}{[underline]}Vos critères de recherche:{[/underline]} {[bold]}Catégorie{[/bold]} correspond à {[italic]}"Entreprise"{[italic]} et {[bold]}Raison Sociale{[/bold]} contient {[italic]}"sans"{[italic]}{[/center]}',"".$comp->m_value,"Valeur de titre");
 //GRID - personneMorale
 $comp=$rep->getComponents('personneMorale');
-$test->assertEquals(3,count($comp->m_actions),"Nb grid actions de personneMorale");
+$test->assertEquals(4,count($comp->m_actions),"Nb grid actions de personneMorale");
 $test->assertEquals(4,count($comp->m_headers),"Nb grid headers de personneMorale");
 $test->assertEquals(1,count($comp->m_records),"Nb grid records de personneMorale");
 $rec=$comp->m_records[100];
@@ -656,7 +657,7 @@ $test->assertEquals(4,COUNT($rep->m_actions),'nb action');
 $test->assertEquals(5,$rep->getComponentCount(),'nb component');
 //GRID - personneMorale
 $comp=$rep->getComponents('personneMorale');
-$test->assertEquals(3,count($comp->m_actions),"Nb grid actions de personneMorale");
+$test->assertEquals(4,count($comp->m_actions),"Nb grid actions de personneMorale");
 $test->assertEquals(4,count($comp->m_headers),"Nb grid headers de personneMorale");
 $test->assertEquals(0,count($comp->m_records),"Nb grid records de personneMorale");
 //LABELFORM - nb

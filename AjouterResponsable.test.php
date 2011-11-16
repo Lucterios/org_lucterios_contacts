@@ -1,13 +1,13 @@
 <?php
-// 	This file is part of Lucterios/Diacamma, a software developped by "Le Sanglier du Libre" (http://www.sd-libre.fr)
+// 	This file is part of Diacamma, a software developped by "Le Sanglier du Libre" (http://www.sd-libre.fr)
 // 	Thanks to have payed a retribution for using this module.
 // 
-// 	Lucterios/Diacamma is free software; you can redistribute it and/or modify
+// 	Diacamma is free software; you can redistribute it and/or modify
 // 	it under the terms of the GNU General Public License as published by
 // 	the Free Software Foundation; either version 2 of the License, or
 // 	(at your option) any later version.
 // 
-// 	Lucterios/Diacamma is distributed in the hope that it will be useful,
+// 	Diacamma is distributed in the hope that it will be useful,
 // 	but WITHOUT ANY WARRANTY; without even the implied warranty of
 // 	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // 	GNU General Public License for more details.
@@ -16,8 +16,9 @@
 // 	along with Lucterios; if not, write to the Free Software
 // 	Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 // 
-// 		Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY// Test file write by SDK tool
-// --- Last modification: Date 08 November 2011 5:27:28 By  ---
+// 		Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
+// Test file write by SDK tool
+// --- Last modification: Date 15 November 2011 21:39:22 By  ---
 
 
 //@TABLES@
@@ -253,7 +254,7 @@ $test->assertEquals("Président","".$comp->m_value,"Valeur de fonction");
 //LABELFORM - titreFind
 $comp=$rep->getComponents('titreFind');
 $test->assertClass("Xfer_Comp_LabelForm",$comp,"Classe de titreFind");
-$test->assertEquals("{[underline]}Vos critères de recherche:{[/underline]} {[bold]}Nom{[/bold]} contient {[italic]}\"toto\"{[italic]}","".$comp->m_value,"Valeur de titreFind");
+$test->assertEquals('{[underline]}Vos critères de recherche:{[/underline]} {[bold]}Nom{[/bold]} contient {[italic]}"toto"{[italic]}',"".$comp->m_value,"Valeur de titreFind");
 //GRID - personnePhysique
 $comp=$rep->getComponents('personnePhysique');
 $test->assertEquals(4,count($comp->m_actions),"Nb grid actions de personnePhysique");
@@ -526,8 +527,8 @@ $comp=$rep->getComponents('title');
 $test->assertEquals("{[center]}{[underline]}{[bold]}Utilisateurs du logiciel{[/bold]}{[/underline]}{[/center]}","".$comp->m_value,"Valeur de title");
 //GRID - user_actif
 $comp=$rep->getComponents('user_actif');
-$test->assertEquals(3,count($comp->m_actions),"Nb grid actions de user_actif");
-$test->assertEquals(3,count($comp->m_headers),"Nb grid headers de user_actif");
+$test->assertEquals(4,count($comp->m_actions),"Nb grid actions de user_actif");
+$test->assertEquals(4,count($comp->m_headers),"Nb grid headers de user_actif");
 $test->assertEquals(2,count($comp->m_records),"Nb grid records de user_actif");
 $headers=$comp->m_headers;
 $test->assertEquals("Alias",$headers["login"]->m_descript,'Header #1');
@@ -543,7 +544,7 @@ $test->assertEquals("TOTO Paul",$rec["realName"],"Valeur de grid [101,realName]"
 $test->assertEquals("Admin",$rec["groupId"],"Valeur de grid [101,groupId]");
 //GRID - user_desactif
 $comp=$rep->getComponents('user_desactif');
-$test->assertEquals(1,count($comp->m_actions),"Nb grid actions de user_desactif");
+$test->assertEquals(2,count($comp->m_actions),"Nb grid actions de user_desactif");
 $test->assertEquals(3,count($comp->m_headers),"Nb grid headers de user_desactif");
 $test->assertEquals(1,count($comp->m_records),"Nb grid records de user_desactif");
 $rec=$comp->m_records[99];
