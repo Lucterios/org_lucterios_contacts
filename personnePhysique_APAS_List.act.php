@@ -76,7 +76,7 @@ else {
 	$xfer_result->addComponent($lbl);
 	$comp = new Xfer_Comp_Edit('FiltrecodPostal');
 	$comp->setValue($FiltrecodPostal);
-	$comp->setAction( new Xfer_Action('','',$xfer_result->m_extension,$xfer_result->m_action, FORMTYPE_REFRESH, CLOSE_NO));
+	$comp->setAction($xfer_result->getRefreshAction());
 	$comp->setLocation(2,1);
 	$xfer_result->addComponent($comp);
 	$q = "SELECT org_lucterios_contacts_personnePhysique.* ";

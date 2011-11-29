@@ -3,19 +3,19 @@ Un contact moral est une structure ou d'une organisation de personne (entreprise
 <h2>Liste de vos contacts moraux</h2>
 Le menu <i>Bureautique/Contacts/Personnes morales</i> vous permet de consulter la liste des structures que vous avez déjà enregistrées.<br>
 Chaque contact moral est associé à une catégorie. Dans cette liste, vous consultez vos structures filtrées par ces catégories.<br><br>
-<center><img src='~org_lucterios_contacts$ListMoral.jpg' height='250' alt='ListMoral.jpg' /></center><br>
+<center><img src='~org_lucterios_contacts$ListMoral.jpg' height='350' alt='ListMoral.jpg' /></center><br>
 Depuis cet écran, vous avez aussi la possibilité d'imprimer la liste des structures.
 
 <h2>Création du contact moraux</h2>
 Depuis la liste précédente, vous avez la possibilité de créer une nouvelle structure.<br><br>
-<center><img src='~org_lucterios_contacts$NewMoral.jpg' height='250' alt='NewMoral.jpg' /></center><br>
+<center><img src='~org_lucterios_contacts$NewMoral.jpg' height='350' alt='NewMoral.jpg' /></center><br>
 Remplissez le formulaire et valider le pour l'insérer dans votre base de données.
 
 <JUMP_PAGE/>
 
 <h2>Edition d'un contact moraux</h2>
 Depuis la liste des personnes morales, vous avez la possibilité d'éditer une structure.<br><br>
-<center><img src='~org_lucterios_contacts$EditMoral.jpg' height='220' alt='EditMoral.jpg' /></center><br>
+<center><img src='~org_lucterios_contacts$EditMoral.jpg' height='320' alt='EditMoral.jpg' /></center><br>
 Cela vous permettra de consulter la fiche d'une structure précédemment entrée dans votre base.<br>
 Vous pouvez modifier cette fiche ou l'imprimer.<br>
 Si cette personne n'est pas référencée dans d'autre enregistrement de l'application, vous avez la possibilité de la supprimer.
@@ -24,11 +24,13 @@ Si cette personne n'est pas référencée dans d'autre enregistrement de l'applicat
 Vous avez la possibilité d'associer une personne physique à votre structure.<br>
 Choisissez la fonction de ce nouveau responsable ainsi que des critères de recherche: si la personne n'existe pas dans votre base, vous aurez la possibilité de la créer.<br>
 Vous avez aussi la possibilité d'ajouter une fonction à un responsable précédemment définit.<br><br>
-<center><img src='~org_lucterios_contacts$Responsable.jpg' height='220' alt='Responsable.jpg' /></center>
+<center><img src='~org_lucterios_contacts$Responsable.jpg' height='320' alt='Responsable.jpg' /></center>
+
+<JUMP_PAGE/>
 
 <h2>Recherche d'un contact moral</h2>
 Le menu <i>Bureautique/Contacts/Recherche de personne morale</i> vous permet de définir un critère de recherche sur une structure morale.<br><br>
-<center><img src='~org_lucterios_contacts$RechercheMoral.jpg' height='250' alt='RechercheMoral.jpg' /></center><br>
+<center><img src='~org_lucterios_contacts$RechercheMoral.jpg' height='200' alt='RechercheMoral.jpg' /></center><br>
 Une fois validé, l'outil va rechercher dans la base toutes les fiches correspondantes à ces critères.<br>
 Vous pourrez alors imprimer cette liste ou en éditer/modifier une.<br>
 Il vous est possible de fusionner plusieurs fiches en une seul.
