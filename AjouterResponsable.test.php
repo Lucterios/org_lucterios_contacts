@@ -254,7 +254,7 @@ $test->assertEquals("Président","".$comp->m_value,"Valeur de fonction");
 //LABELFORM - titreFind
 $comp=$rep->getComponents('titreFind');
 $test->assertClass("Xfer_Comp_LabelForm",$comp,"Classe de titreFind");
-$test->assertEquals('{[underline]}Vos critères de recherche:{[/underline]} {[bold]}Nom{[/bold]} contient {[italic]}"toto"{[italic]}',"".$comp->m_value,"Valeur de titreFind");
+$test->assertEquals('{[underline]}Vos critères de recherche:{[/underline]} {[bold]}Nom{[/bold]} contient {[italic]}"toto"{[/italic]}',"".$comp->m_value,"Valeur de titreFind");
 //GRID - personnePhysique
 $comp=$rep->getComponents('personnePhysique');
 $test->assertEquals(4,count($comp->m_actions),"Nb grid actions de personnePhysique");

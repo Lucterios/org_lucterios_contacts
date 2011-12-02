@@ -621,7 +621,7 @@ $test->assertEquals("extensions/org_lucterios_contacts/images/contactMoral.png",
 //LABELFORM - titre
 $comp=$rep->getComponents('titre');
 $test->assertClass("Xfer_Comp_LabelForm",$comp,"Classe de titre");
-$test->assertEquals('{[center]}{[bold]}Résultat de la recherche{[/bold]}{[newline]}{[newline]}{[underline]}Vos critères de recherche:{[/underline]} {[bold]}Catégorie{[/bold]} correspond à {[italic]}"Entreprise"{[italic]} et {[bold]}Raison Sociale{[/bold]} contient {[italic]}"sans"{[italic]}{[/center]}',"".$comp->m_value,"Valeur de titre");
+$test->assertEquals('{[center]}{[bold]}Résultat de la recherche{[/bold]}{[newline]}{[newline]}{[underline]}Vos critères de recherche:{[/underline]} {[bold]}Catégorie{[/bold]} correspond à {[italic]}"Entreprise"{[/italic]} et {[bold]}Raison Sociale{[/bold]} contient {[italic]}"sans"{[/italic]}{[/center]}',"".$comp->m_value,"Valeur de titre");
 //GRID - personneMorale
 $comp=$rep->getComponents('personneMorale');
 $test->assertEquals(4,count($comp->m_actions),"Nb grid actions de personneMorale");
