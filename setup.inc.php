@@ -18,7 +18,7 @@
 // 
 // 		Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
 // setup file write by SDK tool
-// --- Last modification: Date 02 December 2011 19:45:37 By  ---
+// --- Last modification: Date 15 December 2011 0:41:23 By  ---
 
 $extention_name="org_lucterios_contacts";
 $extention_description="Module de gestion des contacts physiques (hommes ou femmes){[newline]}ou moraux (entreprise, association, administration,...)";
@@ -30,7 +30,7 @@ $extension_libre=true;
 $version_max=1;
 $version_min=3;
 $version_release=1;
-$version_build=636;
+$version_build=637;
 
 $depencies=array();
 $depencies[0] = new Param_Depencies("CORE", 1, 3, 1, 3, false);
@@ -55,7 +55,7 @@ $menus[9] = new Param_Menu("Bureautique", "", "", "bureau.png", "", 60 , 0, "Out
 $menus[10] = new Param_Menu("Configuration des contacts", "_Contact", "configuration", "contactsConfig.png", "", 15 , 1, "Gestion des fonctions des personnes physiques {[newline]}et des catégorie des structures morales.");
 $menus[11] = new Param_Menu("Mon compte", "Ad_ministration", "FichePersonnel", "fiche.png", "shift ctrl alt M", 1 , 1, "Visualiser la fiche de mon compte.");
 $menus[12] = new Param_Menu("Nos coordonnées", "Ad_ministration", "StructureLocal", "nousContact.png", "shift ctrl alt N", 8 , 1, "Fiche complete de notre structure et de ses responsables");
-$menus[13] = new Param_Menu("Configuration couriel", "_Contact", "confMailSMS", "contacts_telmail.png", "", 40 , 1, "Configuration des paramètres pour l'envoir de couriel");
+$menus[13] = new Param_Menu("Configuration courriel", "_Contact", "confMailSMS", "contacts_telmail.png", "", 40 , 1, "Configuration des paramètres pour l'envoir de courriel");
 $menus[14] = new Param_Menu("Mot de passe perdu", "Adresses et _Contacts", "passForgot", "", "", 100 , 1, "Mot de passe perdu");
 $menus[15] = new Param_Menu("Nouveau contact", "Adresses et _Contacts", "newContact", "", "", 110 , 1, "Nouveau contact");
 
