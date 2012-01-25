@@ -2,23 +2,24 @@ Dans le menu <i>Administration/Extensions (conf)</i> vous avez à votre dispositi
 
 <h2>Configuration des contacts</h2>
 
-Dans cette écran vous avez la possibilité de créer ou de modifier une définition d'une fonction ou une responsabilité pour associer une personne physique à une structure morale.<br>
-De la même façon que précédemment, vous pouvez créer ou de modifier une catégorie de structure morale pour vous aider dans la classification de vos contacts moraux.<br>
+Dans cet écran, vous avez la possibilité de créer ou de modifier une définition de fonction, ou responsabilité, pour associer une personne physique à une structure morale.<br>
+De la même façon que précédemment, vous pouvez créer ou modifier une catégorie de structure morale pour vous aider dans la classification de vos contacts moraux.<br>
 <br>
 De plus, vous pouvez préciser un groupe, une fonction et une catégorie par défaut.<br>
-Le groupe sera utilisé si vous souhaitez ajouter un droit de connexion à un personne physique. 
-La fonction sera celle par défaut quand vous associez une personne physique dans une structure morale.
-La catégorie sera la sélection initial de filtrage dans la liste des personnes morales.
+
+Le groupe sera utilisé si vous souhaitez ajouter un droit de connexion à un personne physique.<br>
+La fonction sera celle par défaut quand vous associez une personne physique dans une structure morale.<br>
+La catégorie sera la sélection initiale de filtrage dans la liste des personnes morales.<br>
 
 <h2>Codes postaux/villes</h2>
-Pour vous aider dans votre saisie de contacts, l'outil recherche automatiquement la ville associé au code postal que vous avez saisie.<br>
-Dans cette écran, vous avez la possibilité de rajouter des codes postaux manquant.<br/>
+Pour vous aider dans votre saisie de contacts, l'outil recherche automatiquement la ville associé au code postal que vous avez saisi.<br>
+Dans cet écran, vous avez la possibilité de rajouter des codes postaux manquants.<br>
 Par défaut, les 39000 codes postaux français sont insérés.
 
 <h2>Configuration couriel</h2>
-Vous pouvez configurer ici des réglages pour l'envoie de couriel.<br/>
+Vous pouvez configurer ici des réglages pour l'envoi de couriel.<br/>
 <br/>
-Le serveur SMTP permettra au logiciel d'envoyer directement de message à vos contacts comme par exemple l'envoie d'un nouveau mot de passe de connexion.
+Le serveur SMTP permettra au logiciel d'envoyer directement des messages à vos contacts comme par exemple l'envoi d'un nouveau mot de passe de connexion.
 N'oubliez pas alors de préciser un petit message d'explication.<br/>
 <br/>
-Vous pouvez aussi préciser comment voulez vous utiliser votre navigateur de couriel pour la fonctionnalité 'écrire à tous': 'Pour', 'Copie à' ou 'Copie caché à'.<br/>
+Vous pouvez aussi préciser comment vous voulez utiliser votre navigateur de couriel pour la fonctionnalité 'écrire à tous': 'Pour', 'Copie à' ou 'Copie caché à'.<br/>
