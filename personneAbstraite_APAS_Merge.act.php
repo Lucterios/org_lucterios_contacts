@@ -1,24 +1,23 @@
 <?php
+// 	This file is part of Lucterios/Diacamma, a software developped by "Le Sanglier du Libre" (http://www.sd-libre.fr)
+// 	Thanks to have payed a retribution for using this module.
 // 
-//     This file is part of Lucterios.
+// 	Lucterios/Diacamma is free software; you can redistribute it and/or modify
+// 	it under the terms of the GNU General Public License as published by
+// 	the Free Software Foundation; either version 2 of the License, or
+// 	(at your option) any later version.
 // 
-//     Lucterios is free software; you can redistribute it and/or modify
-//     it under the terms of the GNU General Public License as published by
-//     the Free Software Foundation; either version 2 of the License, or
-//     (at your option) any later version.
+// 	Lucterios/Diacamma is distributed in the hope that it will be useful,
+// 	but WITHOUT ANY WARRANTY; without even the implied warranty of
+// 	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// 	GNU General Public License for more details.
 // 
-//     Lucterios is distributed in the hope that it will be useful,
-//     but WITHOUT ANY WARRANTY; without even the implied warranty of
-//     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-//     GNU General Public License for more details.
+// 	You should have received a copy of the GNU General Public License
+// 	along with Lucterios; if not, write to the Free Software
+// 	Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 // 
-//     You should have received a copy of the GNU General Public License
-//     along with Lucterios; if not, write to the Free Software
-//     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
-// 
-// 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
-//  // Action file write by SDK tool
-// --- Last modification: Date 15 November 2008 1:46:59 By  ---
+// 		Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY// Action file write by SDK tool
+// --- Last modification: Date 20 February 2012 8:45:56 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
@@ -58,6 +57,7 @@ $xfer_result->Caption="Fusionne des contacts";
 $file_name=DBObj_Basic::getTableName(substr($CLASSNAME,6));
 require_once($file_name);
 
+$extraParam=array();
 $list_id=explode(';',$PERSONNE);
 foreach($list_id as $id) {
 	$main=new DBObj_org_lucterios_contacts_personneAbstraite;
@@ -65,6 +65,7 @@ foreach($list_id as $id) {
 
 	$obj=new $CLASSNAME;
 	$obj->get($id);
+	$extraParam=$obj->getMergeExtra($extraParam, $contact);
 	$sub_obj=$obj->getSuperObject('org_lucterios_contacts_personneAbstraite');
 	$sub_obj_id=$sub_obj->id;
 	if ($contact==-1)
@@ -75,6 +76,13 @@ foreach($list_id as $id) {
 		$main->merge($other);
 	}
 }
+$son=$main->getSon();
+while (($son!=null) && (get_class($main)!=$CLASSNAME)) {
+	$main=$son;
+	$son=$main->getSon();
+}
+$obj->setMergeExtra($extraParam);
+
 $xfer_result->m_context['contact']=$contact;
 $xfer_result->redirectAction($self->NewAction('titre','','Fiche',FORMTYPE_MODAL,CLOSE_NO));
 //@CODE_ACTION@

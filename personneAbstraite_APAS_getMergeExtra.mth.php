@@ -17,33 +17,23 @@
 // 	Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 // 
 // 		Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY// Method file write by SDK tool
-// --- Last modification: Date 27 February 2012 6:27:35 By  ---
+// --- Last modification: Date 20 February 2012 7:24:12 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
 
 //@TABLES@
-require_once('extensions/org_lucterios_contacts/personneMorale.tbl.php');
+require_once('extensions/org_lucterios_contacts/personneAbstraite.tbl.php');
 //@TABLES@
 
-//@DESC@getList de personneMorale
-//@PARAM@ Params
-//@PARAM@ withAdd=true
+//@DESC@Renvoie des parametres specifiques a conserver
+//@PARAM@ values
+//@PARAM@ contact
 
-function personneMorale_APAS_getGrid(&$self,$Params,$withAdd=true)
+function personneAbstraite_APAS_getMergeExtra(&$self,$values,$contact)
 {
 //@CODE_ACTION@
-if (isset($Params['GRID_NAME']))
-	$gridName=$Params['GRID_NAME'];
-else
-	$gridName='personneMorale';
-$grid = new Xfer_Comp_Grid($gridName);
-$grid->setDBObject($self,array("raisonSociale","fixe","fax","mail"),'',$Params);
-$grid->addAction($self->newAction("_Editer","edit.png","Fiche", FORMTYPE_MODAL, CLOSE_NO, SELECT_SINGLE));
-if ($withAdd)
-	$grid->addAction($self->newAction("_Ajouter","add.png","AddModify", FORMTYPE_MODAL, CLOSE_NO, SELECT_NONE));
-$grid->setSize(200,750);
-return $grid;
+return $values;
 //@CODE_ACTION@
 }
 
