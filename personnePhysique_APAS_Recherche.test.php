@@ -45,7 +45,7 @@ $test->assertEquals(2,count($comp->m_records),"Initial");
 
 $rep=$test->CallAction("org_lucterios_contacts","personnePhysique_APAS_Search",array(),"Xfer_Container_Custom");
 $test->assertEquals(14,$rep->getComponentCount(),"nb");
-$test->assertEquals(2,count($rep->m_actions),"m_actions nb");
+$test->assertEquals(3,count($rep->m_actions),"m_actions nb");
 $comp=$rep->getComponents('searchSelector');
 $test->assertClass("Xfer_Comp_Select",$comp,'searchSelector');
 $test->assertEquals(11,count($comp->m_select),'searchSelector nb');

@@ -543,15 +543,19 @@ $rep=$test->CallAction("CORE","UNLOCK",array("ORIGINE"=>"personneMorale_APAS_Fic
 
 // --- Recherche ---
 $rep=$test->CallAction("org_lucterios_contacts","personneMorale_APAS_Search",array(),"Xfer_Container_Custom");
-$test->assertEquals(2,COUNT($rep->m_actions),'nb action');
+$test->assertEquals(3,COUNT($rep->m_actions),'nb action');
 $act=$rep->m_actions[0];
 $test->assertEquals("_Rechercher",$act->m_title,'Titre action #1');
 $test->assertEquals("org_lucterios_contacts",$act->m_extension,'Ext action #1');
 $test->assertEquals("personneMorale_APAS_List",$act->m_action,'Act action #1');
 $act=$rep->m_actions[1];
-$test->assertEquals("_Annuler",$act->m_title,'Titre action #2');
-$test->assertEquals("",$act->m_extension,'Ext action #2');
-$test->assertEquals("",$act->m_action,'Act action #2');
+$test->assertEquals("_Doublons",$act->m_title,'Titre action #2');
+$test->assertEquals("org_lucterios_contacts",$act->m_extension,'Ext action #2');
+$test->assertEquals("personneMorale_APAS_rechercheDoublon",$act->m_action,'Act action #2');
+$act=$rep->m_actions[2];
+$test->assertEquals("_Annuler",$act->m_title,'Titre action #3');
+$test->assertEquals("",$act->m_extension,'Ext action #3');
+$test->assertEquals("",$act->m_action,'Act action #3');
 $test->assertEquals(14,$rep->getComponentCount(),'nb component');
 //IMAGE - img
 $comp=$rep->getComponents('img');
