@@ -29,5 +29,7 @@ Le menu <i>Bureautique/Contacts/Recherche de personne physique</i> vous permet d
 Une fois validé, l'outil va rechercher dans la base toutes les personnes correspondantes à ces critères.<br>
 Vous pourrez alors imprimer cette liste ou en éditer/modifier une fiche.<br>
 
-Il vous est possible de fusionner plusieurs fiches en une seule. 
-Pour cela, vous devez préciser le contact principal; l'outil supprimera les autres après avoir déplacé toutes leurs références sur l'enregistrement restant. 
+Il vous est possible de fusionner plusieurs fiches en une seule. <br/>
+Pour cela, vous devez préciser le contact principal; l'outil supprimera les autres après avoir déplacé toutes leurs références sur l'enregistrement restant. <br/>
+<br/>
+Depuis l'outil de recherche, vous pouvez aussi rechercher les fiches doublons. Cela vous permet d'afficher la liste des contacts ayant nom et prénom similaire.

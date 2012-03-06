@@ -17,7 +17,7 @@
 // 	Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 // 
 // 		Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY// setup file write by SDK tool
-// --- Last modification: Date 02 March 2012 5:59:27 By  ---
+// --- Last modification: Date 06 March 2012 3:52:02 By  ---
 
 $extention_name="org_lucterios_contacts";
 $extention_description="Module de gestion des contacts physiques (hommes ou femmes){[newline]}ou moraux (entreprise, association, administration,...)";
@@ -28,7 +28,7 @@ $extension_libre=true;
 
 $version_max=1;
 $version_min=3;
-$version_release=2;
+$version_release=3;
 $version_build=682;
 
 $depencies=array();

@@ -33,5 +33,7 @@ Le menu <i>Bureautique/Contacts/Recherche de personne morale</i> vous permet de 
 <center><img src='~org_lucterios_contacts$RechercheMoral.jpg' height='200' alt='RechercheMoral.jpg' /></center><br>
 Une fois validé, l'outil va rechercher dans la base toutes les fiches correspondantes à ces critères.<br>
 Vous pourrez alors imprimer cette liste ou en éditer/modifier une.<br>
-Il vous est possible de fusionner plusieurs fiches en une seule.
-Pour cela vous devez préciser le contact principal, l'outil supprimera les autres après avoir déplacé toutes leurs références sur l'enregistrement restant. 
+Il vous est possible de fusionner plusieurs fiches en une seule.<br/>
+Pour cela vous devez préciser le contact principal, l'outil supprimera les autres après avoir déplacé toutes leurs références sur l'enregistrement restant.<br/>
+<br/>
+Depuis l'outil de recherche, vous pouvez aussi rechercher les fiches doublons. Cela vous permet d'afficher la liste des contacts ayant une raison sociale similaire.
