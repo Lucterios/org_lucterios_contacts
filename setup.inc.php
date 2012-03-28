@@ -17,7 +17,7 @@
 // 	Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 // 
 // 		Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY// setup file write by SDK tool
-// --- Last modification: Date 06 March 2012 3:52:02 By  ---
+// --- Last modification: Date 26 March 2012 6:15:18 By  ---
 
 $extention_name="org_lucterios_contacts";
 $extention_description="Module de gestion des contacts physiques (hommes ou femmes){[newline]}ou moraux (entreprise, association, administration,...)";
@@ -29,7 +29,7 @@ $extension_libre=true;
 $version_max=1;
 $version_min=3;
 $version_release=3;
-$version_build=682;
+$version_build=692;
 
 $depencies=array();
 $depencies[0] = new Param_Depencies("CORE", 1, 3, 1, 3, false);
@@ -62,8 +62,8 @@ $actions=array();
 $actions[0] = new Param_Action("Changer la configuration courriel", "ChangeParamMail", 2);
 $actions[1] = new Param_Action("Changer les options des contacts", "ChangeParamOptions", 2);
 $actions[2] = new Param_Action("Changer les paramètres", "ChangeParams", 2);
-$actions[3] = new Param_Action("Validation", "CodePostal_APAS_ajouteract", 0);
-$actions[4] = new Param_Action("Ajouter Code postal/Ville", "CodePostal_APAS_ajout", 0);
+$actions[3] = new Param_Action("Validation", "CodePostal_APAS_ajouteract", 2);
+$actions[4] = new Param_Action("Ajouter Code postal/Ville", "CodePostal_APAS_ajout", 2);
 $actions[5] = new Param_Action("Liste des Codes Postaux/Villes", "CodePostal_APAS_list", 0);
 $actions[6] = new Param_Action("Mon compte", "FichePersonnel", 5);
 $actions[7] = new Param_Action("Imprimer nos contacts", "ImpressionLocal", 4);
@@ -123,10 +123,11 @@ $actions[60] = new Param_Action("Rechercher une personne physique", "personnePhy
 $actions[61] = new Param_Action("Modifier la connexion", "personnePhysique_APAS_login", 2);
 $actions[62] = new Param_Action("Recherche des personnes physiques en doublon", "personnePhysique_APAS_rechercheDoublon", 3);
 $actions[63] = new Param_Action("Valider une connexion", "personnePhysique_APAS_validerLogin", 2);
-$actions[64] = new Param_Action("ajouts de catégorie de personne morale", "typesMorales_APAS_ajouteract", 0);
-$actions[65] = new Param_Action("Ajouter une catégorie de personne morale", "typesMorales_APAS_ajout", 0);
-$actions[66] = new Param_Action("Liste des catégories de personnes morales", "typesMorales_APAS_liste", 0);
-$actions[67] = new Param_Action("Suppression de catégorie de personne morale", "typesMorales_APAS_suppr", 0);
+$actions[64] = new Param_Action("Envoyer un courriel de test", "sendTestMail", 2);
+$actions[65] = new Param_Action("ajouts de catégorie de personne morale", "typesMorales_APAS_ajouteract", 0);
+$actions[66] = new Param_Action("Ajouter une catégorie de personne morale", "typesMorales_APAS_ajout", 0);
+$actions[67] = new Param_Action("Liste des catégories de personnes morales", "typesMorales_APAS_liste", 0);
+$actions[68] = new Param_Action("Suppression de catégorie de personne morale", "typesMorales_APAS_suppr", 0);
 
 $params=array();
 $params["MailToConfig"] = new Param_Parameters("MailToConfig", "0", "Type de destinataire de courriel", 4, array('Enum'=>array('Pour', 'Copie à', 'Copie caché à')));
