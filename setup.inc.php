@@ -1,23 +1,22 @@
 <?php
-// 	This file is part of Lucterios/Diacamma, a software developped by "Le Sanglier du Libre" (http://www.sd-libre.fr)
-// 	Thanks to have payed a retribution for using this module.
+// This file is part of Lucterios/Diacamma, a software developped by 'Le Sanglier du Libre' (http://www.sd-libre.fr)
+// thanks to have payed a retribution for using this module.
 // 
-// 	Lucterios/Diacamma is free software; you can redistribute it and/or modify
-// 	it under the terms of the GNU General Public License as published by
-// 	the Free Software Foundation; either version 2 of the License, or
-// 	(at your option) any later version.
+// Lucterios/Diacamma is free software; you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation; either version 2 of the License, or
+// (at your option) any later version.
 // 
-// 	Lucterios/Diacamma is distributed in the hope that it will be useful,
-// 	but WITHOUT ANY WARRANTY; without even the implied warranty of
-// 	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// 	GNU General Public License for more details.
+// Lucterios/Diacamma is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
 // 
-// 	You should have received a copy of the GNU General Public License
-// 	along with Lucterios; if not, write to the Free Software
-// 	Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
-// 
-// 		Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY// setup file write by SDK tool
-// --- Last modification: Date 28 March 2012 12:18:50 By  ---
+// You should have received a copy of the GNU General Public License
+// along with Lucterios; if not, write to the Free Software
+// Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+// setup file write by SDK tool
+// --- Last modification: Date 10 April 2012 21:04:42 By  ---
 
 $extention_name="org_lucterios_contacts";
 $extention_description="Module de gestion des contacts physiques (hommes ou femmes){[newline]}ou moraux (entreprise, association, administration,...)";
@@ -29,7 +28,7 @@ $extension_libre=true;
 $version_max=1;
 $version_min=3;
 $version_release=3;
-$version_build=693;
+$version_build=694;
 
 $depencies=array();
 $depencies[0] = new Param_Depencies("CORE", 1, 3, 1, 3, false);
@@ -139,6 +138,8 @@ $params["defaultFunction"] = new Param_Parameters("defaultFunction", "1", "Fonct
 $params["defaultType"] = new Param_Parameters("defaultType", "1", "Catégorie par défaut", 1, array('Min'=>1, 'Max'=>100000));
 $params["defaultGroup"] = new Param_Parameters("defaultGroup", "99", "Groupe par défaut", 1, array('Min'=>1, 'Max'=>100000));
 $params["withInterneCode"] = new Param_Parameters("withInterneCode", "n", "Utilisation de code interne", 3, array());
+$params["MailSmtpPort"] = new Param_Parameters("MailSmtpPort", "25", "Port du serveur SMTP", 1, array('Min'=>1, 'Max'=>1000000));
+$params["MailSmtpSecurity"] = new Param_Parameters("MailSmtpSecurity", "0", "Sécurité SMTP", 4, array('Enum'=>array('Aucune', 'StartTLS', 'SSL/TLS')));
 
 $extend_tables=array();
 $extend_tables["CodePostal"] = array("Code postal","",array());
