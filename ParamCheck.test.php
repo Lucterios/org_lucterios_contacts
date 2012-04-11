@@ -1,24 +1,23 @@
 <?php
+// 	This file is part of Lucterios/Diacamma, a software developped by "Le Sanglier du Libre" (http://www.sd-libre.fr)
+// 	Thanks to have payed a retribution for using this module.
 // 
-//     This file is part of Lucterios.
+// 	Lucterios/Diacamma is free software; you can redistribute it and/or modify
+// 	it under the terms of the GNU General Public License as published by
+// 	the Free Software Foundation; either version 2 of the License, or
+// 	(at your option) any later version.
 // 
-//     Lucterios is free software; you can redistribute it and/or modify
-//     it under the terms of the GNU General Public License as published by
-//     the Free Software Foundation; either version 2 of the License, or
-//     (at your option) any later version.
+// 	Lucterios/Diacamma is distributed in the hope that it will be useful,
+// 	but WITHOUT ANY WARRANTY; without even the implied warranty of
+// 	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// 	GNU General Public License for more details.
 // 
-//     Lucterios is distributed in the hope that it will be useful,
-//     but WITHOUT ANY WARRANTY; without even the implied warranty of
-//     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-//     GNU General Public License for more details.
+// 	You should have received a copy of the GNU General Public License
+// 	along with Lucterios; if not, write to the Free Software
+// 	Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 // 
-//     You should have received a copy of the GNU General Public License
-//     along with Lucterios; if not, write to the Free Software
-//     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
-// 
-// 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
-//  // Test file write by SDK tool
-// --- Last modification: Date 08 January 2010 22:43:08 By  ---
+// 		Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY// Test file write by SDK tool
+// --- Last modification: Date 11 April 2012 4:29:07 By  ---
 
 
 //@TABLES@
@@ -33,6 +32,10 @@ function org_lucterios_contacts_ParamCheck(&$test)
 $rep=$test->CallAction("org_lucterios_contacts","confMailSMS",array(),"Xfer_Container_Custom");
 $comp1=$rep->getComponents("MailSmtpServer");
 $test->assertEquals("",$comp1->m_value,"MailSmtpServer I");
+$comp1=$rep->getComponents("MailSmtpSecurity");
+$test->assertEquals("Aucune",$comp1->m_value,"MailSmtpSecurity I");
+$comp1=$rep->getComponents("MailSmtpPort");
+$test->assertEquals("25",$comp1->m_value,"MailSmtpPort I");
 $comp2=$rep->getComponents("MailSmtpUser");
 $test->assertEquals("",$comp2->m_value,"MailSmtpUser I");
 $comp3=$rep->getComponents("MailSmtpPass");
@@ -44,15 +47,19 @@ $comp5=$rep->getComponents("MailToConfig");
 $test->assertEquals("Pour",$comp5->m_value,"MailToConfig I");
 
 $test->CallAction("CORE","extension_params_APAS_validerModif",array("extensionName"=>"org_lucterios_contacts",
-"MailSmtpServer"=>'smtp.lucterios.org',"MailSmtpUser"=>'moi',"MailSmtpPass"=>'abc123',"MailConnectionMsg"=>'message{[newline]}tout gentil',"MailToConfig"=>'2'),"Xfer_Container_Acknowledge");
+"MailSmtpServer"=>'smtp.lucterios.org',"MailSmtpUser"=>'moi',"MailSmtpPass"=>'abc123',"MailConnectionMsg"=>'message{[newline]}tout gentil',"MailToConfig"=>'2','MailSmtpSecurity'=>'2','MailSmtpPort'=>'587'),"Xfer_Container_Acknowledge");
 
 $rep=$test->CallAction("org_lucterios_contacts","confMailSMS",array(),"Xfer_Container_Custom");
 $comp1=$rep->getComponents("MailSmtpServer");
 $test->assertEquals("smtp.lucterios.org",$comp1->m_value,"MailSmtpServer II");
+$comp1=$rep->getComponents("MailSmtpSecurity");
+$test->assertEquals("SSL/TLS",$comp1->m_value,"MailSmtpSecurity II");
+$comp1=$rep->getComponents("MailSmtpPort");
+$test->assertEquals("587",$comp1->m_value,"MailSmtpPort II");
 $comp2=$rep->getComponents("MailSmtpUser");
 $test->assertEquals("moi",$comp2->m_value,"MailSmtpUser II");
 $comp3=$rep->getComponents("MailSmtpPass");
-$test->assertEquals("abc123",$comp3->m_value,"MailSmtpPass II");
+$test->assertEquals("******",$comp3->m_value,"MailSmtpPass II");
 $comp4=$rep->getComponents("MailConnectionMsg");
 $test->assertEquals("message{[newline]}tout gentil",$comp4->m_value,"MailConnectionMsg II");
 
@@ -60,12 +67,18 @@ $comp5=$rep->getComponents("MailToConfig");
 $test->assertEquals("Copie caché à",$comp5->m_value,"MailToConfig II");
 
 $rep=$test->CallAction("org_lucterios_contacts","ChangeParamMail",array(),"Xfer_Container_Custom");
-$test->assertEquals(10,$rep->getComponentCount(),"Nb Comp");
+$test->assertEquals(14,$rep->getComponentCount(),"Nb Comp");
 $test->assertEquals(2,count($rep->m_actions),"Nb act");
 
 $comp1=$rep->getComponents("MailSmtpServer");
 $test->assertClass("Xfer_Comp_edit",$comp1,"MailSmtpServer");
 $test->assertEquals("smtp.lucterios.org",$comp1->m_value,"MailSmtpServer III");
+$comp2=$rep->getComponents("MailSmtpSecurity");
+$test->assertClass("Xfer_Comp_Select",$comp2,"MailSmtpSecurity ");
+$test->assertEquals("2","".$comp2->m_value,"MailSmtpSecurity III");
+$comp2=$rep->getComponents("MailSmtpPort");
+$test->assertClass("Xfer_Comp_Float",$comp2,"MailSmtpPort");
+$test->assertEquals("587","".$comp2->m_value,"MailSmtpPort III");
 $comp2=$rep->getComponents("MailSmtpUser");
 $test->assertClass("Xfer_Comp_edit",$comp2,"MailSmtpUser");
 $test->assertEquals("moi",$comp2->m_value,"MailSmtpUser III");
