@@ -38,11 +38,14 @@ function sendEMail($from,$recipients,$Subject,$body,$contentFile='',$fileName=''
 	$smtp->host_name=$params['MailSmtpServer'];
 	$smtp->host_port=$params['MailSmtpPort'];
 
-	$smtp_params["host"] = $params['MailSmtpServer'];
-	$smtp_params["port"] = 25;
 	if ($params['MailSmtpUser']!='') {
 		$smtp->user=$params['MailSmtpUser'];
-		$smtp->realm=$params['MailSmtpPass'];
+		if ($params['MailSmtpSecurity']==0)
+		{
+			$smtp->realm=$params['MailSmtpServer'];
+		}else{
+			$smtp->realm="";
+		}
 		$smtp->password=$params['MailSmtpPass'];
 	}
 	else  {
@@ -51,7 +54,7 @@ function sendEMail($from,$recipients,$Subject,$body,$contentFile='',$fileName=''
 		$smtp->password="";
 	}
 	if ($params['MailSmtpSecurity']==1)
-            		$smtp->start_tls=1;
+        	$smtp->start_tls=1;
 	if ($params['MailSmtpSecurity']==2)
 		$smtp->ssl=1;
 	$smtp->localhost="localhost";
