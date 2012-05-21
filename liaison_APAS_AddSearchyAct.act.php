@@ -54,6 +54,7 @@ $xfer_result->setDBObject($self,'morale', true,0,1);
 $xfer_result->setDBObject($self,'fonction', true,1,1);
 
 $physique = new DBObj_org_lucterios_contacts_personnePhysique;
+$xfer_result->clearSearchParam();
 $physique->setForSearch($Params);
 $lbl = new Xfer_Comp_LabelForm("titreFind");
 $lbl->setLocation(1,2,2);

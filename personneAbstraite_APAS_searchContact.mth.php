@@ -37,7 +37,7 @@ function personneAbstraite_APAS_searchContact(&$self,$posY,$xfer_result,$Extract
 if (isset($xfer_result->m_context['classname']))
 	$classname=$xfer_result->m_context['classname'];
 else if (!isset($xfer_result->classRoot))
-	$classname='org_lucterios_contacts/personneMorale';
+	$classname='org_lucterios_contacts/personneAbstraite';
 else
 	$classname=$xfer_result->classRoot;
 $lbl=new  Xfer_Comp_LabelForm("type");
@@ -47,7 +47,7 @@ $xfer_result->addComponent($lbl);
 $select=new Xfer_Comp_Select('classname');
 if (!isset($xfer_result->classRoot))
 	$xfer_result->classRoot='org_lucterios_contacts/personneAbstraite';
-$includeParent=($xfer_result->classRoot!='org_lucterios_contacts/personneAbstraite');
+$includeParent=true; 
 $select->fillByDaughterList($xfer_result->classRoot,$classname,$includeParent);
 $select->setLocation(1,$posY,2);
 $select->setAction($xfer_result->getRefreshAction('refresh'));
@@ -66,7 +66,7 @@ $CriteriaList=$newFind->extractCriteria($xfer_result->m_context);
 $NewCriteriaList=$newFind->checkInCriteriaFieldExisting($CriteriaList,$ExtractFields);
 $newFind->reinjectCriteria($xfer_result->m_context,$NewCriteriaList);
 
-$xfer_result->setSearchGUI($contact,$ExtractFields,$posY+1);
+$xfer_result->setSearchGUI($contact,$ExtractFields,$posY+1,0,"{[bold]}Le type de contact{[/bold]} est '".$contact->Title."'");
 return $xfer_result;
 //@CODE_ACTION@
 }

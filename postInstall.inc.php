@@ -62,7 +62,7 @@ function install_org_lucterios_contacts($ExensionVersions) {
 	list($nb)=$connect->getRow($id);
 	$nb=(int)$nb;
 	$testtag_file='conf/testtag.file';
-	if (($nb==0) ||(!is_file($testtag_file) && version_compare($ExensionVersions[0], '0.90', '<'))) {
+	if (($nb==0) ||(!is_file($testtag_file) && version_compare($ExensionVersions[0], '1.3.2', '<'))) {
 		$q = "CREATE UNIQUE INDEX IDX_UNIQUE ON org_lucterios_contacts_CodePostal(codePostal,ville,pays)";
 		$id = $connect->execute($q);
 		if($id === false)

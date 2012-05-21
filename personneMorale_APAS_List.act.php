@@ -63,6 +63,7 @@ $lbl = new Xfer_Comp_LabelForm("titre");
 $lbl->setLocation(1,0,2);
 $xfer_result->addComponent($lbl);
 if($IsSearch != 0) {
+	$xfer_result->clearSearchParam();
 	$self->setForSearch($Params,'raisonSociale');
 	include_once("CORE/DBFind.inc.php");
 	$lbl->setValue("{[center]}{[bold]}Résultat de la recherche{[/bold]}{[newline]}{[newline]}".DBFind::getCriteriaText($self,$Params)."{[/center]}");
