@@ -1,24 +1,23 @@
 <?php
+// 	This file is part of Lucterios/Diacamma, a software developped by "Le Sanglier du Libre" (http://www.sd-libre.fr)
+// 	Thanks to have payed a retribution for using this module.
 // 
-//     This file is part of Lucterios.
+// 	Lucterios/Diacamma is free software; you can redistribute it and/or modify
+// 	it under the terms of the GNU General Public License as published by
+// 	the Free Software Foundation; either version 2 of the License, or
+// 	(at your option) any later version.
 // 
-//     Lucterios is free software; you can redistribute it and/or modify
-//     it under the terms of the GNU General Public License as published by
-//     the Free Software Foundation; either version 2 of the License, or
-//     (at your option) any later version.
+// 	Lucterios/Diacamma is distributed in the hope that it will be useful,
+// 	but WITHOUT ANY WARRANTY; without even the implied warranty of
+// 	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// 	GNU General Public License for more details.
 // 
-//     Lucterios is distributed in the hope that it will be useful,
-//     but WITHOUT ANY WARRANTY; without even the implied warranty of
-//     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-//     GNU General Public License for more details.
+// 	You should have received a copy of the GNU General Public License
+// 	along with Lucterios; if not, write to the Free Software
+// 	Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 // 
-//     You should have received a copy of the GNU General Public License
-//     along with Lucterios; if not, write to the Free Software
-//     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
-// 
-// 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
-//  // Method file write by SDK tool
-// --- Last modification: Date 21 July 2010 20:37:35 By  ---
+// 		Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY// Method file write by SDK tool
+// --- Last modification: Date 25 May 2012 4:26:44 By  ---
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
@@ -31,7 +30,7 @@ require_once('extensions/org_lucterios_contacts/personneAbstraite.tbl.php');
 //@PARAM@ posY
 //@PARAM@ xfer_result
 
-function personneAbstraite_APAS_searchContact(&$self,$posY,$xfer_result,$ExtractFields=array())
+function personneAbstraite_APAS_searchContact(&$self,$posY,$xfer_result)
 {
 //@CODE_ACTION@
 if (isset($xfer_result->m_context['classname']))
@@ -47,7 +46,7 @@ $xfer_result->addComponent($lbl);
 $select=new Xfer_Comp_Select('classname');
 if (!isset($xfer_result->classRoot))
 	$xfer_result->classRoot='org_lucterios_contacts/personneAbstraite';
-$includeParent=true; 
+$includeParent=true;
 $select->fillByDaughterList($xfer_result->classRoot,$classname,$includeParent);
 $select->setLocation(1,$posY,2);
 $select->setAction($xfer_result->getRefreshAction('refresh'));
@@ -59,12 +58,6 @@ $contact=new $class_name;
 $Fields=$contact->findFields();
 foreach($Fields as $ExtractName)
 	$ExtractFields[]=$ExtractName;
-
-include_once("CORE/DBFind.inc.php");
-$newFind= new DBFind($self);
-$CriteriaList=$newFind->extractCriteria($xfer_result->m_context);
-$NewCriteriaList=$newFind->checkInCriteriaFieldExisting($CriteriaList,$ExtractFields);
-$newFind->reinjectCriteria($xfer_result->m_context,$NewCriteriaList);
 
 $xfer_result->setSearchGUI($contact,$ExtractFields,$posY+1,0,"{[bold]}Le type de contact{[/bold]} est '".$contact->Title."'");
 return $xfer_result;
