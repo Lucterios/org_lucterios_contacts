@@ -27,7 +27,7 @@ $extension_libre=true;
 $version_max=1;
 $version_min=3;
 $version_release=5;
-$version_build=708;
+$version_build=711;
 
 $depencies=array();
 $depencies[0] = new Param_Depencies("CORE", 1, 3, 1, 3, false);
@@ -39,6 +39,7 @@ $rights[2] = new Param_Rigth("Gestion des paramètres",75);
 $rights[3] = new Param_Rigth("Suppression/Fusion",70);
 $rights[4] = new Param_Rigth("Voir structure local",0);
 $rights[5] = new Param_Rigth("Voir/modifier fiche personnel",20);
+$rights[6] = new Param_Rigth("special",100);
 
 $menus=array();
 $menus[0] = new Param_Menu("Adresses et _Contacts", "Bureautique", "", "contacts.png", "", 50 , 0, "Gestion d'hommes ou de femmes{[newline]}et d'organisations de personnes enregistrés");
@@ -81,8 +82,8 @@ $actions[20] = new Param_Action("Supprimer un liaison", "liaison_APAS_Del", 1);
 $actions[21] = new Param_Action("Fiche d'un liaison", "liaison_APAS_Fiche", 0);
 $actions[22] = new Param_Action("Ajouter une fonction", "liaison_APAS_addFunctionAct", 1);
 $actions[23] = new Param_Action("Ajouter une fonction", "liaison_APAS_addFunction", 1);
-$actions[24] = new Param_Action("Nouveau contact", "newContactAct", 4);
-$actions[25] = new Param_Action("Nouveau contact", "newContact", 4);
+$actions[24] = new Param_Action("Nouveau contact", "newContactAct", 6);
+$actions[25] = new Param_Action("Nouveau contact", "newContact", 6);
 $actions[26] = new Param_Action("Mot de passe perdu", "passForgotAct", 4);
 $actions[27] = new Param_Action("Mot de passe perdu", "passForgot", 4);
 $actions[28] = new Param_Action("Valider un contact", "personneAbstraite_APAS_AddModifyAct", 1);
