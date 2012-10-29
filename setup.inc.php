@@ -1,13 +1,13 @@
 <?php
-// This file is part of Lucterios, a software developped by "Le Sanglier du Libre" (http://www.sd-libre.fr)
-// Thanks to have payed a donation for using this module.
+// This file is part of Lucterios/Diacamma, a software developped by 'Le Sanglier du Libre' (http://www.sd-libre.fr)
+// thanks to have payed a retribution for using this module.
 // 
-// Lucterios is free software; you can redistribute it and/or modify
+// Lucterios/Diacamma is free software; you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation; either version 2 of the License, or
 // (at your option) any later version.
 // 
-// Lucterios is distributed in the hope that it will be useful,
+// Lucterios/Diacamma is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
@@ -26,8 +26,8 @@ $extension_libre=true;
 
 $version_max=1;
 $version_min=4;
-$version_release=1;
-$version_build=712;
+$version_release=2;
+$version_build=720;
 
 $depencies=array();
 $depencies[0] = new Param_Depencies("CORE", 1, 4, 1, 3, false);
@@ -43,17 +43,17 @@ $rights[6] = new Param_Rigth("special",100);
 
 $menus=array();
 $menus[0] = new Param_Menu("Adresses et _Contacts", "Bureautique", "", "contacts.png", "", 50 , 0, "Gestion d'hommes ou de femmes{[newline]}et d'organisations de personnes enregistrés");
-$menus[1] = new Param_Menu("Personnes _morales", "Adresses et _Contacts", "personneMorale_APAS_List", "contactMoral.png", "ctrl alt M", 10 , 0, "Gestion d'une structure ou d'une organisation de personne{[newline]}(entreprise, association, administration, ...)");
+$menus[1] = new Param_Menu("Personnes _morales", "Adresses et _Contacts", "personneMorale_APAS_List", "contactMoral.png", "ctrl alt M", 10 , 0, "Gestion d'une structure ou d'une organisation de personnes{[newline]}(entreprise, association, administration, ...)");
 $menus[2] = new Param_Menu("_Personnes physiques", "Adresses et _Contacts", "personnePhysique_APAS_List", "contactPhyique.png", "", 40 , 0, "Gestion des hommes et des femmes enregistrés");
 $menus[3] = new Param_Menu("_Recherche de personne physique", "Adresses et _Contacts", "personnePhysique_APAS_Search", "contactPhyiqueFind.png", "ctrl alt R", 20 , 1, "Pour trouver une personne physique{[newline]}suivant un ensemble de critères.");
 $menus[4] = new Param_Menu("R_echerche de personne morale", "Adresses et _Contacts", "personneMorale_APAS_Search", "contactMoralFind.png", "", 30 , 1, "Pour trouver une personne morale{[newline]}suivant un ensemble de critères.");
 $menus[5] = new Param_Menu("_Contact", "_Extensions (conf.)", "", "", "", 30 , 0, "");
 $menus[8] = new Param_Menu("Codes postaux / villes", "_Contact", "CodePostal_APAS_list", "contactCodePostal.png", "", 30 , 1, "Gestion des codes postaux associés à leurs communes.");
 $menus[9] = new Param_Menu("Bureautique", "", "", "bureau.png", "", 60 , 0, "Outils bureautiques");
-$menus[10] = new Param_Menu("Configuration des contacts", "_Contact", "configuration", "contactsConfig.png", "", 15 , 1, "Gestion des fonctions des personnes physiques {[newline]}et des catégorie des structures morales.");
+$menus[10] = new Param_Menu("Configuration des contacts", "_Contact", "configuration", "contactsConfig.png", "", 15 , 1, "Gestion des fonctions des personnes physiques {[newline]}et des catégories de structures morales.");
 $menus[11] = new Param_Menu("Mon compte", "_Général", "FichePersonnel", "fiche.png", "shift ctrl alt M", 1 , 1, "Visualiser la fiche de mon compte.");
-$menus[12] = new Param_Menu("Nos coordonnées", "_Général", "StructureLocal", "nousContact.png", "shift ctrl alt N", 8 , 1, "Fiche complete de notre structure et de ses responsables");
-$menus[13] = new Param_Menu("Configuration courriel", "_Contact", "confMailSMS", "contacts_telmail.png", "", 40 , 1, "Configuration des paramètres pour l'envoir de courriel");
+$menus[12] = new Param_Menu("Nos coordonnées", "_Général", "StructureLocal", "nousContact.png", "shift ctrl alt N", 8 , 1, "Fiche complète de notre structure et de ses responsables");
+$menus[13] = new Param_Menu("Configuration courriel", "_Contact", "confMailSMS", "contacts_telmail.png", "", 40 , 1, "Configuration des paramètres pour pour l?envoi de courriel");
 $menus[14] = new Param_Menu("Mot de passe perdu", "Adresses et _Contacts", "passForgot", "", "", 100 , 1, "Mot de passe perdu");
 $menus[15] = new Param_Menu("Nouveau contact", "Adresses et _Contacts", "newContact", "", "", 110 , 1, "Nouveau contact");
 
