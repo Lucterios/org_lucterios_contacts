@@ -1,24 +1,21 @@
 <?php
-// 	This file is part of Diacamma, a software developped by "Le Sanglier du Libre" (http://www.sd-libre.fr)
-// 	Thanks to have payed a retribution for using this module.
+// This file is part of Lucterios/Diacamma, a software developped by 'Le Sanglier du Libre' (http://www.sd-libre.fr)
+// thanks to have payed a retribution for using this module.
 // 
-// 	Diacamma is free software; you can redistribute it and/or modify
-// 	it under the terms of the GNU General Public License as published by
-// 	the Free Software Foundation; either version 2 of the License, or
-// 	(at your option) any later version.
+// Lucterios/Diacamma is free software; you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation; either version 2 of the License, or
+// (at your option) any later version.
 // 
-// 	Diacamma is distributed in the hope that it will be useful,
-// 	but WITHOUT ANY WARRANTY; without even the implied warranty of
-// 	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// 	GNU General Public License for more details.
+// Lucterios/Diacamma is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
 // 
-// 	You should have received a copy of the GNU General Public License
-// 	along with Lucterios; if not, write to the Free Software
-// 	Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
-// 
-// 		Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
-// Test file write by SDK tool
-// --- Last modification: Date 12 August 2011 11:16:40 By  ---
+// You should have received a copy of the GNU General Public License
+// along with Lucterios; if not, write to the Free Software
+// Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+// Test file write by Lucterios SDK tool
 
 
 //@TABLES@
@@ -39,9 +36,13 @@ $test->CallAction("org_lucterios_contacts","personnePhysique_APAS_AddModifyAct",
 'codePostal'=>'38000','ville'=>'GRENOBLE','pays'=>'FRANCE','fixe'=>'047654321','portable'=>'069012345','fax'=>'041234567',
 'mail'=>'nom2.prenom2@free.fr','commentaire'=>'aa bb cc','sexe'=>0),"Xfer_Container_Acknowledge");
 
-$rep=$test->CallAction("org_lucterios_contacts","personnePhysique_APAS_List",array('FiltrecodPostal'=>''),"Xfer_Container_Custom");
+$rep=$test->CallAction("org_lucterios_contacts","personnePhysique_APAS_List",array('Filtreraison'=>''),"Xfer_Container_Custom");
 $comp=$rep->getComponents('personnePhysique');
 $test->assertEquals(2,count($comp->m_records),"Initial");
+
+$rep=$test->CallAction("org_lucterios_contacts","personnePhysique_APAS_List",array('Filtreraison'=>'Nom1'),"Xfer_Container_Custom");
+$comp=$rep->getComponents('personnePhysique');
+$test->assertEquals(1,count($comp->m_records),"Initial 2");
 
 $rep=$test->CallAction("org_lucterios_contacts","personnePhysique_APAS_Search",array(),"Xfer_Container_Custom");
 $test->assertEquals(14,$rep->getComponentCount(),"nb");

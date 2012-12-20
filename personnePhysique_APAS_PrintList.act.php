@@ -1,24 +1,21 @@
 <?php
+// This file is part of Lucterios/Diacamma, a software developped by 'Le Sanglier du Libre' (http://www.sd-libre.fr)
+// thanks to have payed a retribution for using this module.
 // 
-//     This file is part of Lucterios.
+// Lucterios/Diacamma is free software; you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation; either version 2 of the License, or
+// (at your option) any later version.
 // 
-//     Lucterios is free software; you can redistribute it and/or modify
-//     it under the terms of the GNU General Public License as published by
-//     the Free Software Foundation; either version 2 of the License, or
-//     (at your option) any later version.
+// Lucterios/Diacamma is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
 // 
-//     Lucterios is distributed in the hope that it will be useful,
-//     but WITHOUT ANY WARRANTY; without even the implied warranty of
-//     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-//     GNU General Public License for more details.
-// 
-//     You should have received a copy of the GNU General Public License
-//     along with Lucterios; if not, write to the Free Software
-//     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
-// 
-// 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
-//  // Action file write by SDK tool
-// --- Last modification: Date 25 June 2010 18:11:03 By  ---
+// You should have received a copy of the GNU General Public License
+// along with Lucterios; if not, write to the Free Software
+// Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+// Action file write by Lucterios SDK tool
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
@@ -32,7 +29,7 @@ require_once('CORE/xfer_printing.inc.php');
 
 
 //@DESC@Imprimer une liste de personnes physiques
-//@PARAM@ FiltrecodPostal=0
+//@PARAM@ Filtreraison=''
 //@PARAM@ IsSearch=0
 
 
@@ -40,7 +37,7 @@ require_once('CORE/xfer_printing.inc.php');
 
 function personnePhysique_APAS_PrintList($Params)
 {
-$FiltrecodPostal=getParams($Params,"FiltrecodPostal",0);
+$Filtreraison=getParams($Params,"Filtreraison",'');
 $IsSearch=getParams($Params,"IsSearch",0);
 $self=new DBObj_org_lucterios_contacts_personnePhysique();
 try {
@@ -60,7 +57,7 @@ if ($xfer_result->showSelector(0)) {
 	if($IsSearch != 0)
 		$self->setForSearch($Params);
 	else {
-		$q = "SELECT org_lucterios_contacts_personnePhysique.* FROM org_lucterios_contacts_personnePhysique,org_lucterios_contacts_personneAbstraite WHERE (org_lucterios_contacts_personnePhysique.superId=org_lucterios_contacts_personneAbstraite.id) AND (org_lucterios_contacts_personneAbstraite.codePostal like '".$FiltrecodPostal."%') ";
+		$q = "SELECT p.* FROM org_lucterios_contacts_personnePhysique p,org_lucterios_contacts_personneAbstraite a WHERE (p.superId=a.id) AND (CONCAT(p.nom,' ',p.prenom) like '%".$Filtreraison."%') ";
 		$self->query($q);
 	}
 	while($self->fetch()) {

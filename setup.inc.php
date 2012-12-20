@@ -26,8 +26,8 @@ $extension_libre=true;
 
 $version_max=1;
 $version_min=4;
-$version_release=2;
-$version_build=720;
+$version_release=3;
+$version_build=749;
 
 $depencies=array();
 $depencies[0] = new Param_Depencies("CORE", 1, 4, 1, 3, false);
@@ -44,8 +44,8 @@ $rights[6] = new Param_Rigth("special",100);
 $menus=array();
 $menus[0] = new Param_Menu("Adresses et _Contacts", "Bureautique", "", "contacts.png", "", 50 , 0, "Gestion d'hommes ou de femmes{[newline]}et d'organisations de personnes enregistrés");
 $menus[1] = new Param_Menu("Personnes _morales", "Adresses et _Contacts", "personneMorale_APAS_List", "contactMoral.png", "ctrl alt M", 10 , 0, "Gestion d'une structure ou d'une organisation de personnes{[newline]}(entreprise, association, administration, ...)");
-$menus[2] = new Param_Menu("_Personnes physiques", "Adresses et _Contacts", "personnePhysique_APAS_List", "contactPhyique.png", "", 40 , 0, "Gestion des hommes et des femmes enregistrés");
-$menus[3] = new Param_Menu("_Recherche de personne physique", "Adresses et _Contacts", "personnePhysique_APAS_Search", "contactPhyiqueFind.png", "ctrl alt R", 20 , 1, "Pour trouver une personne physique{[newline]}suivant un ensemble de critères.");
+$menus[2] = new Param_Menu("_Personnes physiques", "Adresses et _Contacts", "personnePhysique_APAS_List", "contactPhyique.png", "", 20 , 0, "Gestion des hommes et des femmes enregistrés");
+$menus[3] = new Param_Menu("_Recherche de personne physique", "Adresses et _Contacts", "personnePhysique_APAS_Search", "contactPhyiqueFind.png", "ctrl alt R", 40 , 1, "Pour trouver une personne physique{[newline]}suivant un ensemble de critères.");
 $menus[4] = new Param_Menu("R_echerche de personne morale", "Adresses et _Contacts", "personneMorale_APAS_Search", "contactMoralFind.png", "", 30 , 1, "Pour trouver une personne morale{[newline]}suivant un ensemble de critères.");
 $menus[5] = new Param_Menu("_Contact", "_Extensions (conf.)", "", "", "", 30 , 0, "");
 $menus[8] = new Param_Menu("Codes postaux / villes", "_Contact", "CodePostal_APAS_list", "contactCodePostal.png", "", 30 , 1, "Gestion des codes postaux associés à leurs communes.");

@@ -1,24 +1,21 @@
 <?php
-// 	This file is part of Diacamma, a software developped by "Le Sanglier du Libre" (http://www.sd-libre.fr)
-// 	Thanks to have payed a retribution for using this module.
+// This file is part of Lucterios/Diacamma, a software developped by 'Le Sanglier du Libre' (http://www.sd-libre.fr)
+// thanks to have payed a retribution for using this module.
 // 
-// 	Diacamma is free software; you can redistribute it and/or modify
-// 	it under the terms of the GNU General Public License as published by
-// 	the Free Software Foundation; either version 2 of the License, or
-// 	(at your option) any later version.
+// Lucterios/Diacamma is free software; you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation; either version 2 of the License, or
+// (at your option) any later version.
 // 
-// 	Diacamma is distributed in the hope that it will be useful,
-// 	but WITHOUT ANY WARRANTY; without even the implied warranty of
-// 	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// 	GNU General Public License for more details.
+// Lucterios/Diacamma is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
 // 
-// 	You should have received a copy of the GNU General Public License
-// 	along with Lucterios; if not, write to the Free Software
-// 	Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
-// 
-// 		Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
-// Action file write by SDK tool
-// --- Last modification: Date 15 November 2011 19:46:31 By  ---
+// You should have received a copy of the GNU General Public License
+// along with Lucterios; if not, write to the Free Software
+// Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+// Action file write by Lucterios SDK tool
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
@@ -34,7 +31,7 @@ require_once('CORE/xfer_custom.inc.php');
 
 
 //@DESC@Liste des personnes physiques
-//@PARAM@ FiltrecodPostal=0
+//@PARAM@ Filtreraison=''
 //@PARAM@ IsSearch=0
 
 
@@ -42,7 +39,7 @@ require_once('CORE/xfer_custom.inc.php');
 
 function personnePhysique_APAS_List($Params)
 {
-$FiltrecodPostal=getParams($Params,"FiltrecodPostal",0);
+$Filtreraison=getParams($Params,"Filtreraison",'');
 $IsSearch=getParams($Params,"IsSearch",0);
 $self=new DBObj_org_lucterios_contacts_personnePhysique();
 try {
@@ -66,24 +63,22 @@ if($IsSearch != 0) {
 else {
 	$img->setValue('contactPhyique.png');
 	$lbl->setValue("{[center]}{[bold]}Liste des personnes physiques{[/bold]}{[/center]}");
-	if( is_integer($FiltrecodPostal) && ($FiltrecodPostal == 0)) {
-		$local_struct = new DBObj_org_lucterios_contacts_personneMorale;
-		$local_struct->get(1);
-		$FiltrecodPostal = $local_struct->codePostal;
-	}
 	$lbl = new Xfer_Comp_LabelForm('filtre');
-	$lbl->setValue("{[italic]}Filtrer par code postal{[/italic]}");
+	$lbl->setValue("{[italic]}Nom/prénom contenant{[/italic]}");
 	$lbl->setLocation(1,1);
 	$xfer_result->addComponent($lbl);
-	$comp = new Xfer_Comp_Edit('FiltrecodPostal');
-	$comp->setValue($FiltrecodPostal);
-	$comp->setAction($xfer_result->getRefreshAction());
+	$comp = new Xfer_Comp_Edit('Filtreraison');
+	$comp->setValue($Filtreraison);
+	$comp->setAction($self->NewAction('','','List', FORMTYPE_REFRESH, CLOSE_NO));
 	$comp->setLocation(2,1);
 	$xfer_result->addComponent($comp);
-	$q = "SELECT org_lucterios_contacts_personnePhysique.* ";
-	$q .= "FROM org_lucterios_contacts_personnePhysique,org_lucterios_contacts_personneAbstraite ";
-	$q .= "WHERE ( org_lucterios_contacts_personnePhysique.superId=org_lucterios_contacts_personneAbstraite.id )  AND ( org_lucterios_contacts_personneAbstraite.codePostal like '".$FiltrecodPostal."%') ";
-	$q .= "ORDER BY org_lucterios_contacts_personnePhysique.nom,org_lucterios_contacts_personnePhysique.prenom ";
+
+	$q = "SELECT p.* ";
+	$q .= "FROM org_lucterios_contacts_personnePhysique p,org_lucterios_contacts_personneAbstraite a ";
+	$q .= "WHERE ( p.superId=a.id )  ";
+	if ($Filtreraison != '')
+		$q .= "AND CONCAT(p.nom,' ',p.prenom) like '%".$Filtreraison."%' ";
+	$q .= "ORDER BY p.nom,p.prenom ";
 	$self->query($q);
 }
 $mNbLines=$self->N;

@@ -1,24 +1,21 @@
 <?php
-// 	This file is part of Diacamma, a software developped by "Le Sanglier du Libre" (http://www.sd-libre.fr)
-// 	Thanks to have payed a retribution for using this module.
+// This file is part of Lucterios/Diacamma, a software developped by 'Le Sanglier du Libre' (http://www.sd-libre.fr)
+// thanks to have payed a retribution for using this module.
 // 
-// 	Diacamma is free software; you can redistribute it and/or modify
-// 	it under the terms of the GNU General Public License as published by
-// 	the Free Software Foundation; either version 2 of the License, or
-// 	(at your option) any later version.
+// Lucterios/Diacamma is free software; you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation; either version 2 of the License, or
+// (at your option) any later version.
 // 
-// 	Diacamma is distributed in the hope that it will be useful,
-// 	but WITHOUT ANY WARRANTY; without even the implied warranty of
-// 	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// 	GNU General Public License for more details.
+// Lucterios/Diacamma is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
 // 
-// 	You should have received a copy of the GNU General Public License
-// 	along with Lucterios; if not, write to the Free Software
-// 	Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
-// 
-// 		Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
-// Test file write by SDK tool
-// --- Last modification: Date 15 November 2011 21:41:30 By  ---
+// You should have received a copy of the GNU General Public License
+// along with Lucterios; if not, write to the Free Software
+// Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+// Test file write by Lucterios SDK tool
 
 
 //@TABLES@
@@ -46,7 +43,7 @@ $act=$rep->m_actions[2];
 $test->assertEquals("_Fermer",$act->m_title,'Titre action #3');
 $test->assertEquals("",$act->m_extension,'Ext action #3');
 $test->assertEquals("",$act->m_action,'Act action #3');
-$test->assertEquals(7,$rep->getComponentCount(),'nb component');
+$test->assertEquals(9,$rep->getComponentCount(),'nb component');
 //IMAGE - img
 $comp=$rep->getComponents('img');
 $test->assertClass("Xfer_Comp_Image",$comp,"Classe de img");
@@ -316,7 +313,7 @@ $comp=$rep->getComponents('emailAll');
 $test->assertEquals("mailto:sansos@free.fr",$comp->m_Link,"Liens de emailAll");
 
 // --- Ajouter association ---
-$rep=$test->CallAction("org_lucterios_contacts","personneMorale_APAS_List",array("Filtretype"=>"2",),"Xfer_Container_Custom");
+$rep=$test->CallAction("org_lucterios_contacts","personneMorale_APAS_List",array("Filtretype"=>"2",$Filtreraison=''),"Xfer_Container_Custom");
 //SELECT - Filtretype
 $comp=$rep->getComponents('Filtretype');
 $test->assertClass("Xfer_Comp_Select",$comp,"Classe de Filtretype");
@@ -435,9 +432,9 @@ $rep=$test->CallAction("CORE","UNLOCK",array("ORIGINE"=>"personneMorale_APAS_Fic
 
 
 // --- liste 2 contact ---
-$rep=$test->CallAction("org_lucterios_contacts","personneMorale_APAS_List",array("Filtretype"=>"2",),"Xfer_Container_Custom");
+$rep=$test->CallAction("org_lucterios_contacts","personneMorale_APAS_List",array("Filtretype"=>"2",$Filtreraison=''),"Xfer_Container_Custom");
 $test->assertEquals(3,COUNT($rep->m_actions),'nb action');
-$test->assertEquals(7,$rep->getComponentCount(),'nb component');
+$test->assertEquals(9,$rep->getComponentCount(),'nb component');
 //SELECT - Filtretype
 $comp=$rep->getComponents('Filtretype');
 $test->assertEquals("2","".$comp->m_value,"Valeur de Filtretype");
