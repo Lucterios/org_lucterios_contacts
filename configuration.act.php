@@ -1,28 +1,27 @@
 <?php
-// 	This file is part of Lucterios/Diacamma, a software developped by "Le Sanglier du Libre" (http://www.sd-libre.fr)
-// 	Thanks to have payed a retribution for using this module.
+// This file is part of Lucterios, a software developped by "Le Sanglier du Libre" (http://www.sd-libre.fr)
+// Thanks to have payed a donation for using this module.
 // 
-// 	Lucterios/Diacamma is free software; you can redistribute it and/or modify
-// 	it under the terms of the GNU General Public License as published by
-// 	the Free Software Foundation; either version 2 of the License, or
-// 	(at your option) any later version.
+// Lucterios is free software; you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation; either version 2 of the License, or
+// (at your option) any later version.
 // 
-// 	Lucterios/Diacamma is distributed in the hope that it will be useful,
-// 	but WITHOUT ANY WARRANTY; without even the implied warranty of
-// 	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// 	GNU General Public License for more details.
+// Lucterios is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
 // 
-// 	You should have received a copy of the GNU General Public License
-// 	along with Lucterios; if not, write to the Free Software
-// 	Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
-// 
-// 		Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY// Action file write by SDK tool
-// --- Last modification: Date 08 November 2011 4:14:03 By  ---
+// You should have received a copy of the GNU General Public License
+// along with Lucterios; if not, write to the Free Software
+// Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+// Action file write by Lucterios SDK tool
 
 require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
 
 //@TABLES@
+require_once('extensions/org_lucterios_contacts/champPerso.tbl.php');
 require_once('extensions/org_lucterios_contacts/fonctions.tbl.php');
 require_once('extensions/org_lucterios_contacts/typesMorales.tbl.php');
 require_once('CORE/extension_params.tbl.php');
@@ -49,7 +48,9 @@ try {
 $xfer_result=&new Xfer_Container_Custom("org_lucterios_contacts","configuration",$Params);
 $xfer_result->Caption="Configuration des contacts";
 //@CODE_ACTION@
+//--------------------------------------------------
 $xfer_result->newTab("Paramètres");
+
 $DBParam=new DBObj_CORE_extension_params;
 $params=$DBParam->getParameters("org_lucterios_contacts");
 
@@ -101,6 +102,25 @@ $lab->setLocation(0,4,3);
 $lab->setAction(new Xfer_Action('Modifier','edit.png','org_lucterios_contacts','ChangeParams',FORMTYPE_MODAL,CLOSE_NO));
 $xfer_result->addComponent($lab);
 
+//--------------------------------------------------
+$xfer_result->newTab("Champs personalisés");
+
+$img=new  Xfer_Comp_Image('imgChamps');
+$img->setValue('champs.png');
+$img->setLocation(0,10);
+$xfer_result->addComponent($img);
+$lab = new Xfer_Comp_LabelForm("titleChamps");
+$lab->setValue("{[newline]}{[center]}{[bold]}Champs supplémentaires relatifs à vos adhérents{[/bold]}{[/center]}");
+$lab->setLocation(1,10,5);
+$xfer_result->addComponent($lab);
+$DBChamps=new DBObj_org_lucterios_contacts_champPerso;
+$DBChamps->orderby('class,id');
+$DBChamps->find();
+$grid = $DBChamps->getGrid();
+$grid->setLocation(0,11,6);
+$xfer_result->addComponent($grid);
+
+//--------------------------------------------------
 $xfer_result->newTab("Fonctions et responsabilités");
 
 $DBFunction=new DBObj_org_lucterios_contacts_fonctions;
@@ -125,6 +145,7 @@ $lbl->setLocation(0,2,2);
 $lbl->setValue("Nombre de fonctions affichés : ". count($grid->m_records));
 $xfer_result->addComponent($lbl);
 
+//--------------------------------------------------
 $xfer_result->newTab("Catégories de personnes morales");
 
 $DBCategorie=new DBObj_org_lucterios_contacts_typesMorales;

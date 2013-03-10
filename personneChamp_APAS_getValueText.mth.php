@@ -22,18 +22,40 @@ require_once('CORE/rights.inc.php');
 
 //@TABLES@
 require_once('extensions/org_lucterios_contacts/personneChamp.tbl.php');
-require_once('extensions/org_lucterios_contacts/personneAbstraite.tbl.php');
 //@TABLES@
 
-//@DESC@Mise à jours
-//@PARAM@ Params
+//@DESC@
+//@PARAM@ 
 
-function personneAbstraite_APAS_updateData(&$self,$Params)
+function personneChamp_APAS_getValueText(&$self)
 {
 //@CODE_ACTION@
-$self->writeImage($Params);
-$DBPersChamp=new DBObj_org_lucterios_contacts_personneChamp;
-$DBPersChamp->sauver($self->id, $Params);
+$champPerso=$self->getField('champ');
+$value="";
+switch($champPerso->type) {
+	case 0: // str
+		$value=$self->value;
+		break;
+	case 1: // entier
+		$value=(int)$self->value;
+		break;
+	case 2: // réel
+		$value=(float)$self->value;
+		break;
+	case 3: // bool
+		$value=($self->value=='o')?'Oui':'Non';
+		break;
+	case 4: // énumération
+		if ($champPerso->param!='') {
+			$cmd='$extend='.$champPerso->param.';';
+			eval($cmd);
+		}
+		else
+			$extend=array();
+		$value=$extend['Enum'][(int)$self->value];
+		break;
+}
+return $value;
 //@CODE_ACTION@
 }
 

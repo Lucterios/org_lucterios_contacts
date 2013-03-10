@@ -21,19 +21,18 @@ require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
 
 //@TABLES@
-require_once('extensions/org_lucterios_contacts/personneChamp.tbl.php');
-require_once('extensions/org_lucterios_contacts/personneAbstraite.tbl.php');
+require_once('extensions/org_lucterios_contacts/champPerso.tbl.php');
 //@TABLES@
 
-//@DESC@Mise à jours
-//@PARAM@ Params
+//@DESC@
+//@PARAM@ 
 
-function personneAbstraite_APAS_updateData(&$self,$Params)
+function champPerso_APAS_get_class_title(&$self)
 {
 //@CODE_ACTION@
-$self->writeImage($Params);
-$DBPersChamp=new DBObj_org_lucterios_contacts_personneChamp;
-$DBPersChamp->sauver($self->id, $Params);
+require_once('CORE/extensionManager.inc.php');
+$select = getDaughterClassesList($self->class,'', false,true);
+return $select[$self->class];
 //@CODE_ACTION@
 }
 

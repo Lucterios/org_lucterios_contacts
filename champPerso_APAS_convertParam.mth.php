@@ -21,19 +21,43 @@ require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
 
 //@TABLES@
-require_once('extensions/org_lucterios_contacts/personneChamp.tbl.php');
-require_once('extensions/org_lucterios_contacts/personneAbstraite.tbl.php');
+require_once('extensions/org_lucterios_contacts/champPerso.tbl.php');
 //@TABLES@
 
-//@DESC@Mise à jours
-//@PARAM@ Params
+//@DESC@
+//@PARAM@ 
 
-function personneAbstraite_APAS_updateData(&$self,$Params)
+function champPerso_APAS_convertParam(&$self)
 {
 //@CODE_ACTION@
-$self->writeImage($Params);
-$DBPersChamp=new DBObj_org_lucterios_contacts_personneChamp;
-$DBPersChamp->sauver($self->id, $Params);
+if ($self->param!='') {
+	$cmd='$extend='.$self->param.';';
+	eval($cmd);
+}
+else
+	$extend=array();
+$text="";
+switch($self->type) {
+	case 0: // str
+		if ($extend['Multi'])
+				$text='Multi-ligne';
+		else
+				$text='mono-ligne';
+		break;
+	case 1: // entier
+		$text="Minimum=".$extend['Min']." - Maximum=".$extend['Max'];
+		break;
+	case 2: // réel
+		$text="Minimum=".$extend['Min']." - Maximum=".$extend['Max']." - Précision=".$extend['Prec'];
+		break;
+	case 3: // bool
+		$text="";
+		break;
+	case 4: // énumération
+		$text="sélection=['".implode("';'",$extend['Enum'])."']";
+		break;
+}
+return $text;
 //@CODE_ACTION@
 }
 

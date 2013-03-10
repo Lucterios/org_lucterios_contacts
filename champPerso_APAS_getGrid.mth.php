@@ -21,19 +21,22 @@ require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
 
 //@TABLES@
-require_once('extensions/org_lucterios_contacts/personneChamp.tbl.php');
-require_once('extensions/org_lucterios_contacts/personneAbstraite.tbl.php');
+require_once('extensions/org_lucterios_contacts/champPerso.tbl.php');
 //@TABLES@
 
-//@DESC@Mise à jours
+//@DESC@getList de champ personalisé
 //@PARAM@ Params
 
-function personneAbstraite_APAS_updateData(&$self,$Params)
+function champPerso_APAS_getGrid(&$self,$Params)
 {
 //@CODE_ACTION@
-$self->writeImage($Params);
-$DBPersChamp=new DBObj_org_lucterios_contacts_personneChamp;
-$DBPersChamp->sauver($self->id, $Params);
+$grid = new Xfer_Comp_Grid("champPerso");
+$grid->setDBObject($self, array('type_title','description','type','paramText'),"",$Params);
+$grid->addAction($self->newAction("_Modifier", "edit.png", "AddModify",FORMTYPE_MODAL,CLOSE_NO, SELECT_SINGLE));
+$grid->addAction($self->newAction("_Supprimer", "suppr.png", "Del", FORMTYPE_MODAL,CLOSE_NO, SELECT_SINGLE));
+$grid->addAction($self->newAction("_Ajouter", "add.png", "AddModify",FORMTYPE_MODAL,CLOSE_NO, SELECT_NONE));
+$grid->setSize(200,750);
+return $grid;
 //@CODE_ACTION@
 }
 

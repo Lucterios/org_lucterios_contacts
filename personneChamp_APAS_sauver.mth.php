@@ -21,19 +21,28 @@ require_once('CORE/xfer_exception.inc.php');
 require_once('CORE/rights.inc.php');
 
 //@TABLES@
+require_once('extensions/org_lucterios_contacts/champPerso.tbl.php');
 require_once('extensions/org_lucterios_contacts/personneChamp.tbl.php');
-require_once('extensions/org_lucterios_contacts/personneAbstraite.tbl.php');
 //@TABLES@
 
-//@DESC@Mise à jours
+//@DESC@
+//@PARAM@ contact
 //@PARAM@ Params
 
-function personneAbstraite_APAS_updateData(&$self,$Params)
+function personneChamp_APAS_sauver(&$self,$contact,$Params)
 {
 //@CODE_ACTION@
-$self->writeImage($Params);
-$DBPersChamp=new DBObj_org_lucterios_contacts_personneChamp;
-$DBPersChamp->sauver($self->id, $Params);
+$ID='personneChamp_';
+$dico=array();
+foreach($Params as $ParamName=>$ParamValue) {
+	if (substr($ParamName,0,strlen($ID))==$ID)  {
+		$champId=(int)substr($ParamName,strlen($ID));
+		$DBperso=new DBObj_org_lucterios_contacts_champPerso;
+		$DBperso->get($champId);
+		$dico[$DBperso->description]=$ParamValue;
+	}
+}
+$self->import($contact, $dico);
 //@CODE_ACTION@
 }
 

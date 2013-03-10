@@ -22,18 +22,27 @@ require_once('CORE/rights.inc.php');
 
 //@TABLES@
 require_once('extensions/org_lucterios_contacts/personneChamp.tbl.php');
-require_once('extensions/org_lucterios_contacts/personneAbstraite.tbl.php');
 //@TABLES@
 
-//@DESC@Mise à jours
-//@PARAM@ Params
+//@DESC@Voir un champs
+//@PARAM@ posX
+//@PARAM@ posY
+//@PARAM@ xfer_result
 
-function personneAbstraite_APAS_updateData(&$self,$Params)
+function personneChamp_APAS_show(&$self,$posX,$posY,$xfer_result)
 {
 //@CODE_ACTION@
-$self->writeImage($Params);
-$DBPersChamp=new DBObj_org_lucterios_contacts_personneChamp;
-$DBPersChamp->sauver($self->id, $Params);
+$champPerso=$self->getField('champ');
+$lbl=new Xfer_Comp_LabelForm('lblpersonneChamp_'.$self->id);
+$lbl->setValue("{[bold]}".$champPerso->description."{[/bold]}");
+$lbl->setLocation($posX,$posY);
+$xfer_result->addComponent($lbl);
+
+$edt=new Xfer_Comp_LabelForm('personneChamp_'.$self->id);
+$edt->setValue($self->getValueText());
+$edt->setLocation($posX+1,$posY);
+$xfer_result->addComponent($edt);
+return $xfer_result;
 //@CODE_ACTION@
 }
 
