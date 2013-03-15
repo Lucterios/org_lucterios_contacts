@@ -1,24 +1,21 @@
 <?php
-// 	This file is part of Diacamma, a software developped by "Le Sanglier du Libre" (http://www.sd-libre.fr)
-// 	Thanks to have payed a retribution for using this module.
+// This file is part of Lucterios/Diacamma, a software developped by 'Le Sanglier du Libre' (http://www.sd-libre.fr)
+// thanks to have payed a retribution for using this module.
 // 
-// 	Diacamma is free software; you can redistribute it and/or modify
-// 	it under the terms of the GNU General Public License as published by
-// 	the Free Software Foundation; either version 2 of the License, or
-// 	(at your option) any later version.
+// Lucterios/Diacamma is free software; you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation; either version 2 of the License, or
+// (at your option) any later version.
 // 
-// 	Diacamma is distributed in the hope that it will be useful,
-// 	but WITHOUT ANY WARRANTY; without even the implied warranty of
-// 	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// 	GNU General Public License for more details.
+// Lucterios/Diacamma is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
 // 
-// 	You should have received a copy of the GNU General Public License
-// 	along with Lucterios; if not, write to the Free Software
-// 	Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
-// 
-// 		Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
-// Test file write by SDK tool
-// --- Last modification: Date 15 November 2011 21:39:22 By  ---
+// You should have received a copy of the GNU General Public License
+// along with Lucterios; if not, write to the Free Software
+// Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+// Test file write by Lucterios SDK tool
 
 
 //@TABLES@
@@ -333,7 +330,7 @@ $act=$rep->m_actions[1];
 $test->assertEquals("_Fermer",$act->m_title,'Titre action #2');
 $test->assertEquals("",$act->m_extension,'Ext action #2');
 $test->assertEquals("",$act->m_action,'Act action #2');
-$test->assertEquals(37,$rep->getComponentCount(),'nb component');
+$test->assertEquals(38,$rep->getComponentCount(),'nb component');
 //LABEL - morale
 $comp=$rep->getComponents('morale');
 $test->assertClass("Xfer_Comp_Label",$comp,"Classe de morale");
@@ -438,7 +435,7 @@ $test->assertEquals("mailto:",$comp->m_Link,"Liens de email");
 // --- Ajouter connexion ---
 $rep=$test->CallAction("org_lucterios_contacts","liaison_APAS_Fiche",array("liaison_physique"=>"100","personneMorale"=>"1",),"Xfer_Container_Custom");
 $test->assertEquals(2,COUNT($rep->m_actions),'nb action');
-$test->assertEquals(37,$rep->getComponentCount(),'nb component');
+$test->assertEquals(38,$rep->getComponentCount(),'nb component');
 //LABEL - morale
 $comp=$rep->getComponents('morale');
 $test->assertEquals("Ma structure","".$comp->m_value,"Valeur de morale");
