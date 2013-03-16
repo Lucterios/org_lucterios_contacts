@@ -330,7 +330,7 @@ $act=$rep->m_actions[1];
 $test->assertEquals("_Fermer",$act->m_title,'Titre action #2');
 $test->assertEquals("",$act->m_extension,'Ext action #2');
 $test->assertEquals("",$act->m_action,'Act action #2');
-$test->assertEquals(38,$rep->getComponentCount(),'nb component');
+$test->assertEquals(37,$rep->getComponentCount(),'nb component');
 //LABEL - morale
 $comp=$rep->getComponents('morale');
 $test->assertClass("Xfer_Comp_Label",$comp,"Classe de morale");
@@ -435,7 +435,7 @@ $test->assertEquals("mailto:",$comp->m_Link,"Liens de email");
 // --- Ajouter connexion ---
 $rep=$test->CallAction("org_lucterios_contacts","liaison_APAS_Fiche",array("liaison_physique"=>"100","personneMorale"=>"1",),"Xfer_Container_Custom");
 $test->assertEquals(2,COUNT($rep->m_actions),'nb action');
-$test->assertEquals(38,$rep->getComponentCount(),'nb component');
+$test->assertEquals(37,$rep->getComponentCount(),'nb component');
 //LABEL - morale
 $comp=$rep->getComponents('morale');
 $test->assertEquals("Ma structure","".$comp->m_value,"Valeur de morale");
