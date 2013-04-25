@@ -93,20 +93,23 @@ if($IsSearch != 0) {
 }
 $xfer_result->addComponent($grid);
 
-$DBPhysique=new DBObj_org_lucterios_contacts_personnePhysique;
-if($IsSearch != 0) {
-	$DBPhysique->setForSearch($Params,"org_lucterios_contacts_personnePhysique.nom,org_lucterios_contacts_personnePhysique.prenom");
+if ($mNbLines<75) {
+	$DBPhysique=new DBObj_org_lucterios_contacts_personnePhysique;
+	if($IsSearch != 0) {
+		$DBPhysique->setForSearch($Params,"org_lucterios_contacts_personnePhysique.nom,org_lucterios_contacts_personnePhysique.prenom");
+	}
+	else {
+		$q = "SELECT org_lucterios_contacts_personnePhysique.* ";
+		$q .= "FROM org_lucterios_contacts_personnePhysique,org_lucterios_contacts_personneAbstraite ";
+		$q .= "WHERE ( org_lucterios_contacts_personnePhysique.superId=org_lucterios_contacts_personneAbstraite.id )  AND ( org_lucterios_contacts_personneAbstraite.codePostal like '".$FiltrecodPostal."%') ";
+		$q .= "ORDER BY org_lucterios_contacts_personnePhysique.nom,org_lucterios_contacts_personnePhysique.prenom ";
+		$DBPhysique->query($q);
+	}
+	$link = $DBPhysique->getEmailLink($DBPhysique);
+	$link->setLocation(2,3);
+	$xfer_result->addComponent($link);
 }
-else {
-	$q = "SELECT org_lucterios_contacts_personnePhysique.* ";
-	$q .= "FROM org_lucterios_contacts_personnePhysique,org_lucterios_contacts_personneAbstraite ";
-	$q .= "WHERE ( org_lucterios_contacts_personnePhysique.superId=org_lucterios_contacts_personneAbstraite.id )  AND ( org_lucterios_contacts_personneAbstraite.codePostal like '".$FiltrecodPostal."%') ";
-	$q .= "ORDER BY org_lucterios_contacts_personnePhysique.nom,org_lucterios_contacts_personnePhysique.prenom ";
-	$DBPhysique->query($q);
-}
-$link = $DBPhysique->getEmailLink($DBPhysique);
-$link->setLocation(2,3);
-$xfer_result->addComponent($link);
+
 $lbl = new Xfer_Comp_LabelForm("nb");
 $lbl->setLocation(0,3,2);
 $lbl->setValue("Nombre total : ".$mNbLines);

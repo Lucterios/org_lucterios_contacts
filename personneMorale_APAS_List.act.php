@@ -116,18 +116,20 @@ $lbl->setLocation(0,4,2);
 $lbl->setValue("Nombre total : ".$grid->mNbLines);
 $xfer_result->addComponent($lbl);
 
-$DBMoral=new DBObj_org_lucterios_contacts_personneMorale;
-if($IsSearch != 0) {
-	$DBMoral->setForSearch($Params,'raisonSociale');
+if ($grid->mNbLines<75) {
+	$DBMoral=new DBObj_org_lucterios_contacts_personneMorale;
+	if($IsSearch != 0) {
+		$DBMoral->setForSearch($Params,'raisonSociale');
+	}
+	else {
+		$DBMoral->type = $Filtretype;
+		$DBMoral->orderBy('raisonSociale');
+		$nb=$DBMoral->find();
+	}
+	$link = $DBMoral->getEmailLink($DBMoral);
+	$link->setLocation(2,4);
+	$xfer_result->addComponent($link);
 }
-else {
-	$DBMoral->type = $Filtretype;
-	$DBMoral->orderBy('raisonSociale');
-	$nb=$DBMoral->find();
-}
-$link = $DBMoral->getEmailLink($DBMoral);
-$link->setLocation(2,4);
-$xfer_result->addComponent($link);
 
 $xfer_result->addAction($self->newAction("_Imprimer","print.png","PrintList", FORMTYPE_MODAL, CLOSE_NO));
 $xfer_result->addAction($self->newAction("_Etiquettes","print.png","PrintEtiquettes", FORMTYPE_MODAL, CLOSE_NO));
