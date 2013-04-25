@@ -2,14 +2,18 @@ Dans le menu <i>Administration/Extensions (conf)</i> vous avez à votre dispositi
 
 <h2>Configuration des contacts</h2>
 
-Dans cet écran, vous avez la possibilité de créer ou de modifier une définition de fonction, ou responsabilité, pour associer une personne physique à une structure morale.<br>
-De la même façon que précédemment, vous pouvez créer ou modifier une catégorie de structure morale pour vous aider dans la classification de vos contacts moraux.<br>
-<br>
-De plus, vous pouvez préciser un groupe, une fonction et une catégorie par défaut.<br>
+<p>Dans cet écran, vous avez la possibilité de créer ou de modifier une définition de fonction, ou responsabilité, pour associer une personne physique à une structure morale.<br>
+De la même façon que précédemment, vous pouvez créer ou modifier une catégorie de structure morale pour vous aider dans la classification de vos contacts moraux.</p>
 
+<p>Il se peut que vous ayez besoin de préciser des informations supplémentaires pour vos différents contacts.
+Vous avez ici la possibilité d'ajouter des champs personnels pour chaque type de contacts.<br>
+Pour ajouter un champ, vous devez simplement donner son titre ainsi que définir son type (chaîne de texte, nombre entier, nombre à virgule (réel), valeur Oui/Non (booléen) ou
+choix dans une liste (énumération)) et éventuellement les compléments nécessaires.
+Dans le cas de l'énumération, vous devez définir la liste des valeurs possibles (mots) séparées par un point-virgule.</p>
+<p>De plus, vous pouvez préciser un groupe, une fonction et une catégorie par défaut.<br>
 Le groupe sera utilisé si vous souhaitez ajouter un droit de connexion à un personne physique.<br>
 La fonction sera celle par défaut quand vous associez une personne physique dans une structure morale.<br>
-La catégorie sera la sélection initiale de filtrage dans la liste des personnes morales.<br>
+La catégorie sera la sélection initiale de filtrage dans la liste des personnes morales.</p>
 
 <h2>Codes postaux/villes</h2>
 Pour vous aider dans votre saisie de contacts, l'outil recherche automatiquement la ville associé au code postal que vous avez saisi.<br>

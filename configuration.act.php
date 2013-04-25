@@ -103,24 +103,6 @@ $lab->setAction(new Xfer_Action('Modifier','edit.png','org_lucterios_contacts','
 $xfer_result->addComponent($lab);
 
 //--------------------------------------------------
-$xfer_result->newTab("Champs personalisés");
-
-$img=new  Xfer_Comp_Image('imgChamps');
-$img->setValue('champs.png');
-$img->setLocation(0,10);
-$xfer_result->addComponent($img);
-$lab = new Xfer_Comp_LabelForm("titleChamps");
-$lab->setValue("{[newline]}{[center]}{[bold]}Champs supplémentaires relatifs à vos adhérents{[/bold]}{[/center]}");
-$lab->setLocation(1,10,5);
-$xfer_result->addComponent($lab);
-$DBChamps=new DBObj_org_lucterios_contacts_champPerso;
-$DBChamps->orderby('class,id');
-$DBChamps->find();
-$grid = $DBChamps->getGrid();
-$grid->setLocation(0,11,6);
-$xfer_result->addComponent($grid);
-
-//--------------------------------------------------
 $xfer_result->newTab("Fonctions et responsabilités");
 
 $DBFunction=new DBObj_org_lucterios_contacts_fonctions;
@@ -169,6 +151,24 @@ $lbl = new Xfer_Comp_LabelForm("nbType");
 $lbl->setLocation(0,2,2);
 $lbl->setValue("Nombre de types affichés : ". count($grid->m_records));
 $xfer_result->addComponent($lbl);
+
+//--------------------------------------------------
+$xfer_result->newTab("Champs personalisés");
+
+$img=new  Xfer_Comp_Image('imgChamps');
+$img->setValue('champs.png');
+$img->setLocation(0,10);
+$xfer_result->addComponent($img);
+$lab = new Xfer_Comp_LabelForm("titleChamps");
+$lab->setValue("{[newline]}{[center]}{[bold]}Champs supplémentaires relatifs à vos adhérents{[/bold]}{[/center]}");
+$lab->setLocation(1,10,5);
+$xfer_result->addComponent($lab);
+$DBChamps=new DBObj_org_lucterios_contacts_champPerso;
+$DBChamps->orderby('class,id');
+$DBChamps->find();
+$grid = $DBChamps->getGrid();
+$grid->setLocation(0,11,6);
+$xfer_result->addComponent($grid);
 
 $xfer_result->addAction( new Xfer_Action("_Fermer","close.png"));
 //@CODE_ACTION@
