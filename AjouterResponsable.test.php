@@ -330,7 +330,7 @@ $act=$rep->m_actions[1];
 $test->assertEquals("_Fermer",$act->m_title,'Titre action #2');
 $test->assertEquals("",$act->m_extension,'Ext action #2');
 $test->assertEquals("",$act->m_action,'Act action #2');
-$test->assertEquals(37,$rep->getComponentCount(),'nb component');
+$test->assertEquals(38,$rep->getComponentCount(),'nb component');
 //LABEL - morale
 $comp=$rep->getComponents('morale');
 $test->assertClass("Xfer_Comp_Label",$comp,"Classe de morale");
