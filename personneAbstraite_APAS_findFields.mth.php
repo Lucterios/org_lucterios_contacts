@@ -1,13 +1,13 @@
 <?php
-// This file is part of Lucterios, a software developped by "Le Sanglier du Libre" (http://www.sd-libre.fr)
-// Thanks to have payed a donation for using this module.
+// This file is part of Lucterios/Diacamma, a software developped by 'Le Sanglier du Libre' (http://www.sd-libre.fr)
+// thanks to have payed a retribution for using this module.
 // 
-// Lucterios is free software; you can redistribute it and/or modify
+// Lucterios/Diacamma is free software; you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation; either version 2 of the License, or
 // (at your option) any later version.
 // 
-// Lucterios is distributed in the hope that it will be useful,
+// Lucterios/Diacamma is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
@@ -70,7 +70,7 @@ while ($DBChampPerso->fetch()) {
 			case 2: // réel
 				$new_field['list']=$extend['Min'].';'.$extend['Max'].';'.$extend['Prec'];
 				$new_field['type']='float';
-				break;
+				break;	
 			case 3: // bool
 				$new_field['list']='';
 				$new_field['type']='bool';
@@ -84,9 +84,9 @@ while ($DBChampPerso->fetch()) {
 				break;
 		}
 		// spécial base
-		$new_field['table.name']='org_lucterios_contacts_personneChamp.value';
-		$new_field['tables']=array('org_lucterios_contacts_personneChamp','org_lucterios_contacts_personneAbstraite');
-		$new_field['wheres']=array('org_lucterios_contacts_personneChamp.contact=org_lucterios_contacts_personneAbstraite.id', 'org_lucterios_contacts_personneChamp.champ='.$DBChampPerso->id);
+		$new_field['table.name']='org_lucterios_contacts_FCT_personneChamp_APAS_SelectedValue(org_lucterios_contacts_personneAbstraite.id,'.$DBChampPerso->id.')';
+		$new_field['tables']=array('org_lucterios_contacts_personneAbstraite');
+		$new_field['wheres']=array();
 
 		$fields[]=$new_field;
 	}
