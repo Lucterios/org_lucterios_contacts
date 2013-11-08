@@ -99,7 +99,7 @@ else {
 		$self->whereAdd("raisonSociale like '%".$Filtreraison."%'");
 	$self->type = $Filtretype;
 	$self->orderBy('raisonSociale');
-	$self->find();
+	$self->find(true,(int)$Params[GRID_PAGE.'personneMorale']*MAX_GRID_RECORD,MAX_GRID_RECORD);
 }
 $grid = $self->getGrid($Params);
 $grid->setLocation(0,3,3);

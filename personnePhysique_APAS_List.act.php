@@ -79,7 +79,7 @@ else {
 	if ($Filtreraison != '')
 		$q .= "AND CONCAT(p.nom,' ',p.prenom) like '%".$Filtreraison."%' ";
 	$q .= "ORDER BY p.nom,p.prenom ";
-	$self->query($q);
+	$self->query($q,(int)$Params[GRID_PAGE.'personnePhysique']*MAX_GRID_RECORD,MAX_GRID_RECORD);
 }
 $mNbLines=$self->N;
 $grid = $self->getGrid($Params);
