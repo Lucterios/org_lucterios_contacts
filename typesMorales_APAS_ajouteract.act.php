@@ -46,7 +46,7 @@ $self=new DBObj_org_lucterios_contacts_typesMorales();
 global $connect;
 $connect->begin();
 try {
-$xfer_result=&new Xfer_Container_Acknowledge("org_lucterios_contacts","typesMorales_APAS_ajouteract",$Params);
+$xfer_result=new Xfer_Container_Acknowledge("org_lucterios_contacts","typesMorales_APAS_ajouteract",$Params);
 $xfer_result->Caption="ajouts de catégorie de personne morale";
 //@CODE_ACTION@
 $self->setFrom($Params);

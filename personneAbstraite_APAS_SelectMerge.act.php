@@ -48,7 +48,7 @@ $PARAMNAME=getParams($Params,"PARAMNAME",0);
 $contact=getParams($Params,"contact",-1);
 $self=new DBObj_org_lucterios_contacts_personneAbstraite();
 try {
-$xfer_result=&new Xfer_Container_Custom("org_lucterios_contacts","personneAbstraite_APAS_SelectMerge",$Params);
+$xfer_result=new Xfer_Container_Custom("org_lucterios_contacts","personneAbstraite_APAS_SelectMerge",$Params);
 $xfer_result->Caption="Selectionner les personnes à fusionner";
 //@CODE_ACTION@
 $img = new Xfer_Comp_Image("img");

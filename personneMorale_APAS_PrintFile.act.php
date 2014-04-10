@@ -44,7 +44,7 @@ $self=new DBObj_org_lucterios_contacts_personneMorale();
 $personneMorale=getParams($Params,"personneMorale",-1);
 if ($personneMorale>=0) $self->get($personneMorale);
 try {
-$xfer_result=&new Xfer_Container_Print("org_lucterios_contacts","personneMorale_APAS_PrintFile",$Params);
+$xfer_result=new Xfer_Container_Print("org_lucterios_contacts","personneMorale_APAS_PrintFile",$Params);
 $xfer_result->Caption="Imprimer un personneMorale";
 //@CODE_ACTION@
 $xfer_result->withTextExport=1;

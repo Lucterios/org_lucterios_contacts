@@ -62,7 +62,7 @@ $self=new DBObj_org_lucterios_contacts_personneAbstraite();
 $personne=getParams($Params,"personne",-1);
 if ($personne>=0) $self->get($personne);
 try {
-$xfer_result=&new Xfer_Container_Acknowledge("org_lucterios_contacts","personneAbstraite_APAS_sendMessageReport",$Params);
+$xfer_result=new Xfer_Container_Acknowledge("org_lucterios_contacts","personneAbstraite_APAS_sendMessageReport",$Params);
 $xfer_result->Caption="Envoye de rapport par courriel";
 //@CODE_ACTION@
 require_once('CORE/xfer_printing.inc.php');

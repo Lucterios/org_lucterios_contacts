@@ -47,7 +47,7 @@ if ($personneMorale>=0) $self->get($personneMorale);
 
 $self->lockRecord("personneMorale_APAS_AddModify");
 try {
-$xfer_result=&new Xfer_Container_Custom("org_lucterios_contacts","personneMorale_APAS_AddModify",$Params);
+$xfer_result=new Xfer_Container_Custom("org_lucterios_contacts","personneMorale_APAS_AddModify",$Params);
 $xfer_result->Caption="Ajouter/Modifier un personneMorale";
 $xfer_result->m_context['ORIGINE']="personneMorale_APAS_AddModify";
 $xfer_result->m_context['TABLE_NAME']=$self->__table;

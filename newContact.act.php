@@ -42,7 +42,7 @@ function newContact($Params)
 $login=getParams($Params,"login",'');
 $error=getParams($Params,"error",'');
 try {
-$xfer_result=&new Xfer_Container_Custom("org_lucterios_contacts","newContact",$Params);
+$xfer_result=new Xfer_Container_Custom("org_lucterios_contacts","newContact",$Params);
 $xfer_result->Caption="Nouveau contact";
 //@CODE_ACTION@
 $DBPhysique=new DBObj_org_lucterios_contacts_personnePhysique;
@@ -50,7 +50,7 @@ $DBPhysique->setFrom($Params);
 $DBMoral=new DBObj_org_lucterios_contacts_personneMorale;
 $DBMoral->setFrom($Params);
 
-$img= &new Xfer_Comp_Image('img');
+$img=new Xfer_Comp_Image('img');
 $img->setValue('contactMoral.png');
 $img->setLocation(0, 0, 1, 3);
 $xfer_result->addComponent($img);

@@ -49,7 +49,7 @@ $login=getParams($Params,"login",0);
 global $connect;
 $connect->begin();
 try {
-$xfer_result=&new Xfer_Container_Acknowledge("org_lucterios_contacts","newContactAct",$Params);
+$xfer_result=new Xfer_Container_Acknowledge("org_lucterios_contacts","newContactAct",$Params);
 $xfer_result->Caption="Nouveau contact";
 //@CODE_ACTION@
 $DBUser=new DBObj_CORE_users;

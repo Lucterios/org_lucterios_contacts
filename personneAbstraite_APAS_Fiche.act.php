@@ -46,7 +46,7 @@ $contact=getParams($Params,"contact",0);
 $classname=getParams($Params,"classname",'');
 $self=new DBObj_org_lucterios_contacts_personneAbstraite();
 try {
-$xfer_result=&new Xfer_Container_Custom("org_lucterios_contacts","personneAbstraite_APAS_Fiche",$Params);
+$xfer_result=new Xfer_Container_Custom("org_lucterios_contacts","personneAbstraite_APAS_Fiche",$Params);
 $xfer_result->Caption="Fiche d'un contact";
 //@CODE_ACTION@
 if ($classname!='') {

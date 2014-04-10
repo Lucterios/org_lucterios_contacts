@@ -43,7 +43,7 @@ $IsSearch=getParams($Params,"IsSearch",0);
 $Filtreraison=getParams($Params,"Filtreraison",'');
 $self=new DBObj_org_lucterios_contacts_personneMorale();
 try {
-$xfer_result=&new Xfer_Container_Print("org_lucterios_contacts","personneMorale_APAS_PrintEtiquettes",$Params);
+$xfer_result=new Xfer_Container_Print("org_lucterios_contacts","personneMorale_APAS_PrintEtiquettes",$Params);
 $xfer_result->Caption="Imprimer des étiquettes";
 //@CODE_ACTION@
 if ($xfer_result->showSelector()) {

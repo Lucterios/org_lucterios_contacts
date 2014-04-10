@@ -38,7 +38,7 @@ require_once('CORE/xfer.inc.php');
 function sendTestMail($Params)
 {
 try {
-$xfer_result=&new Xfer_Container_Acknowledge("org_lucterios_contacts","sendTestMail",$Params);
+$xfer_result=new Xfer_Container_Acknowledge("org_lucterios_contacts","sendTestMail",$Params);
 $xfer_result->Caption="Envoyer un courriel de test";
 //@CODE_ACTION@
 $Moral=new DBObj_org_lucterios_contacts_personneMorale;

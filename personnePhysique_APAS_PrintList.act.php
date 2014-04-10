@@ -41,7 +41,7 @@ $Filtreraison=getParams($Params,"Filtreraison",'');
 $IsSearch=getParams($Params,"IsSearch",0);
 $self=new DBObj_org_lucterios_contacts_personnePhysique();
 try {
-$xfer_result=&new Xfer_Container_Print("org_lucterios_contacts","personnePhysique_APAS_PrintList",$Params);
+$xfer_result=new Xfer_Container_Print("org_lucterios_contacts","personnePhysique_APAS_PrintList",$Params);
 $xfer_result->Caption="Imprimer une liste de personnes physiques";
 //@CODE_ACTION@
 $xfer_result->withTextExport=1;

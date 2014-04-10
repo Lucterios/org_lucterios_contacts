@@ -43,7 +43,7 @@ $IsSearch=getParams($Params,"IsSearch",0);
 $Filtreraison=getParams($Params,"Filtreraison",'');
 $self=new DBObj_org_lucterios_contacts_personneMorale();
 try {
-$xfer_result=&new Xfer_Container_Print("org_lucterios_contacts","personneMorale_APAS_PrintList",$Params);
+$xfer_result=new Xfer_Container_Print("org_lucterios_contacts","personneMorale_APAS_PrintList",$Params);
 $xfer_result->Caption="Imprimer une liste de personneMorale";
 //@CODE_ACTION@
 $xfer_result->withTextExport=1;

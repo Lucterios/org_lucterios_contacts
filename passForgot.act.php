@@ -41,10 +41,10 @@ require_once('CORE/xfer_custom.inc.php');
 function passForgot($Params)
 {
 try {
-$xfer_result=&new Xfer_Container_Custom("org_lucterios_contacts","passForgot",$Params);
+$xfer_result=new Xfer_Container_Custom("org_lucterios_contacts","passForgot",$Params);
 $xfer_result->Caption="Mot de passe perdu";
 //@CODE_ACTION@
-$img= &new Xfer_Comp_Image('img');
+$img=new Xfer_Comp_Image('img');
 $img->setValue('passwd.png');
 $img->setLocation(0, 0, 1, 3);
 $xfer_result->addComponent($img);

@@ -45,7 +45,7 @@ if (($ret=checkParams("org_lucterios_contacts", "liaison_APAS_AddSearchyAct",$Pa
 $personneMorale=getParams($Params,"personneMorale",0);
 $self=new DBObj_org_lucterios_contacts_liaison();
 try {
-$xfer_result=&new Xfer_Container_Custom("org_lucterios_contacts","liaison_APAS_AddSearchyAct",$Params);
+$xfer_result=new Xfer_Container_Custom("org_lucterios_contacts","liaison_APAS_AddSearchyAct",$Params);
 $xfer_result->Caption="Valider la recherche";
 //@CODE_ACTION@
 $self->setFrom($Params);

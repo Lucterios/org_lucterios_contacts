@@ -43,7 +43,7 @@ if ($champPerso>=0) $self->get($champPerso);
 
 $self->lockRecord("champPerso_APAS_AddModify");
 try {
-$xfer_result=&new Xfer_Container_Custom("org_lucterios_contacts","champPerso_APAS_AddModify",$Params);
+$xfer_result=new Xfer_Container_Custom("org_lucterios_contacts","champPerso_APAS_AddModify",$Params);
 $xfer_result->Caption="Ajouter/Modifier un champ personalisé";
 $xfer_result->m_context['ORIGINE']="champPerso_APAS_AddModify";
 $xfer_result->m_context['TABLE_NAME']=$self->__table;

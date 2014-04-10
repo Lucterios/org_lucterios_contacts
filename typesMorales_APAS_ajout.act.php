@@ -40,7 +40,7 @@ function typesMorales_APAS_ajout($Params)
 {
 $self=new DBObj_org_lucterios_contacts_typesMorales();
 try {
-$xfer_result=&new Xfer_Container_Custom("org_lucterios_contacts","typesMorales_APAS_ajout",$Params);
+$xfer_result=new Xfer_Container_Custom("org_lucterios_contacts","typesMorales_APAS_ajout",$Params);
 $xfer_result->Caption="Ajouter une catégorie de personne morale";
 //@CODE_ACTION@
 $self->readonly = 'n';

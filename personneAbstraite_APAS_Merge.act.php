@@ -51,7 +51,7 @@ $self=new DBObj_org_lucterios_contacts_personneAbstraite();
 global $connect;
 $connect->begin();
 try {
-$xfer_result=&new Xfer_Container_Acknowledge("org_lucterios_contacts","personneAbstraite_APAS_Merge",$Params);
+$xfer_result=new Xfer_Container_Acknowledge("org_lucterios_contacts","personneAbstraite_APAS_Merge",$Params);
 $xfer_result->Caption="Fusionne des contacts";
 //@CODE_ACTION@
 $file_name=DBObj_Basic::getTableName(substr($CLASSNAME,6));

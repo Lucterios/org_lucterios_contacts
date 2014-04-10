@@ -46,7 +46,7 @@ $self=new DBObj_org_lucterios_contacts_personnePhysique();
 $personnePhysique=getParams($Params,"personnePhysique",-1);
 if ($personnePhysique>=0) $self->get($personnePhysique);
 try {
-$xfer_result=&new Xfer_Container_Custom("org_lucterios_contacts","personnePhysique_APAS_login",$Params);
+$xfer_result=new Xfer_Container_Custom("org_lucterios_contacts","personnePhysique_APAS_login",$Params);
 $xfer_result->Caption="Modifier la connexion";
 //@CODE_ACTION@
 if($self->user>0) {

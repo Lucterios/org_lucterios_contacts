@@ -56,7 +56,7 @@ if ($personnePhysique>=0) $self->get($personnePhysique);
 global $connect;
 $connect->begin();
 try {
-$xfer_result=&new Xfer_Container_Acknowledge("org_lucterios_contacts","personnePhysique_APAS_validerLogin",$Params);
+$xfer_result=new Xfer_Container_Acknowledge("org_lucterios_contacts","personnePhysique_APAS_validerLogin",$Params);
 $xfer_result->Caption="Valider une connexion";
 //@CODE_ACTION@
 if($self->user>0)

@@ -41,7 +41,7 @@ function fonctions_APAS_ajout($Params)
 {
 $self=new DBObj_org_lucterios_contacts_fonctions();
 try {
-$xfer_result=&new Xfer_Container_Custom("org_lucterios_contacts","fonctions_APAS_ajout",$Params);
+$xfer_result=new Xfer_Container_Custom("org_lucterios_contacts","fonctions_APAS_ajout",$Params);
 $xfer_result->Caption="Ajouter une fonction";
 //@CODE_ACTION@
 $img = new Xfer_Comp_Image('img');

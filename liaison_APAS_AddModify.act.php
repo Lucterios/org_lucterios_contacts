@@ -50,7 +50,7 @@ if ($liaison>=0) $self->get($liaison);
 
 $self->lockRecord("liaison_APAS_AddModify");
 try {
-$xfer_result=&new Xfer_Container_Custom("org_lucterios_contacts","liaison_APAS_AddModify",$Params);
+$xfer_result=new Xfer_Container_Custom("org_lucterios_contacts","liaison_APAS_AddModify",$Params);
 $xfer_result->Caption="Ajouter/Modifier une liaison";
 $xfer_result->m_context['ORIGINE']="liaison_APAS_AddModify";
 $xfer_result->m_context['TABLE_NAME']=$self->__table;
