@@ -25,8 +25,8 @@ $extention_titre="Gestion des contacts";
 $extension_libre=true;
 
 $version_max=1;
-$version_min=5;
-$version_release=7;
+$version_min=4;
+$version_release=8;
 $version_build=967;
 
 $depencies=array();
