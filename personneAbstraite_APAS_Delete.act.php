@@ -48,7 +48,7 @@ if ($abstractContact>=0) $self->get($abstractContact);
 global $connect;
 $connect->begin();
 try {
-$xfer_result=&new Xfer_Container_Acknowledge("org_lucterios_contacts","personneAbstraite_APAS_Delete",$Params);
+$xfer_result=new Xfer_Container_Acknowledge("org_lucterios_contacts","personneAbstraite_APAS_Delete",$Params);
 $xfer_result->Caption="Suppression en cascade";
 //@CODE_ACTION@
 if (($res=$self->canBeDelete())!=0) {

@@ -46,7 +46,7 @@ if ($personneMorale>=0) $self->get($personneMorale);
 
 $self->lockRecord("personneMorale_APAS_Fiche");
 try {
-$xfer_result=&new Xfer_Container_Custom("org_lucterios_contacts","personneMorale_APAS_Fiche",$Params);
+$xfer_result=new Xfer_Container_Custom("org_lucterios_contacts","personneMorale_APAS_Fiche",$Params);
 $xfer_result->Caption="Fiche d'une personne morale";
 $xfer_result->m_context['ORIGINE']="personneMorale_APAS_Fiche";
 $xfer_result->m_context['TABLE_NAME']=$self->__table;

@@ -48,7 +48,7 @@ $self=new DBObj_org_lucterios_contacts_personneMorale();
 global $connect;
 $connect->begin();
 try {
-$xfer_result=&new Xfer_Container_Acknowledge("org_lucterios_contacts","personneMorale_APAS_AddModifyAct",$Params);
+$xfer_result=new Xfer_Container_Acknowledge("org_lucterios_contacts","personneMorale_APAS_AddModifyAct",$Params);
 $xfer_result->Caption="Valider un personneMorale";
 //@CODE_ACTION@
 if($personneMorale>0)

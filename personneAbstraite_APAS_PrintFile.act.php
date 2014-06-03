@@ -44,7 +44,7 @@ $self=new DBObj_org_lucterios_contacts_personneAbstraite();
 $personneAbstraite=getParams($Params,"personneAbstraite",-1);
 if ($personneAbstraite>=0) $self->get($personneAbstraite);
 try {
-$xfer_result=&new Xfer_Container_Print("org_lucterios_contacts","personneAbstraite_APAS_PrintFile",$Params);
+$xfer_result=new Xfer_Container_Print("org_lucterios_contacts","personneAbstraite_APAS_PrintFile",$Params);
 $xfer_result->Caption="Imprimer un contact";
 //@CODE_ACTION@
 require_once "CORE/PrintAction.inc.php";

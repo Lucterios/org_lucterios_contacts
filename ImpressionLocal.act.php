@@ -39,7 +39,7 @@ require_once('CORE/xfer_printing.inc.php');
 function ImpressionLocal($Params)
 {
 try {
-$xfer_result=&new Xfer_Container_Print("org_lucterios_contacts","ImpressionLocal",$Params);
+$xfer_result=new Xfer_Container_Print("org_lucterios_contacts","ImpressionLocal",$Params);
 $xfer_result->Caption="Imprimer nos contacts";
 //@CODE_ACTION@
 require_once"CORE/PrintAction.inc.php";

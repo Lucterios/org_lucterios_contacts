@@ -41,7 +41,7 @@ function personnePhysique_APAS_EditerPerso($Params)
 {
 $self=new DBObj_org_lucterios_contacts_personnePhysique();
 try {
-$xfer_result=&new Xfer_Container_Custom("org_lucterios_contacts","personnePhysique_APAS_EditerPerso",$Params);
+$xfer_result=new Xfer_Container_Custom("org_lucterios_contacts","personnePhysique_APAS_EditerPerso",$Params);
 $xfer_result->Caption="Modifier ma fiche personnelle";
 //@CODE_ACTION@
 $self->findConnected();

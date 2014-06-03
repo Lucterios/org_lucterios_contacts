@@ -54,7 +54,7 @@ $self=new DBObj_org_lucterios_contacts_liaison();
 global $connect;
 $connect->begin();
 try {
-$xfer_result=&new Xfer_Container_Acknowledge("org_lucterios_contacts","liaison_APAS_AddSearchSelect",$Params);
+$xfer_result=new Xfer_Container_Acknowledge("org_lucterios_contacts","liaison_APAS_AddSearchSelect",$Params);
 $xfer_result->Caption="Ajouter un responsable";
 //@CODE_ACTION@
 $self->setFrom($Params);

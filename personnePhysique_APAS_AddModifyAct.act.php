@@ -47,7 +47,7 @@ $self=new DBObj_org_lucterios_contacts_personnePhysique();
 global $connect;
 $connect->begin();
 try {
-$xfer_result=&new Xfer_Container_Acknowledge("org_lucterios_contacts","personnePhysique_APAS_AddModifyAct",$Params);
+$xfer_result=new Xfer_Container_Acknowledge("org_lucterios_contacts","personnePhysique_APAS_AddModifyAct",$Params);
 $xfer_result->Caption="Valider une personne physique";
 //@CODE_ACTION@
 if($personnePhysique>0)$find = $self->get($personnePhysique);

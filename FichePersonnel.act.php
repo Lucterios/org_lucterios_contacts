@@ -43,7 +43,7 @@ require_once('CORE/xfer_custom.inc.php');
 function FichePersonnel($Params)
 {
 try {
-$xfer_result=&new Xfer_Container_Custom("org_lucterios_contacts","FichePersonnel",$Params);
+$xfer_result=new Xfer_Container_Custom("org_lucterios_contacts","FichePersonnel",$Params);
 $xfer_result->Caption="Mon compte";
 //@CODE_ACTION@
 $contact=new DBObj_org_lucterios_contacts_personnePhysique;

@@ -49,7 +49,7 @@ $personneMorale=getParams($Params,"personneMorale",0);
 $liaison_physique=getParams($Params,"liaison_physique",0);
 $self=new DBObj_org_lucterios_contacts_liaison();
 try {
-$xfer_result=&new Xfer_Container_Custom("org_lucterios_contacts","liaison_APAS_Fiche",$Params);
+$xfer_result=new Xfer_Container_Custom("org_lucterios_contacts","liaison_APAS_Fiche",$Params);
 $xfer_result->Caption="Fiche d'un liaison";
 //@CODE_ACTION@
 $liaison = new DBObj_org_lucterios_contacts_liaison;

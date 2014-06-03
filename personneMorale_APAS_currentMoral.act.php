@@ -45,7 +45,7 @@ function personneMorale_APAS_currentMoral($Params)
 $moral=getParams($Params,"moral",0);
 $self=new DBObj_org_lucterios_contacts_personneMorale();
 try {
-$xfer_result=&new Xfer_Container_Custom("org_lucterios_contacts","personneMorale_APAS_currentMoral",$Params);
+$xfer_result=new Xfer_Container_Custom("org_lucterios_contacts","personneMorale_APAS_currentMoral",$Params);
 $xfer_result->Caption="Afficher les ou la organisation de l'utilisateur connecté";
 //@CODE_ACTION@
 $img = new Xfer_Comp_Image("img");

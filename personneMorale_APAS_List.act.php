@@ -45,7 +45,7 @@ $IsSearch=getParams($Params,"IsSearch",0);
 $Filtreraison=getParams($Params,"Filtreraison",'');
 $self=new DBObj_org_lucterios_contacts_personneMorale();
 try {
-$xfer_result=&new Xfer_Container_Custom("org_lucterios_contacts","personneMorale_APAS_List",$Params);
+$xfer_result=new Xfer_Container_Custom("org_lucterios_contacts","personneMorale_APAS_List",$Params);
 $xfer_result->Caption="Liste des personnes morales";
 //@CODE_ACTION@
 if ($Filtretype==-1) {

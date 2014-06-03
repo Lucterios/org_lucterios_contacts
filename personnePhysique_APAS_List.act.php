@@ -43,7 +43,7 @@ $Filtreraison=getParams($Params,"Filtreraison",'');
 $IsSearch=getParams($Params,"IsSearch",0);
 $self=new DBObj_org_lucterios_contacts_personnePhysique();
 try {
-$xfer_result=&new Xfer_Container_Custom("org_lucterios_contacts","personnePhysique_APAS_List",$Params);
+$xfer_result=new Xfer_Container_Custom("org_lucterios_contacts","personnePhysique_APAS_List",$Params);
 $xfer_result->Caption="Liste des personnes physiques";
 //@CODE_ACTION@
 $img = new Xfer_Comp_Image('img');

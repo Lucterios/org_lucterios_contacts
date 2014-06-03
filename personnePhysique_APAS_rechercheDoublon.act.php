@@ -41,7 +41,7 @@ function personnePhysique_APAS_rechercheDoublon($Params)
 {
 $self=new DBObj_org_lucterios_contacts_personnePhysique();
 try {
-$xfer_result=&new Xfer_Container_Custom("org_lucterios_contacts","personnePhysique_APAS_rechercheDoublon",$Params);
+$xfer_result=new Xfer_Container_Custom("org_lucterios_contacts","personnePhysique_APAS_rechercheDoublon",$Params);
 $xfer_result->Caption="Recherche des personnes physiques en doublon";
 //@CODE_ACTION@
 $img=new  Xfer_Comp_Image("img");

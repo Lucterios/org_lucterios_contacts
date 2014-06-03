@@ -51,7 +51,7 @@ $self->lockRecord("fonctions_APAS_suppr");
 global $connect;
 $connect->begin();
 try {
-$xfer_result=&new Xfer_Container_Acknowledge("org_lucterios_contacts","fonctions_APAS_suppr",$Params);
+$xfer_result=new Xfer_Container_Acknowledge("org_lucterios_contacts","fonctions_APAS_suppr",$Params);
 $xfer_result->Caption="Suppression d`une fonction";
 $xfer_result->m_context['ORIGINE']="fonctions_APAS_suppr";
 $xfer_result->m_context['TABLE_NAME']=$self->__table;

@@ -44,7 +44,7 @@ $self=new DBObj_org_lucterios_contacts_personnePhysique();
 $personnePhysique=getParams($Params,"personnePhysique",-1);
 if ($personnePhysique>=0) $self->get($personnePhysique);
 try {
-$xfer_result=&new Xfer_Container_Print("org_lucterios_contacts","personnePhysique_APAS_PrintFile",$Params);
+$xfer_result=new Xfer_Container_Print("org_lucterios_contacts","personnePhysique_APAS_PrintFile",$Params);
 $xfer_result->Caption="Imprimer une personne physique";
 //@CODE_ACTION@
 $xfer_result->withTextExport=1;

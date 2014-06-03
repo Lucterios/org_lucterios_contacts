@@ -45,7 +45,7 @@ $self=new DBObj_org_lucterios_contacts_personnePhysique();
 global $connect;
 $connect->begin();
 try {
-$xfer_result=&new Xfer_Container_Acknowledge("org_lucterios_contacts","personnePhysique_APAS_ModifFichePerso",$Params);
+$xfer_result=new Xfer_Container_Acknowledge("org_lucterios_contacts","personnePhysique_APAS_ModifFichePerso",$Params);
 $xfer_result->Caption="Modifier ma fiche personnelle";
 //@CODE_ACTION@
 $self->findConnected();

@@ -41,7 +41,7 @@ function personneMorale_APAS_rechercheDoublon($Params)
 {
 $self=new DBObj_org_lucterios_contacts_personneMorale();
 try {
-$xfer_result=&new Xfer_Container_Custom("org_lucterios_contacts","personneMorale_APAS_rechercheDoublon",$Params);
+$xfer_result=new Xfer_Container_Custom("org_lucterios_contacts","personneMorale_APAS_rechercheDoublon",$Params);
 $xfer_result->Caption="Recherche de personnes morales doublonnées";
 //@CODE_ACTION@
 $img=new  Xfer_Comp_Image("img");

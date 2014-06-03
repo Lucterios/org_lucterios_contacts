@@ -37,7 +37,7 @@ require_once('CORE/xfer_custom.inc.php');
 function confMailSMS($Params)
 {
 try {
-$xfer_result=&new Xfer_Container_Custom("org_lucterios_contacts","confMailSMS",$Params);
+$xfer_result=new Xfer_Container_Custom("org_lucterios_contacts","confMailSMS",$Params);
 $xfer_result->Caption="Configuration courriel";
 //@CODE_ACTION@
 $xfer_result->newTab("Courriel");

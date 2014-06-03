@@ -45,7 +45,7 @@ if (($ret=checkParams("org_lucterios_contacts", "passForgotAct",$Params ,"mail")
 	return $ret;
 $mail=getParams($Params,"mail",0);
 try {
-$xfer_result=&new Xfer_Container_Acknowledge("org_lucterios_contacts","passForgotAct",$Params);
+$xfer_result=new Xfer_Container_Acknowledge("org_lucterios_contacts","passForgotAct",$Params);
 $xfer_result->Caption="Mot de passe perdu";
 //@CODE_ACTION@
 require_once('extensions/org_lucterios_contacts/mailerFunctions.inc.php');

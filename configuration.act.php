@@ -45,7 +45,7 @@ function configuration($Params)
 global $connect;
 $connect->begin();
 try {
-$xfer_result=&new Xfer_Container_Custom("org_lucterios_contacts","configuration",$Params);
+$xfer_result=new Xfer_Container_Custom("org_lucterios_contacts","configuration",$Params);
 $xfer_result->Caption="Configuration des contacts";
 //@CODE_ACTION@
 //--------------------------------------------------
