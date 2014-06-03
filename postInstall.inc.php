@@ -1,24 +1,5 @@
 <?php
-// 
-//     This file is part of Lucterios.
-// 
-//     Lucterios is free software; you can redistribute it and/or modify
-//     it under the terms of the GNU General Public License as published by
-//     the Free Software Foundation; either version 2 of the License, or
-//     (at your option) any later version.
-// 
-//     Lucterios is distributed in the hope that it will be useful,
-//     but WITHOUT ANY WARRANTY; without even the implied warranty of
-//     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-//     GNU General Public License for more details.
-// 
-//     You should have received a copy of the GNU General Public License
-//     along with Lucterios; if not, write to the Free Software
-//     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
-// 
-// 	Contributeurs: Fanny ALLEAUME, Pierre-Olivier VERSCHOORE, Laurent GAY
-//  // library file write by SDK tool
-// --- Last modification: Date 10 March 2010 23:05:04 By  ---
+// library file write by Lucterios SDK tool
 
 //@BEGIN@
 include_once("CORE/log.inc.php");
@@ -62,7 +43,7 @@ function install_org_lucterios_contacts($ExensionVersions) {
 	list($nb)=$connect->getRow($id);
 	$nb=(int)$nb;
 	$testtag_file='conf/testtag.file';
-	if (($nb==0) ||(!is_file($testtag_file) && version_compare($ExensionVersions[0], '1.3.2', '<'))) {
+	if (($nb==0) ||(!is_file($testtag_file) && version_compare($ExensionVersions[0], '1.5.1', '<'))) {
 		$q = "CREATE UNIQUE INDEX IDX_UNIQUE ON org_lucterios_contacts_CodePostal(codePostal,ville,pays)";
 		$id = $connect->execute($q);
 		if($id === false)
