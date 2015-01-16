@@ -26,8 +26,8 @@ $extension_libre=true;
 
 $version_max=1;
 $version_min=5;
-$version_release=1;
-$version_build=971;
+$version_release=2;
+$version_build=972;
 
 $depencies=array();
 $depencies[0] = new Param_Depencies("CORE", 1, 6, 1, 5, false);
